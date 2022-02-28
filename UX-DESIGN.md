@@ -125,7 +125,7 @@
 * Contact info of the team
 * Also live chat/message option if users have questions. Clicking this opens up a chat/message overlay
 
-### Chat/Message Overlay
+#### Chat/Message Overlay
 ![Chat/Message Overlay](./ux-design/Chat-Overlay.png)
 
 * Overlay for chat that appears when users click message on the Contact Us page.
