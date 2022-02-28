@@ -7,6 +7,7 @@
 * [Joshua Plattner](https://github.com/jplattner73)
 * [Elena Wang](https://github.com/ELENA0206)
 * [Aaron Pahwa](https://github.com/ampahwa)
+* [Shrankhla Chand](https://github.com/shrankhla1234)
 
 ### Product Vision Statement
 People use apps and websites to connect with others, find furniture, restaurants, clothes, and other things that they need. The same technology can be used to create a centralized place to find blood donation centers and drives to help stop the shortage.
