@@ -1,7 +1,7 @@
 .Header-nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: right;
 }
 
 .Header-header {
@@ -14,9 +14,15 @@
   color: black;
 }
 
+.Header-header2 {
+
+  align-items: left;
+  
+}
+
+
 .logo {
   display: inline-block;
-  justify-self: start;
   margin-left: 20px;
   
 }
@@ -47,29 +53,7 @@
   padding: 10px 15px;
 }
 
-.nav-box:hover a {
-  color: rgb(148, 148, 148);
-}
 
-.nav-box a{
-  border: 1px solid white;
-  color: black;
-  border-radius: 30px;
-  background-color: white;
-  justify-content: 'center';
-  padding: 5px 20px;
-  text-decoration: none;
-} 
-
-.active-box {
-  border: 1px solid black;
-  color: black;
-  border-radius: 30px;
-  background-color: black;
-  justify-content: 'center';
-  padding: 5px 20px;
-  text-decoration: none;
-}
 
 
 .logo img {

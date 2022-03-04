@@ -11,7 +11,7 @@ import {NavLink} from 'react-router-dom'
 const Header = props => {
   return (
     <header className="Header-header">
-      <nav className="Header-navbar">
+      <nav className="Header-navbar" >
         <ul className="nav-links">
           <li className="nav-item">
             <Link to="/" className="logo"><img src={logo} alt="Our fabulous logo" /></Link>
@@ -28,8 +28,28 @@ const Header = props => {
           <li className="nav-item">
             <NavLink activeClassName="active" to="/ContactUs">Contact Us</NavLink>
           </li>
-          <li className="nav-box">
-            <NavLink activeClassName="active-box" to="/login">Login</NavLink>
+          <li className="nav-item">
+            <NavLink to="/login" style={({ isActive }) =>
+              isActive
+                ? {
+                    color: '#fff',
+                    background: '#000000',
+                    borderRadius: 30,
+                    paddingTop: 5,
+                    paddingBottom: 5,
+                    paddingLeft: 20,
+                    paddingRight: 20
+    
+                  }
+                : { color: '#000000', 
+                    background: '#fff',
+                    borderRadius: 30, 
+                    paddingTop: 5, 
+                    paddingBottom: 5, 
+                    paddingLeft: 20, 
+                    paddingRight: 20
+ }
+            }>Login</NavLink>
           </li>
         </ul>
       </nav>
