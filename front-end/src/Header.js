@@ -17,7 +17,7 @@ const Header = props => {
             <Link to="/" className="logo"><img src={logo} alt="Our fabulous logo" /></Link>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" to="/map">Map</NavLink>
+            <NavLink activeClassName="active" to="/finddonationsite">Find Donation Site</NavLink>
           </li>
           <li className="nav-item">
             <NavLink activeClassName="active" to="/FAQ">FAQ</NavLink>
@@ -28,8 +28,8 @@ const Header = props => {
           <li className="nav-item">
             <NavLink activeClassName="active" to="/ContactUs">Contact Us</NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink activeClassName="active" to="/login">Login</NavLink>
+          <li className="nav-box">
+            <NavLink activeClassName="active-box" to="/login">Login</NavLink>
           </li>
         </ul>
       </nav>
