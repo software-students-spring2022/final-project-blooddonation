@@ -1,7 +1,7 @@
 .Header-nav {
   display: flex;
-  justify-content: flex-end;
-  align-items: right;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .Header-header {
@@ -14,17 +14,13 @@
   color: black;
 }
 
-.Header-header2 {
 
-  align-items: left;
-  
-}
 
 
 .logo {
   display: inline-block;
   margin-left: 20px;
-  
+  align-items: left;
 }
 
 .nav-links {
