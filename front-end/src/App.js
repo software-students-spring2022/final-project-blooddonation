@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import './App.css'
 import FindDonationSite from './FindDonationSite'
 import Faq from './Faq'
@@ -7,6 +7,14 @@ import ContactUs from './ContactUs'
 import LogIn from './LogIn'
 import Home from './Home'
 import Header from './Header'
+import Eligibility from './Eligibility'
+import OtherWaysToHelp from './OtherWaysToHelp'
+import WholeBloodDonation from './WholeBloodDonation'
+import ABElitePlasmaDonation from './ABElitePlasmaDonation'
+import PlateletDonation from './PlateletDonation'
+import PowerRedDonation from './PowerRedDonation'
+import InformationForTeens from './InformationForTeens'
+
 
 const App = props => {
   return (
@@ -21,10 +29,19 @@ const App = props => {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/contactus" element={<ContactUs />}></Route>
             <Route path="/login" element={<LogIn />}></Route>
+            <Route path="FAQ/eligibility" element={<Eligibility />}/>
+            <Route path="FAQ/otherwaystohelp" element={<OtherWaysToHelp />}/>
+            <Route path="FAQ/eligibility/informationforteens" element={<InformationForTeens />}/>
+            <Route path="FAQ/eligibility/wholeblooddonation" element={<WholeBloodDonation />}/>
+            <Route path="FAQ/eligibility/abeliteplasmadonation" element={<ABElitePlasmaDonation/>}/>
+            <Route path="FAQ/eligibility/plateletdonation" element={<PlateletDonation />}/>
+            <Route path="FAQ/eligibility/powerreddonation" element={<PowerRedDonation />}/>
+
           </Routes>
         </main>
       </Router>
     </div>
+
   )
 }
 
