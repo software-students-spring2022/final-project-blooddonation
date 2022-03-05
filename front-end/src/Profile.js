@@ -1,4 +1,5 @@
 import './Profile.css'
+import BasicCard from './components/Card.js'
 
 /**
  * A React component that represents the Home page of the app.
@@ -8,8 +9,8 @@ import './Profile.css'
 const Profile = props => {
   return (
     <>
-      <h1>Hello and welcome!</h1>
-      <p>This is our blood donation Profile Page!</p>
+      <BasicCard text = "Age">
+      </BasicCard>
     </>
   )
 }
