@@ -9,6 +9,14 @@ import './Eligibility.css'
 const Eligibility = props => {
   return (
     <>
+      <body className="eligibilitybody">
+       <nav className='eligibilitynav'>
+        <div className="left-links">
+          <Link to="/FAQ" className="backlink">Back to FAQ</Link>
+        </div>
+      </nav>
+    </body>
+
       <h1>Eligibility!</h1>
       <p>
         Check out the <Link to="./informationforteens">Information for Teens</Link>.

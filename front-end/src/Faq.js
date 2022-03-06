@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom'
 import './Faq.css'
+import FAQHeader from './FAQHeader'
+
 
 
 
@@ -14,13 +15,7 @@ import './Faq.css'
 const Faq = props => {
   return (
     <>
-      <h1>FAQ!</h1>
-      <p>
-        Check out the <Link to="./eligibility">Eligibility</Link>.
-      </p>
-      <p>
-        Check out the <Link to="./otherwaystohelp">Other Ways To Help</Link>.
-      </p>
+      <FAQHeader></FAQHeader>
     </>
   )
 }
