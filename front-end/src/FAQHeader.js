@@ -12,7 +12,7 @@ const FAQHeader = props => {
     <body className="faqbody">
        <nav className='faqnav'>
         <div className="left-links">
-          <h2>FAQ</h2>
+          <h2 className='faqh2'>FAQ</h2>
         </div>
           <div className="right-links">
           <Link to="./eligibility" className="links">Eligibility</Link>

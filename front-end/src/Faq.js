@@ -1,5 +1,6 @@
 import './Faq.css'
 import FAQHeader from './FAQHeader'
+import FAQAccordion from './components/FAQAccordion';
 
 
 
@@ -15,7 +16,8 @@ import FAQHeader from './FAQHeader'
 const Faq = props => {
   return (
     <>
-      <FAQHeader></FAQHeader>
+      <FAQHeader/>
+      <FAQAccordion />
     </>
   )
 }
