@@ -67,7 +67,7 @@ const Dropdown = styled.div`
 const Ul = styled.div`
     list-style: none;
 
-    ul li::before {
+     &li::before {
         content: "\2022"; 
         color: red; 
         font-weight: bold; 
@@ -95,12 +95,13 @@ const Accordion = () => {
     setClicked(index);
   };
 
+  let count = 1;
 
   return (
     <IconContext.Provider value={{ color: '#ff0000', size: '25px' }}>
       <AccordionSection>
         <Container>
-          {FAQData.map((item, index) => {
+          {FAQData.map((item, index, count) => {
             return (
               <>
                 <Wrap onClick={() => toggle(index)} key={index}>
@@ -109,7 +110,25 @@ const Accordion = () => {
                 </Wrap>
                 {clicked === index ? (
                   <Dropdown>
-                    <p>{item.answer}</p>
+                   {item.answer.map((answerObj)=>{
+                     return(
+                       <>
+                        <h1>{answerObj.subHeading}</h1>
+                        {answerObj.points.map((point)=>{
+                          return(
+                            <>
+                              <Ul>
+                                <li>{point}</li>
+                              </Ul>
+                            </>
+                          )
+                          })}
+                       </>
+                      
+                      
+                     )
+
+                   })}
                   </Dropdown>
                 ) : null}
               </>

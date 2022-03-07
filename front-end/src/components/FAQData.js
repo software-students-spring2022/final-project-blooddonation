@@ -1,11 +1,21 @@
 export const FAQData = [
     {
-      question: 'What to Do Before, During and After Your Donation',
-      answer: 'von Ebrennac  compares France and Germanys relationship to the fairytale The Beauty and the Beast. This comparison has so many meanings and suggestions. Firstly Vercors is suggesting that the union between the two countries exists only in myth and legend. The  ‘polite invasion’ of the early years of German occupation was an illusion to disguise its true tyrannical nature. This fairytale comparison also reveals that Von Ebrennac, without knowing it, recognizes Nazi values. France is of course the Beauty and Germany the Beast, but the soldier changes the emotional dynamic of the story by focusing on the torment of the beast rather than the capture of the Beauty, creating a positive representation of the Beast. Like Nazi propaganda, the true events are glossed over and undermined. When Ebernnac continues on and says that the their Union, the Beauty and the Beast, is supposed to give rise to “leurs enfants, qui additionnent et mêlent les dons de leurs parents, sont les plus beaux que la terre ait portes.”’ he is indirectly referring to the Nazi aspiration to create a master race, of Aryan people to improve their breeding stock. Finally the act of translating a traditional French story to German is symbolic of translating French culture, society, and politics into German'
-      
+      question: 'What is the blood donation process?',
+      description: 'The blood donation process from the time you arrive until the time you leave takes about an hour. The donation itself is only about 8-10 minutes on average.',
+      answer: [
+        {subHeading: "Registration", 
+        points: ["You'll sign in and go over basic eligibility", "You'll be asked to show ID, such as your driver's license", "You'll read some information about donating blood", "You'll be asked for your complete address.  Your address needs to be complete (including PO Box, street/apartment number) and the place where you will receive your mail 8 weeks from donation"]
+        },
+        {subHeading: "Health History",
+          points: ["You'll answer a few questions about your health history and places you've traveled, during a private and confidential interview", "You'll tell us about any prescription and/or over the counter medications that may be in your system.", "Your temperature, pulse, blood pressure and hemoglobin level will be checked."]
+        },
+        {subHeading: "Your donation",
+          points: ["If you're donating whole blood, an area on your arm will be cleansed and a brand new sterile needle will be inserted for the blood draw. (This feels like a quick pinch and is over in seconds.)",  "Other types of donations, like platelets, are made using an aphaeresis machine that will be connected to both arms.",  "A whole blood donation takes 8-10 minutes, during which you'll be seated comfortably or lying down.", "When about a pint of whole blood has been collected, the donation is complete and a staff person will place a bandage on your arm.",  "For platelets, the aphaeresis machine will collect a small amount of blood, remove the platelets, and return the rest of the blood through your other arm; this cycle will be repeated several times for about 2 hours."]
+        },
+        {subHeading: "Refreshment and recovery",
+        points: [ "After donating blood, you'll have a snack and something to drink in a designated refreshment area.", "You'll leave after 10-15 minutes.", "Inspire others to become blood donors!"]
+        }
+      ]
     },
-    {
-        question: 'What to Do Before, During and After Your Donation',
-        answer: 'Before Your Donation'
-      },
+
   ];
