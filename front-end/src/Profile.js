@@ -1,5 +1,7 @@
 import './Profile.css'
-import BasicCard from './components/Card.js'
+import ProfileCard from './components/ProfileCard.js'
+import CardMedia from '@mui/material/CardMedia'
+import ProfileImage from './assets/ProfilePlaceholder.jpg';
 
 /**
  * A React component that represents the Home page of the app.
@@ -9,8 +11,9 @@ import BasicCard from './components/Card.js'
 const Profile = props => {
   return (
     <>
-      <BasicCard text = "Age">
-      </BasicCard>
+      <ProfileCard user = {{"Name": "Rachel", "Age" : 13, "BloodTypes": "Blood Type A"}} image = {ProfileImage}
+      >
+      </ProfileCard>
     </>
   )
 }
