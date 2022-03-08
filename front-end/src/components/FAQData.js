@@ -1,21 +1,72 @@
 export const FAQData = [
     {
       question: 'What is the blood donation process?',
-      description: 'The blood donation process from the time you arrive until the time you leave takes about an hour. The donation itself is only about 8-10 minutes on average.',
       answer: [
-        {subHeading: "Registration", 
-        points: ["You'll sign in and go over basic eligibility", "You'll be asked to show ID, such as your driver's license", "You'll read some information about donating blood", "You'll be asked for your complete address.  Your address needs to be complete (including PO Box, street/apartment number) and the place where you will receive your mail 8 weeks from donation"]
+        {subHeading: "Registration"},
+
+        { subHeading: "Health History",
+          points: [ "You'll answer a few questions about your health history and places you've traveled, during a private and confidential interview", 
+                    "You'll tell us about any prescription and/or over the counter medications that may be in your system.", 
+                    "Your temperature, pulse, blood pressure and hemoglobin level will be checked."]
         },
-        {subHeading: "Health History",
-          points: ["You'll answer a few questions about your health history and places you've traveled, during a private and confidential interview", "You'll tell us about any prescription and/or over the counter medications that may be in your system.", "Your temperature, pulse, blood pressure and hemoglobin level will be checked."]
-        },
-        {subHeading: "Your donation",
-          points: ["If you're donating whole blood, an area on your arm will be cleansed and a brand new sterile needle will be inserted for the blood draw. (This feels like a quick pinch and is over in seconds.)",  "Other types of donations, like platelets, are made using an aphaeresis machine that will be connected to both arms.",  "A whole blood donation takes 8-10 minutes, during which you'll be seated comfortably or lying down.", "When about a pint of whole blood has been collected, the donation is complete and a staff person will place a bandage on your arm.",  "For platelets, the aphaeresis machine will collect a small amount of blood, remove the platelets, and return the rest of the blood through your other arm; this cycle will be repeated several times for about 2 hours."]
-        },
-        {subHeading: "Refreshment and recovery",
-        points: [ "After donating blood, you'll have a snack and something to drink in a designated refreshment area.", "You'll leave after 10-15 minutes.", "Inspire others to become blood donors!"]
+        {subHeading: "Your donation"},
+
+        { subHeading: "Refreshment and recovery",
+          points: [ "After donating blood, you'll have a snack and something to drink in a designated refreshment area.", 
+                    "You'll leave after 10-15 minutes.", "Inspire others to become blood donors!"]
         }
       ]
     },
+
+    {
+      question: 'What to Do Before, During and After Your Donation',
+      answer: [
+        { subHeading: "Before Your Donation"},
+
+        { subHeading: "On the Day of Your Donation",
+          points: [ "Bring your driver's license or two other forms of Identification. See FAQ below", 
+                    "Know what medications you are taking. Those assisting you will need to know about all prescription and over-the-counter medications you're taking.", 
+                    "Drink 16 oz. of water (or other nonalcoholic drink) before your appointment.", 
+                    "Eat a healthy meal, avoiding fatty foods like hamburgers, fries or ice cream.", 
+                    "Wear a shirt with sleeves that you can roll up above your elbows."]
+        },
+
+        { subHeading: "After Your Donation",
+          points: [ "Relax for a few minutes and have a snack at the site's recovery area!", 
+                    "Drink 8 oz. of liquids and avoid alcohol for the next 24 hours.", 
+                    "Keep your bandage on for the next few hours and clean the area around the bandage with soap and water to avoid a rash.", 
+                    "Don't do any heavy lifting or vigorous exercise for the rest of the day.", 
+                    "If the needle site starts to bleed, apply pressure and raise your arm straight up for 5-10 minutes or until bleeding stops.", 
+                    "Eat iron-rich foods.", "If you donate frequently, take multivitamins with iron to replenish your iron stores before your next donation."]
+        }
+      ]
+    },
+
+    {
+      question: 'What are some acceptable forms of ID for blood donors?',
+      answer: [
+
+        { subHeading: "Primary Form of ID (You will need one of the following)",
+          points: [ "Driver's license with photo", "Immigration and Naturalization Service card (green card)", "State ID", "Employee ID with photo", 
+                    "Passport", "Student ID with photo", "Military ID"]
+
+        },
+
+        { subHeading: "Secondary Form of ID (When a primary form of ID is not available, the donor needs two secondary forms of ID)",
+          points: [ "Student ID (without a photo)", "Driver's license without a photo", "Credit card or bank card", "Employee ID (without a photo)", 
+                    "Birth certificate (original or certified copy)", "Personal checkbook with name and address", "Social Security card", "Voter registration card", 
+                    "Payroll stub", "Vehicle registration", "Fishing or hunting license", "Grocery store frequent shopper card or VIP card", "Club or museum membership card", 
+                    "Library card with donor's name", "Professional license (such as: RN, LPN or MT)","Non-American Red Cross donor card", "Selective Service card", "Insurance card"]
+        },
+
+        { subHeading: "High School Students (Without any of the previously listed forms of ID, the ID and date of birth of a high school student may be checked by the following listed below)",
+          points: [ "School officials determine the donor's identity and date of birth from a list of potentially eligible donors (may use the yearbook to assist with the determination).", 
+                    "Adult volunteers instructed on ID verification using a current yearbook picture and an additional piece of ID containing the donor's name and age.", 
+                    "A parent or legal guardian can provide a document with the donor's legal name and verbally provide the name and age when the donor does not have ID due to age",
+                    "High school students may not check identification on other high school students at high school blood drives."]
+
+        }
+      ]
+    }
 
   ];

@@ -1,21 +1,16 @@
-.faqbody{
-  margin:0px;
-  margin-top:50px;
-  padding: 0px;
-}
-
 
 .faqnav{
   display: flex;
-  top: 80px;
   overflow: visible;
   height: 50px;
+  margin-top:50px;
+  margin-right: auto;
 }
 
 
 .left-links{
-  flex: 0.5 0.5 100px;
   text-align: left;
+  flex-direction: column;
 }
 
 
@@ -23,6 +18,16 @@
   display: inline-block;
   text-align: right;
   padding: 14px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.links2 {
+  display: inline-block;
+  text-align: right;
+  padding-top: 14px;
+  padding-right: 100px;
   color: rgb(0, 0, 0);
   text-decoration: none;
   font-weight: bold;
