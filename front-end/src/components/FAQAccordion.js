@@ -6,14 +6,13 @@ import { FiPlus, FiMinus } from 'react-icons/fi';
 import {Link} from 'react-router-dom'
 
 const AccordionSection = styled.div`
-  display: flex;
-  flex-direction: column;
+  flex: 0 0 100%;
+  max-width: 100%;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 900px;
-  margin-left: 250px;
-  margin-top: 200px
+  margin-left: 0px;
+  margin-top: 50px
   position: absolute;
 `;
 
