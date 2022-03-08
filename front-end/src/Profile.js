@@ -1,6 +1,5 @@
 import './Profile.css'
 import ProfileCard from './components/ProfileCard.js'
-import CardMedia from '@mui/material/CardMedia'
 import ProfileImage from './assets/ProfilePlaceholder.jpg';
 
 /**
@@ -11,9 +10,9 @@ import ProfileImage from './assets/ProfilePlaceholder.jpg';
 const Profile = props => {
   return (
     <>
-      <ProfileCard user = {{"Name": "Rachel", "Age" : 13, "BloodTypes": "Blood Type A"}} image = {ProfileImage}
-      >
-      </ProfileCard>
+      <body className='profilebody'>
+        <ProfileCard user = {{"Name": "Rachel", "Age" : 13, "BloodTypes": "Blood Type A"}} image = {ProfileImage}></ProfileCard>
+      </body>
     </>
   )
 }

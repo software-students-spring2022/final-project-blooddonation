@@ -37,8 +37,9 @@ const Wrap = styled.div`
     font-size: 2rem;
   }
   h2 {
-    padding: 2rem;
+    padding: 1rem;
     font-size: 2rem;
+    
   }
   span {
     margin-right: 1.5rem;
@@ -53,28 +54,41 @@ const Dropdown = styled.div`
   flex-direction: column;
   justify-content: left;
   align-items: left;
+  text-align: center;
   margin-top:0px;
   border-bottom: 1px solid #ff0000;
   border-top: 1px solid #ff0000;
   transition: all 0.5s cubic-bezier(0,1,0,1);
+  overflow-y: scroll;
 
   p {
     font-size: 2rem;
   }
-  overflow-y: scroll;
+
+  h2 {
+    padding: 1rem;
+    font-size: 2rem;
+    padding-top: 5px;
+    border-top: 2px solid red;
+    
+  }
+  
 `;
 
 const Ul = styled.div`
     list-style: none;
 
-     &li::before {
-        content: "\2022"; 
+   
+   
+
+      li:before {
+        content: "• "; 
         color: red; 
-        font-weight: bold; 
+        font-weight: bold;
+        font-size: 30px; 
         display: inline-block; 
         width: 1em; 
-        margin-left: -1em; 
-    }
+      }
 `;
   
 
@@ -113,13 +127,14 @@ const Accordion = () => {
                    {item.answer.map((answerObj)=>{
                      return(
                        <>
-                        <h1>{answerObj.subHeading}</h1>
+                        <h2>{answerObj.subHeading}</h2>
                         {answerObj.points.map((point)=>{
                           return(
                             <>
                               <Ul>
                                 <li>{point}</li>
                               </Ul>
+                              <p></p>
                             </>
                           )
                           })}
