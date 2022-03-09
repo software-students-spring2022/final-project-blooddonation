@@ -10,29 +10,37 @@ const Eligibility = props => {
   return (
     <>
       <body className="eligibilitybody">
-       <nav className='eligibilitynav'>
-        <div className="left-links">
-          <Link to="/FAQ" className="backlink">Back to FAQ</Link>
-        </div>
-      </nav>
-    </body>
 
-      <h1>Eligibility!</h1>
-      <p>
-        Check out the <Link to="./informationforteens">Information for Teens</Link>.
-      </p>
-      <p>
-        Check out the <Link to="./wholeblooddonation">Whole Blood Donation</Link>.
-      </p>
-      <p>
-        Check out the <Link to="./powerreddonation">Power Red Donation</Link>.
-      </p>
-      <p>
-        Check out the <Link to="./plateletdonation">Platelet Donation</Link>.
-      </p>
-      <p>
-        Check out the <Link to="./abeliteplasmadonation">AB Elite Plasma Donation</Link>.
-      </p>
+        <nav className='eligibilitynav'>
+          <div className="left-links">
+            <Link to="/FAQ" className="backlink">Back to FAQ</Link>
+          </div>
+        </nav>
+
+        <div class="main" id="wholeblood">
+          <h2 className='sectionheader'>Whole Blood Donation</h2>
+          <p>Click on the link to see the "smooth" scrolling effect.</p>
+          <a href="#powerred">Click Me to Smooth Scroll to Power Red Donation (Double Red Cell) Below</a>
+          <p>Note: Remove the scroll-behavior property to remove smooth scrolling.</p>
+        </div>
+
+        <div class="main" id="powerred">
+          <h2 className='sectionheader'>Power Red Donation (Double Red Cell)</h2>
+          <a href="#platelet">Click Me to Smooth Scroll to below</a>
+        </div>
+
+        <div class="main" id="platelet">
+          <h2 className='sectionheader'>Platelet Donation</h2>
+          <a href="#plasma">Click Me to Smooth Scroll to below</a>
+        </div>
+
+        <div class="main" id="plasma">
+          <h2 className='sectionheader'>AB Elite Plasma Donation</h2>
+          <a href="#wholeblood">Click Me to Smooth Scroll to top</a>
+        </div>
+
+      </body>
+
     </>
     
   )
