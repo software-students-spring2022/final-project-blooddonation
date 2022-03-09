@@ -1,7 +1,16 @@
+
+html {
+  scroll-behavior: smooth;
+}
+
 .eligibilitybody{
     margin:0px;
     margin-top:0px;
     padding: 0px;
+  }
+
+  .sectionheader{
+    padding-top: 5em;
   }
 
   .eligibilitynav{
@@ -28,6 +37,40 @@
 
   .links:hover {
     color: gray;
+  }
+
+
+  #wholeblood {
+    height: 400px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top:10px;
+    margin-bottom: 20px;
+    background-color: pink;
+  }
+  
+  #powerred {
+    height: 400px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    background-color: yellow;
+  }
+
+  #platelet {
+    height: 400px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    background-color: pink;
+  }
+  
+  #plasma {
+    height: 400px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    background-color: yellow;
   }
   
   
