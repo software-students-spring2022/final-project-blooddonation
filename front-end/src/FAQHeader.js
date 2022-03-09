@@ -8,15 +8,20 @@ import {Link} from 'react-router-dom'
  */
 const FAQHeader = props => {
   return (
-    <nav className='faqnav'>
-    <div className="left-links">
-      <h2 className='faqh2'>FAQ</h2>
-    </div>
-      <div>
-      <Link to="./eligibility" className="links">Eligibility</Link>
-      <Link to="./otherwaystohelp" className="links2">Other Ways To Help</Link>
-    </div>
-  </nav>
+
+    <body className='faqheaderbody'>
+
+      <nav className='faqnav'>
+          <div className="left">
+            <h2 className='faqh2'>Frequently Asked Questions</h2>
+          </div>
+            <div className="right-links">
+            <Link to="./eligibility" className="links">Eligibility</Link>
+            <Link to="./otherwaystohelp" className="links">Other Ways To Help</Link>
+          </div>
+      </nav>
+      
+    </body>
    
   )
 }

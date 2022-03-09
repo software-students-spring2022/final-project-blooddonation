@@ -1,4 +1,5 @@
 export const FAQData = [
+
     {
       question: 'What is the blood donation process?',
       answer: [
@@ -41,6 +42,36 @@ export const FAQData = [
         }
       ]
     },
+
+    {
+      question: 'Am I eligible to donate blood?',
+      answer: [ {subHeading: "Eligible"}]
+    },
+
+    {
+      question: 'Is it safe to donate?',
+      answer: [ { subHeading: "",
+                  points: ["Yes, it is safe to donate blood. New, sterile needles are used and are discarded after one use, so you can’t get AIDS or any other infectious disease. In addition to this, Those at the site will check your temperature, blood pressure, pulse, and hemoglobin to ensure that you are healthy enough to donate blood on the day of your appointment."]
+                }
+      ]
+    },
+
+    {
+      question: 'How long does a blood donation take?',
+      answer: [ { subHeading: "",
+                  points: ["The time varies slightly depending on the donor's health history and how busy the center is, but the process generally takes one hour and 15 minutes. The actual donation of a pint of whole blood unit takes eight to 10 minutes."]
+                }
+      ]
+    },
+
+    {
+      question: 'How often can I donate blood',
+      answer: [ { subHeading: "",
+                  points: ["You must wait at least eight weeks (56 days) between donations of whole blood and 16 weeks (112 days) between Power Red donations (Double Red Cell). Whole blood donors can donate up to 6 times a year. Platelet apheresis donors may give every 7 days up to 24 times per year. Regulations are different for those giving blood for themselves (autologous donors). "]
+                }
+      ]
+    },
+
 
     {
       question: 'What are some acceptable forms of ID for blood donors?',

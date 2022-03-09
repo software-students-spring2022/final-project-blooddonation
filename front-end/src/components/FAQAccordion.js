@@ -12,12 +12,13 @@ const AccordionSection = styled.div`
   justify-content: center;
   height: 100vh;
   margin-left: 0px;
-  margin-top: 50px
+  margin-top: 0px
   position: absolute;
 `;
 
 const Container = styled.div`
   top: 5%;
+
 `;
 
 const Wrap = styled.div`
@@ -29,6 +30,9 @@ const Wrap = styled.div`
   text-align: center;
   cursor: pointer;
   width: 100%;
+  border-top: 1px solid #ff0000;
+  border-radius: 5px;
+
 
 
   h1 {
@@ -55,13 +59,26 @@ const Dropdown = styled.div`
   align-items: left;
   text-align: center;
   margin-top:0px;
+  border-radius: 5px;
   border-bottom: 1px solid #ff0000;
   border-top: 1px solid #ff0000;
-  transition: all 0.5s cubic-bezier(0,1,0,1);
   overflow-y: scroll;
+  
+
+
 
   p {
     font-size: 2rem;
+  }
+
+  .p-info {
+    font-size: 20px;
+    margin-top 100px;
+    text-align: center;
+  }
+
+  .p-other {
+    font-size: 1rem;
   }
 
   h2 {
@@ -69,6 +86,15 @@ const Dropdown = styled.div`
     font-size: 2rem;
     padding-top: 5px;
     border-top: 2px solid white;
+    text-decoration: underline;
+    color: white;
+    
+  }
+
+  .linkStyle{
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
     
   }
   
@@ -77,8 +103,9 @@ const Dropdown = styled.div`
 const Ul = styled.div`
     list-style: none;
 
-   
-   
+     li{
+        font-size: 20px;
+     }
 
       li:before {
         content: "• "; 
@@ -93,6 +120,7 @@ const Ul = styled.div`
         color: red;
         font-weight: bold;
         text-decoration: underline;
+        font-size: 20px;
       }
 `;
   
@@ -132,7 +160,8 @@ const Accordion = () => {
                     item.answer.map((answerObj)=>{
                       return(
                         <>
-                          <h2>{answerObj.subHeading}</h2>
+                          {answerObj.subHeading !== "" && answerObj.subHeading !== "Eligible" ? <h2>{answerObj.subHeading}</h2> : <></> }
+
                           { answerObj.subHeading === "Registration" ? 
                               <>
                                 <Ul>
@@ -179,6 +208,34 @@ const Accordion = () => {
 
                                   </Ul>
                                 </>
+                            
+                            :answerObj.subHeading === "Eligible" ?
+                            
+                                <>
+                                  <Ul>
+                                    <p>These are the basic requirements for most donations:</p>
+                                    <br></br>
+                                    <li>You must be in good health. You generally feel well, even if you're being treated for a chronic condition.</li>
+                                    <li>In most states you must be 17 years old. 16 year olds may donate with parental permission if allowed by state law. 
+                                        If you're a teen donor check out our <Link to="./eligibility/informationforteens" className='linkStyle'>information for teens page!</Link></li>
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                  </Ul>
+                                  <p className='p-other'><Link to="/login" className='linkStyle'>Create a profile and take a quiz to determine your eligibility for each type of blood donation (Whole Blood Donation, 
+                                      Power Red Donation (Double Red Cell), Platelet Donation ,Plasma Donation)</Link></p>
+                                </>
+
+                            :answerObj.subHeading === "" ?
+                            
+                                answerObj.points.map((point)=>{
+                                  return(
+                                    <>
+                                      <p className='p-info'>{point}</p>
+        
+                                    </>
+                                  )
+                                  })
 
                             :answerObj.points.map((point)=>{
                             return(
