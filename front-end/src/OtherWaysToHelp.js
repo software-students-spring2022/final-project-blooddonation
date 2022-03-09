@@ -8,8 +8,10 @@ import './OtherWaysToHelp.css'
 const OtherWaysToHelp = props => {
   return (
     <>
-      <h1>Other Ways To Help!</h1>
-      <p>here!</p>
+      <body className='help-body'>
+        <h1>Other Ways To Help!</h1>
+      </body>
+  
     </>
   )
 }

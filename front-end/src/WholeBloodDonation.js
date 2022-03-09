@@ -8,7 +8,10 @@ import './WholeBloodDonation.css'
 const WholeBloodDonation = props => {
   return (
     <>
-      <h1>Whole Blood Donation!</h1>
+      <body className='whole-body'>
+        <h1>Whole Blood Donation!</h1>
+      </body>
+      
     </>
   )
 }

@@ -8,7 +8,10 @@ import './PlateletDonation.css'
 const PlateletDonation = props => {
   return (
     <>
-      <h1>PlateletDonation!</h1>
+      <body className='platelet-body'>
+        <h1>Platelet Donation!</h1>
+      </body>
+     
     </>
   )
 }
