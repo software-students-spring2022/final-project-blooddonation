@@ -11,8 +11,13 @@ const Profile = props => {
   return (
     <>
       <body className='profilebody'>
-        <ProfileCard user = {{"Name": "Rachel", "Age" : 13, "BloodTypes": "Blood Type A"}} image = {ProfileImage}></ProfileCard>
+        <ProfileCard title = "Hi, Rachel!" text = {{"Name": "Rachel", "Age" : 13, "BloodType": "Type A"}} image = {ProfileImage}
+        />
+        <ProfileCard title = "You are eligible for these blood donations" text = {{"Eligible": ["Donation A", "Donation B", "Donation C"]}}
+        />
       </body>
+     
+      {/* to do add button */}
     </>
   )
 }
