@@ -1,4 +1,4 @@
-import './FAQHeader.css'
+import './styles/FAQHeader.css'
 import {Link} from 'react-router-dom'
 
 /**

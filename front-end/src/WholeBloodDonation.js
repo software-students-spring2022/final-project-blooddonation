@@ -1,4 +1,4 @@
-import './WholeBloodDonation.css'
+import './styles/DonationElig.css'
 
 /**
  * A React component that represents the Home page of the app.
@@ -8,8 +8,18 @@ import './WholeBloodDonation.css'
 const WholeBloodDonation = props => {
   return (
     <>
-      <body className='whole-body'>
+      <body>
         <h1>Whole Blood Donation!</h1>
+          <div className='inner'>
+            <h2>What is it?</h2>
+              <p>The 'Whole Blood' Donation includes</p>
+            <h2>Who is Eligible?</h2>
+              <p></p>
+            <h2>How often can you donate?</h2>
+              <p></p>
+
+            <a href="https://tinyurl.com/sdz6pzp7">Link to more info</a>
+          </div>
       </body>
       
     </>

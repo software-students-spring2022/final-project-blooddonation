@@ -1,4 +1,4 @@
-import './Faq.css'
+import './styles/Faq.css'
 import FAQHeader from './FAQHeader'
 import FAQAccordion from './components/FAQAccordion';
 

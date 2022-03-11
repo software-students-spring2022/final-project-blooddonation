@@ -1,4 +1,4 @@
-import './Profile.css'
+import './styles/Profile.css'
 import ProfileCard from './components/ProfileCard.js'
 import ProfileImage from './assets/ProfilePlaceholder.jpg';
 
