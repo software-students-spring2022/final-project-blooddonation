@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom'
 import './Eligibility.css'
+import { EligibilityData} from './components/EligibilityData';
+import { Card, CardContent, CardMedia, Box, Typography as t} from '@mui/material';
+
 
 /**
  * A React component that represents the Home page of the app.
@@ -12,17 +15,45 @@ const Eligibility = props => {
       <body className="eligibilitybody">
 
         <nav className='eligibilitynav'>
-          <div className="left-links">
+          <div className="eligibilityleft-link">
             <Link to="/FAQ" className="backlink">Back to FAQ</Link>
           </div>
         </nav>
 
-        <div class="main" id="wholeblood">
-          <h2 className='sectionheader'>Whole Blood Donation</h2>
-          <p>Click on the link to see the "smooth" scrolling effect.</p>
-          <a href="#powerred">Click Me to Smooth Scroll to Power Red Donation (Double Red Cell) Below</a>
-          <p>Note: Remove the scroll-behavior property to remove smooth scrolling.</p>
+        <div className="container">
+          <a href="#wholeblood" className='side-link'>Whole Blood Donation</a>
+          <a href="#powerred" className='side-link'>Power Red Donation (Double Red Cell)</a>
+          <a href="#platelet" className='side-link'>Platelet Donation</a>
+          <a href="#plasma" className='side-link'>Plasma Donation</a>
         </div>
+
+        {EligibilityData.map((item)=>{
+          return(
+              item.section === "Whole Blood Donation" ?
+              <div class="main" id="wholeblood">
+                <p>{item.image}</p>
+
+              <Card sx={{ display: 'flex', minWidth: 200, height: 400}}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>  
+                      {item.image && 
+                      <CardMedia component = "img" sx= {{ width: 100, borderRadius: '50%'}}image = {item.image}/>
+                      }
+                  </Box>
+                  <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                      <CardContent>
+                          <h2 className='sectionheader'>{item.name}</h2> 
+                          <t component = "div" variant = "h1"> {item.points}<br /></t>
+                          <t component = "div" variant = "h1"> {item.links}</t>
+                      </CardContent>
+                  </Box>
+              </Card>
+            </div>
+
+            :null
+          );
+        })
+        }
+        
 
         <div class="main" id="powerred">
           <h2 className='sectionheader'>Power Red Donation (Double Red Cell)</h2>

@@ -1,11 +1,14 @@
 
 
 import { Link } from 'react-router-dom'
+import  WholeBloodPic from '../assets/wholebloodpic.jpeg';
 
 export const EligibilityData = [
 
     {
         section: 'Whole Blood Donation',
+
+        image: WholeBloodPic,
 
         points: [ "Donation frequency: Every 56 days, up to 6 times a year", "You must be in good health and feeling well", 
                     "You must be at least 16 years old in most states", "You must weigh at least 110 lbs"
