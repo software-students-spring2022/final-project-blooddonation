@@ -8,7 +8,10 @@ import './PowerRedDonation.css'
 const PowerRedDonation = props => {
   return (
     <>
-      <h1>Power Red Donation!</h1>
+      <body className='power-body'>
+        <h1>Power Red Donation (Double Red Cell)!</h1>
+      </body>
+      
     </>
   )
 }

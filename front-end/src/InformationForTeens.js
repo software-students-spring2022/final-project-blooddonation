@@ -8,7 +8,9 @@ import './InformationForTeens.css'
 const InformationForTeens = props => {
   return (
     <>
-      <h1>Information For Teens!</h1>
+      <body className='teeninfo-body'>
+        <h1>Information For Teens!</h1>
+      </body>
     </>
   )
 }

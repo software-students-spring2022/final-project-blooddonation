@@ -8,7 +8,10 @@ import './ABElitePlasmaDonation.css'
 const ABElitePlasmaDonation = props => {
   return (
     <>
-      <h1>AB Elite Plasma Donation!</h1>
+      <body className='plasma-body'>
+        <h1>AB Elite Plasma Donation!</h1>
+      </body>
+      
     </>
   )
 }

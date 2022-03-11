@@ -8,8 +8,10 @@ import './ContactUs.css'
 const ContactUs = props => {
   return (
     <>
-      <h1>Hello and welcome!</h1>
-      <p>This is our blood donation Contact Us Page!</p>
+      <body className='contact-body'>
+        <h1>Hello and welcome!</h1>
+        <p>This is our blood donation Contact Us Page!</p>
+      </body>
     </>
   )
 }

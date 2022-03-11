@@ -10,10 +10,13 @@ import ProfileImage from './assets/ProfilePlaceholder.jpg';
 const Profile = props => {
   return (
     <>
-      <ProfileCard title = "Hi, Rachel!" text = {{"Name": "Rachel", "Age" : 13, "BloodType": "Type A"}} image = {ProfileImage}
-      />
-      <ProfileCard title = "You are eligible for these blood donations" text = {{"Eligible": ["Donation A", "Donation B", "Donation C"]}}
-      />
+      <body className='profilebody'>
+        <ProfileCard title = "Hi, Rachel!" text = {{"Name": "Rachel", "Age" : 13, "BloodType": "Type A"}} image = {ProfileImage}
+        />
+        <ProfileCard title = "You are eligible for these blood donations" text = {{"Eligible": ["Donation A", "Donation B", "Donation C"]}}
+        />
+      </body>
+     
       {/* to do add button */}
     </>
   )
