@@ -1,7 +1,7 @@
 import './Profile.css'
 import ProfileCard from './components/ProfileCard.js'
 import ProfileImage from './assets/ProfilePlaceholder.jpg';
-
+import { Button } from '@mui/material';
 /**
  * A React component that represents the Home page of the app.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -10,11 +10,19 @@ import ProfileImage from './assets/ProfilePlaceholder.jpg';
 const Profile = props => {
   return (
     <>
-      <ProfileCard title = "Hi, Rachel!" text = {{"Name": "Rachel", "Age" : 13, "BloodType": "Type A"}} image = {ProfileImage}
+      <Button>Edit Profile</Button>
+      <ProfileCard 
+        title = "Hi, Rachel!" 
+        text = {{"Name": "Rachel", "Age" : 13, "BloodType": "Type A"}} 
+        image = {ProfileImage}
       />
-      <ProfileCard title = "You are eligible for these blood donations" text = {{"Eligible": ["Donation A", "Donation B", "Donation C"]}}
+      <ProfileCard 
+        title = "You are eligible for these blood donations" 
+        text_chip = {["Whole Blood", "Power Red", "Platelet"]}
       />
-      {/* to do add button */}
+      {/* Navigate to another page */}
+      <Button>Donate Now</Button>
+      <Button>Take Quiz Again</Button>
     </>
   )
 }
