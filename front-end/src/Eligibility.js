@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom'
 import './Eligibility.css'
 import { EligibilityData} from './components/EligibilityData';
 import { Card, CardContent, CardMedia, Box, Typography, Grid} from '@mui/material';
+import MedicationAccordion from './components/MedicationAccordion';
+import GeneralHealthAccordion from './components/GeneralHealthAccordion';
+import TravelAccordion from './components/TravelAccordion';
+
 
 
 /**
@@ -14,22 +18,28 @@ const Eligibility = props => {
     <>
       <body className="eligibilitybody">
 
-        <nav className='eligibilitynav'>
-          <div className="eligibilityleft-link">
-            <Link to="/FAQ" className="backlink">Back to FAQ</Link>
-          </div>
-          <div>
-            <h1 className='title'>Eligibility</h1>
-          </div>
-        </nav>
+      <h1 className='title'>Eligibility</h1>
+        
+        <div className='sidenav'>
 
-        <div className='site-container'><a href="/finddonationsite" className='findSite-link'>Find a Donation Site</a></div>
-        <div className="container">
-          <a href="#wholeblood" className='side-link'>Whole Blood Donation</a>
-          <a href="#powerred" className='side-link'>Power Red Donation (Double Red Cell)</a>
-          <a href="#platelet" className='side-link'>Platelet Donation</a>
-          <a href="#plasma" className='side-link'>Plasma Donation</a>
+            <div className='movelink'><Link to="/FAQ" className="backlink">Back to FAQ</Link></div>
+            <div className='site-container'><a href="/finddonationsite" className='findSite-link'>Find a Donation Site</a></div>
+            <div className="container">
+              <a href="#wholeblood" className='side-link'>Whole Blood Donation</a>
+              <a href="#powerred" className='side-link'>Power Red Donation (Double Red Cell)</a>
+              <a href="#platelet" className='side-link'>Platelet Donation</a>
+              <a href="#plasma" className='side-link'>Plasma Donation</a>
+              <a href="#meds" className='side-link'>Medications and Vaccinations</a>
+              <a href="#general" className='side-link'>General Health Considerations</a>
+              <a href="#travel" className='side-link'>Travel Outside the U.S., Immigration</a>
+              <a href="#medcond" className='side-link'>Medical Conditions that Affect Eligibility</a>
+              <a href="#medtreat" className='side-link'>Medical Treatments</a>
+              <a href="#std" className='side-link'>Lifestyle and Life Events</a>
+              <a href="#life" className='side-link'>Sexually Transmitted Diseases</a>
+            </div>
+            <div className='help-container'><a href="/FAQ/otherwaystohelp" className='findSite-link'>Unable to Give Blood?</a></div>
         </div>
+        
 
         <Grid container direction="column" justifyContent="center" alignItems="center"> 
         
@@ -162,7 +172,7 @@ const Eligibility = props => {
                   <div class="main" id="plasma">
 
                     <Grid item>
-                      <Card sx={{ display: 'flex', minWidth: 200, width: 1100, height: 515}}>
+                      <Card sx={{ display: 'flex', minWidth: 200, width: 1100, height: 535}}>
                           <Box sx={{ display: 'flex', alignItems: 'left'}}>  
                               {item.image && 
                               <CardMedia component = "img" sx= {{ width: 580, height: 700}}image = {item.image}/>
@@ -203,7 +213,27 @@ const Eligibility = props => {
             })
           }
               
-              
+          <div class="main" id="meds">
+              <Grid item>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Medications and Vaccinations<br /></Typography>
+                <MedicationAccordion /> 
+              </Grid>  
+          </div>
+
+          <div class="main" id="general">
+              <Grid item>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> General Health Considerations<br /></Typography>
+                <GeneralHealthAccordion /> 
+              </Grid>  
+          </div>
+
+          <div class="main" id="travel">
+              <Grid item>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Travel Outside the U.S., Immigration<br /></Typography>
+                <TravelAccordion /> 
+              </Grid>  
+          </div>
+           
 
         
         
