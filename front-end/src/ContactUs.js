@@ -1,4 +1,4 @@
-import './ContactUs.css'
+import './styles/ContactUs.css'
 
 /**
  * A React component that represents the Home page of the app.

@@ -1,4 +1,4 @@
-import './OtherWaysToHelp.css'
+import './styles/OtherWaysToHelp.css'
 
 /**
  * A React component that represents the Home page of the app.

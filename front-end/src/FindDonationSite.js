@@ -1,4 +1,4 @@
-import './FindDonationSite.css'
+import './styles/FindDonationSite.css'
 
 /**
  * A React component that represents the Home page of the app.
