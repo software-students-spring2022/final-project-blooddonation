@@ -72,6 +72,29 @@ const Header = props => {
  }
             }>Sign Up</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink to="/createaccount" style={({ isActive }) =>
+              isActive
+                ? {
+                    color: '#fff',
+                    background: '#000000',
+                    borderRadius: 30,
+                    paddingTop: 5,
+                    paddingBottom: 5,
+                    paddingLeft: 20,
+                    paddingRight: 20
+    
+                  }
+                : { color: '#000000', 
+                    background: '#fff',
+                    borderRadius: 30, 
+                    paddingTop: 5, 
+                    paddingBottom: 5, 
+                    paddingLeft: 20, 
+                    paddingRight: 20
+ }
+            }>Sign Up</NavLink>
+          </li>
         </ul>
       </nav>
     </header>
