@@ -3,7 +3,6 @@
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
-import { useForm } from "react-hook-form";
 import { TextField, Button, Input, Stack } from '@mui/material';
 import { useState } from "react";
 import { Link } from 'react-router-dom'
@@ -15,18 +14,17 @@ const [accountData, setAccountData] = useState({
     email:"", 
     password: ""
 })
-const { handleSubmit } = useForm();
-
-const onSubmit = (accountData) => {
+const handleSubmit = (e) => {
     // Send user data to backend here
+    e.preventDefault()
     console.log(accountData)
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
           <Stack alignItems = 'center' spacing = {2}>
-          <t>Create Account</t>
+          <h1>Create Account</h1>
           <TextField 
             sx= {{ width: '25%'}}
             required 
@@ -63,7 +61,7 @@ const onSubmit = (accountData) => {
           </Stack>
                
         <Input type = "submit" value = "Submit">Register</Input><br></br>
-        <t>Already have an account?</t>
+        <h1>Already have an account?</h1>
         <Button component = {Link} to = {'/login'}>Login</Button>
       </form>
     </>
