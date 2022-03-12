@@ -1,4 +1,4 @@
-import './Home.css'
+import './styles/Home.css'
 
 /**
  * A React component that represents the Home page of the app.
@@ -8,8 +8,10 @@ import './Home.css'
 const Home = props => {
   return (
     <>
-      <h1>Hello and welcome!</h1>
-      <p>This is our blood donation Home Page!</p>
+      <body className='home-body'>
+        <h1>Hello and welcome!</h1>
+        <p>This is our blood donation Home Page!</p>
+      </body>
     </>
   )
 }

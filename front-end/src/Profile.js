@@ -1,4 +1,4 @@
-import './Profile.css'
+import './styles/Profile.css'
 import ProfileCard from './components/ProfileCard.js'
 import ProfileImage from './assets/ProfilePlaceholder.jpg';
 import { Button } from '@mui/material';
@@ -10,6 +10,7 @@ import { Button } from '@mui/material';
 const Profile = props => {
   return (
     <>
+      <body className='profilebody'>
       <Button>Edit Profile</Button>
       <ProfileCard 
         title = "Hi, Rachel!" 
@@ -23,6 +24,9 @@ const Profile = props => {
       {/* Navigate to another page */}
       <Button>Donate Now</Button>
       <Button>Take Quiz Again</Button>
+      </body>
+     
+      {/* to do add button */}
     </>
   )
 }

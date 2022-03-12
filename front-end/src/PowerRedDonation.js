@@ -1,4 +1,4 @@
-import './PowerRedDonation.css'
+import './styles/DonationElig.css'
 
 /**
  * A React component that represents the Home page of the app.
@@ -8,7 +8,12 @@ import './PowerRedDonation.css'
 const PowerRedDonation = props => {
   return (
     <>
-      <h1>Power Red Donation!</h1>
+      <body>
+        <h1>Power Red Donation (Double Red Cell)!</h1>
+      </body>
+      
+
+
     </>
   )
 }

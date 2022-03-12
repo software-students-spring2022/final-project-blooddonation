@@ -1,4 +1,4 @@
-import './FindDonationSite.css'
+import './styles/FindDonationSite.css'
 
 /**
  * A React component that represents the Home page of the app.
@@ -8,8 +8,11 @@ import './FindDonationSite.css'
 const FindDonationSite = props => {
   return (
     <>
-      <h1>Hello and welcome!</h1>
-      <p>This is our blood donation Map Page!</p>
+      <body className='find-body'>
+        <h1>Hello and welcome!</h1>
+        <p>This is our blood donation Find Donation Site Page</p>
+      </body>
+
     </>
   )
 }

@@ -1,4 +1,4 @@
-import './LogIn.css'
+import './styles/LogIn.css'
 
 /**
  * A React component that represents the Home page of the app.
@@ -8,8 +8,10 @@ import './LogIn.css'
 const LogIn = props => {
   return (
     <>
-      <h1>Hello and welcome!</h1>
-      <p>This is our blood donation LogIn Page!</p>
+      <body className='login-body'>
+        <h1>Hello and welcome!</h1>
+        <p>This is our blood donation LogIn Page!</p>
+      </body>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import './ABElitePlasmaDonation.css'
+import './styles/DonationElig.css'
 
 /**
  * A React component that represents the Home page of the app.
@@ -8,7 +8,10 @@ import './ABElitePlasmaDonation.css'
 const ABElitePlasmaDonation = props => {
   return (
     <>
-      <h1>AB Elite Plasma Donation!</h1>
+      <body className='plasma-body'>
+        <h1>AB Elite Plasma Donation!</h1>
+      </body>
+      
     </>
   )
 }

@@ -1,4 +1,4 @@
-import './PlateletDonation.css'
+import './styles/DonationElig.css'
 
 /**
  * A React component that represents the Home page of the app.
@@ -8,7 +8,10 @@ import './PlateletDonation.css'
 const PlateletDonation = props => {
   return (
     <>
-      <h1>PlateletDonation!</h1>
+      <body className='platelet-body'>
+        <h1>Platelet Donation!</h1>
+      </body>
+     
     </>
   )
 }
