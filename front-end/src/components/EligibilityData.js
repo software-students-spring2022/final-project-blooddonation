@@ -17,7 +17,7 @@ export const EligibilityData = [
                     "You must be at least 16 years old in most states", "You must weigh at least 110 lbs"
                 ],
 
-        links: [<Link to="./informationforteens" color='red'>See aditional requirements for students!</Link>, <Link to="./wholeblooddonation" className='linkStyle'> Learn more about whole blood donation</Link> ]
+        links: [<Link to="./informationforteens">See aditional requirements for students!</Link>, <Link to="./wholeblooddonation"> Learn more about whole blood donation</Link> ]
     },
 
 
@@ -31,7 +31,7 @@ export const EligibilityData = [
                     "Female donors+ must be at least 19 years old, at least 5'5 tall and weigh at least 150 lbs"
                 ],
 
-        links: [<Link to="./informationforteens" className='linkStyle'>See aditional requirements for students!</Link>, <Link to="./powerreddonation" className='linkStyle'> Learn more about power red donation (double red cell)</Link> ]
+        links: [<Link to="./informationforteens" >See aditional requirements for students!</Link>, <Link to="./powerreddonation" > Learn more about power red donation (double red cell)</Link> ]
     },
 
 

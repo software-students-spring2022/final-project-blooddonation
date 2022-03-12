@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MedicationData } from './MedicationData';
+import { MedicalCondData } from './MedicalCondData';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
@@ -53,7 +53,7 @@ const Wrap = styled.div`
 const Dropdown = styled.div`
   background: #1c1c1c;
   color: #ffffff;
-  height: 300px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -165,7 +165,7 @@ const Ul2 = styled.div`
 
 
 
-const MedicationAccordion = () => {
+const MedicalCondAccordion = () => {
   const [clicked, setClicked] = useState(false);
 
   const toggle = index => {
@@ -182,7 +182,7 @@ const MedicationAccordion = () => {
     <IconContext.Provider value={{ color: '#ff0000', size: '25px' }}>
       <AccordionSection>
         <Container>
-          {MedicationData.map((item, index) => {
+          {MedicalCondData.map((item, index) => {
             return (
               <>
                 <Wrap onClick={() => toggle(index)} key={index}>
@@ -196,10 +196,11 @@ const MedicationAccordion = () => {
                       return(
                         <>
                     
-                          { item.question === "Medications" ? 
+                          { item.question === "Bleeding Condition" ? 
                               <>
-                                <p className='p-info2'>In almost all cases, medications will not disqualify you as a blood donor. Your eligibility will be based on the reason that the medication was prescribed. As long as the condition is under control and you are healthy, blood donation is usually permitted.</p>
-                                <p className='p-info2'>Over-the-counter oral homeopathic medications, herbal remedies, and nutritional supplements are acceptable. There are a handful of drugs that are of special significance in blood donation. Persons on these drugs have waiting periods following their last dose before they can donate blood:</p>
+                                <p className='p-info2'>If you have a history of bleeding problems, you will be asked additional questions. 
+                                                        If your blood does not clot normally, you should not donate since you may have excessive bleeding where the needle was placed. 
+                                                        For the same reason, you should not donate if you are taking any "blood thinner" such as:</p>
                                 {answerObj.points.map((point)=>{
                                     return(
                                     <>
@@ -209,8 +210,37 @@ const MedicationAccordion = () => {
                                     </>
                                     )
                                     })}
+
+                                <p className='p-info2'>If you are on aspirin, it is OK to donate whole blood. However, you must be off of aspirin for at least 2 full days in order to donate platelets by apheresis.  F
+                                                        or example, if you take aspirin products on Monday, the soonest you may donate platelets is Thursday. 
+                                                        Donors with clotting disorder from Factor V who are not on anticoagulants are eligible to donate; however, all others must be evaluated by the health historian at the collection center.</p>
                               </>
-                          
+
+
+                            :item.question === "HIV, AIDS" ? 
+                                <>
+                                    <p className='p-info2'>You should not give blood if you have AIDS or have ever had a positive HIV test, or if you have done something that puts you at risk for becoming infected with HIV.
+                                    You are at risk for getting infected if you:</p>
+                                    {answerObj.points.map((point)=>{
+                                        return(
+                                        <>
+                                            <Ul2>
+                                            <li >{point}</li>
+                                            </Ul2>
+                                        </>
+                                        )
+                                        })}
+
+                                    <p className='p-info2'>You should not give blood if you have any of the following conditions that can be signs or symptoms of HIV/AIDS:</p>
+                                    <>
+                                        <Ul2>
+                                        <li >Fever</li>
+                                        <li >Enlarged lymph glands</li>
+                                        <li >Sore throat</li>
+                                        <li >Rash</li>
+                                        </Ul2>
+                                    </>
+                                </>
                             :answerObj.points.length === 1 ?
                             
                                 <>
@@ -250,4 +280,4 @@ const MedicationAccordion = () => {
   );
 };
 
-export default MedicationAccordion;
+export default MedicalCondAccordion;

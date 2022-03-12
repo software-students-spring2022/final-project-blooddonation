@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { MedicationData } from './MedicationData';
+import { Link } from 'react-router-dom'
+import { LifestyleData } from './LifestyleData';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
@@ -53,7 +54,7 @@ const Wrap = styled.div`
 const Dropdown = styled.div`
   background: #1c1c1c;
   color: #ffffff;
-  height: 300px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -131,32 +132,6 @@ const Ul = styled.div`
         font-size: 20px;
       }
 `;
-
-
-const Ul2 = styled.div`
-    list-style: none;
-    padding-left: 20px;
-
-     li{
-        font-size: 20px;
-     }
-
-      li:before {
-        content: "• "; 
-        color: red; 
-        font-weight: bold;
-        font-size: 30px; 
-        display: inline-block; 
-        width: 1em; 
-      }
-
-      .linkStyle{
-        color: red;
-        font-weight: bold;
-        text-decoration: underline;
-        font-size: 20px;
-      }
-`;
   
   
 
@@ -165,7 +140,7 @@ const Ul2 = styled.div`
 
 
 
-const MedicationAccordion = () => {
+const LifestyleAccordion = () => {
   const [clicked, setClicked] = useState(false);
 
   const toggle = index => {
@@ -182,7 +157,7 @@ const MedicationAccordion = () => {
     <IconContext.Provider value={{ color: '#ff0000', size: '25px' }}>
       <AccordionSection>
         <Container>
-          {MedicationData.map((item, index) => {
+          {LifestyleData.map((item, index) => {
             return (
               <>
                 <Wrap onClick={() => toggle(index)} key={index}>
@@ -196,21 +171,12 @@ const MedicationAccordion = () => {
                       return(
                         <>
                     
-                          { item.question === "Medications" ? 
+                          { item.question === "Age" ? 
                               <>
-                                <p className='p-info2'>In almost all cases, medications will not disqualify you as a blood donor. Your eligibility will be based on the reason that the medication was prescribed. As long as the condition is under control and you are healthy, blood donation is usually permitted.</p>
-                                <p className='p-info2'>Over-the-counter oral homeopathic medications, herbal remedies, and nutritional supplements are acceptable. There are a handful of drugs that are of special significance in blood donation. Persons on these drugs have waiting periods following their last dose before they can donate blood:</p>
-                                {answerObj.points.map((point)=>{
-                                    return(
-                                    <>
-                                        <Ul2>
-                                        <li >{point}</li>
-                                        </Ul2>
-                                    </>
-                                    )
-                                    })}
+                                <p className='p-info2'>You must be at least 17 years old to donate, or 16 years old with parental/guardian consent, if allowed by state law. (<Link to="./eligibility/informationforteens" className='linkStyle'>Find out more information for teen donors)</Link>
+                                                        There is no upper age limit for blood donation as long as you are well with no restrictions or limitations to your activities.</p>
+                                
                               </>
-                          
                             :answerObj.points.length === 1 ?
                             
                                 <>
@@ -250,4 +216,4 @@ const MedicationAccordion = () => {
   );
 };
 
-export default MedicationAccordion;
+export default LifestyleAccordion;

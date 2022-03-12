@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MedicationData } from './MedicationData';
+import { MedicalTreatData } from './MedicalTreatData';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
@@ -53,7 +53,7 @@ const Wrap = styled.div`
 const Dropdown = styled.div`
   background: #1c1c1c;
   color: #ffffff;
-  height: 300px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -133,39 +133,11 @@ const Ul = styled.div`
 `;
 
 
-const Ul2 = styled.div`
-    list-style: none;
-    padding-left: 20px;
-
-     li{
-        font-size: 20px;
-     }
-
-      li:before {
-        content: "• "; 
-        color: red; 
-        font-weight: bold;
-        font-size: 30px; 
-        display: inline-block; 
-        width: 1em; 
-      }
-
-      .linkStyle{
-        color: red;
-        font-weight: bold;
-        text-decoration: underline;
-        font-size: 20px;
-      }
-`;
-  
-  
 
 
 
 
-
-
-const MedicationAccordion = () => {
+const MedicalTreatAccordion = () => {
   const [clicked, setClicked] = useState(false);
 
   const toggle = index => {
@@ -182,7 +154,7 @@ const MedicationAccordion = () => {
     <IconContext.Provider value={{ color: '#ff0000', size: '25px' }}>
       <AccordionSection>
         <Container>
-          {MedicationData.map((item, index) => {
+          {MedicalTreatData.map((item, index) => {
             return (
               <>
                 <Wrap onClick={() => toggle(index)} key={index}>
@@ -196,22 +168,7 @@ const MedicationAccordion = () => {
                       return(
                         <>
                     
-                          { item.question === "Medications" ? 
-                              <>
-                                <p className='p-info2'>In almost all cases, medications will not disqualify you as a blood donor. Your eligibility will be based on the reason that the medication was prescribed. As long as the condition is under control and you are healthy, blood donation is usually permitted.</p>
-                                <p className='p-info2'>Over-the-counter oral homeopathic medications, herbal remedies, and nutritional supplements are acceptable. There are a handful of drugs that are of special significance in blood donation. Persons on these drugs have waiting periods following their last dose before they can donate blood:</p>
-                                {answerObj.points.map((point)=>{
-                                    return(
-                                    <>
-                                        <Ul2>
-                                        <li >{point}</li>
-                                        </Ul2>
-                                    </>
-                                    )
-                                    })}
-                              </>
-                          
-                            :answerObj.points.length === 1 ?
+                          {answerObj.points.length === 1 ?
                             
                                 <>
                                     {answerObj.points.map((point)=>{
@@ -250,4 +207,4 @@ const MedicationAccordion = () => {
   );
 };
 
-export default MedicationAccordion;
+export default MedicalTreatAccordion;

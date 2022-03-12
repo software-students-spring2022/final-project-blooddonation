@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MedicationData } from './MedicationData';
+import { STDData } from './STDData';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
@@ -53,7 +53,7 @@ const Wrap = styled.div`
 const Dropdown = styled.div`
   background: #1c1c1c;
   color: #ffffff;
-  height: 300px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -165,7 +165,7 @@ const Ul2 = styled.div`
 
 
 
-const MedicationAccordion = () => {
+const STDAccordion = () => {
   const [clicked, setClicked] = useState(false);
 
   const toggle = index => {
@@ -182,7 +182,7 @@ const MedicationAccordion = () => {
     <IconContext.Provider value={{ color: '#ff0000', size: '25px' }}>
       <AccordionSection>
         <Container>
-          {MedicationData.map((item, index) => {
+          {STDData.map((item, index) => {
             return (
               <>
                 <Wrap onClick={() => toggle(index)} key={index}>
@@ -196,21 +196,30 @@ const MedicationAccordion = () => {
                       return(
                         <>
                     
-                          { item.question === "Medications" ? 
-                              <>
-                                <p className='p-info2'>In almost all cases, medications will not disqualify you as a blood donor. Your eligibility will be based on the reason that the medication was prescribed. As long as the condition is under control and you are healthy, blood donation is usually permitted.</p>
-                                <p className='p-info2'>Over-the-counter oral homeopathic medications, herbal remedies, and nutritional supplements are acceptable. There are a handful of drugs that are of special significance in blood donation. Persons on these drugs have waiting periods following their last dose before they can donate blood:</p>
-                                {answerObj.points.map((point)=>{
-                                    return(
+                          { item.question === "HIV, AIDS" ? 
+                                <>
+                                    <p className='p-info2'>You should not give blood if you have AIDS or have ever had a positive HIV test, or if you have done something that puts you at risk for becoming infected with HIV.
+                                    You are at risk for getting infected if you:</p>
+                                    {answerObj.points.map((point)=>{
+                                        return(
+                                        <>
+                                            <Ul2>
+                                            <li >{point}</li>
+                                            </Ul2>
+                                        </>
+                                        )
+                                        })}
+
+                                    <p className='p-info2'>You should not give blood if you have any of the following conditions that can be signs or symptoms of HIV/AIDS:</p>
                                     <>
                                         <Ul2>
-                                        <li >{point}</li>
+                                        <li >Fever</li>
+                                        <li >Enlarged lymph glands</li>
+                                        <li >Sore throat</li>
+                                        <li >Rash</li>
                                         </Ul2>
                                     </>
-                                    )
-                                    })}
-                              </>
-                          
+                                </>
                             :answerObj.points.length === 1 ?
                             
                                 <>
@@ -250,4 +259,4 @@ const MedicationAccordion = () => {
   );
 };
 
-export default MedicationAccordion;
+export default STDAccordion;

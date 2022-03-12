@@ -8,7 +8,7 @@ import { FiPlus, FiMinus } from 'react-icons/fi';
 const AccordionSection = styled.div`
   flex: 0 0 100%;
   max-width: 100%;
-  width: 1100px;
+  width: 990px;
   align-items: center;
   justify-content: center;
   height: 100vh;

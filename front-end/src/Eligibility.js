@@ -5,6 +5,10 @@ import { Card, CardContent, CardMedia, Box, Typography, Grid} from '@mui/materia
 import MedicationAccordion from './components/MedicationAccordion';
 import GeneralHealthAccordion from './components/GeneralHealthAccordion';
 import TravelAccordion from './components/TravelAccordion';
+import MedicalCondAccordion from './components/MedicalCondAccordion';
+import MedicalTreatAccordion from './components/MedicalTreatAccordion';
+import LifestyleAccordion from './components/LifestyleAccordion';
+import STDAccordion from './components/STDAccordion';
 
 
 
@@ -32,10 +36,10 @@ const Eligibility = props => {
               <a href="#meds" className='side-link'>Medications and Vaccinations</a>
               <a href="#general" className='side-link'>General Health Considerations</a>
               <a href="#travel" className='side-link'>Travel Outside the U.S., Immigration</a>
-              <a href="#medcond" className='side-link'>Medical Conditions that Affect Eligibility</a>
+              <a href="#medcond" className='side-link'>Medical Conditions</a>
               <a href="#medtreat" className='side-link'>Medical Treatments</a>
-              <a href="#std" className='side-link'>Lifestyle and Life Events</a>
-              <a href="#life" className='side-link'>Sexually Transmitted Diseases</a>
+              <a href="#life" className='side-link'>Lifestyle</a>
+              <a href="#std" className='side-link'>Sexually Transmitted Diseases</a>
             </div>
             <div className='help-container'><a href="/FAQ/otherwaystohelp" className='findSite-link'>Unable to Give Blood?</a></div>
         </div>
@@ -52,7 +56,7 @@ const Eligibility = props => {
                 <div class="main" id="wholeblood">
 
                   <Grid item>
-                    <Card sx={{ display: 'flex', minWidth: 200, width: 1100, height: 515}}>
+                    <Card sx={{ display: 'flex', minWidth: 200, width: 990, height: 515}}>
                         <Box sx={{ display: 'flex', alignItems: 'left'}}>  
                             {item.image && 
                             <CardMedia component = "img" sx= {{ width: 580, height: 515}}image = {item.image}/>
@@ -92,10 +96,10 @@ const Eligibility = props => {
 
                   <div class="main" id="powerred">
 
-                    <Card sx={{ display: 'flex', minWidth: 200, width: 1100, height: 515}}>
+                    <Card sx={{ display: 'flex', minWidth: 200, width: 990, height: 540}}>
                         <Box sx={{ display: 'flex', alignItems: 'left'}}>  
                             {item.image && 
-                            <CardMedia component = "img" sx= {{ width: 580, height: 515}}image = {item.image}/>
+                            <CardMedia component = "img" sx= {{ width: 580, height: 540}}image = {item.image}/>
                             }
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -131,7 +135,7 @@ const Eligibility = props => {
                 <div class="main" id="platelet">
 
                   <Grid item>
-                    <Card sx={{ display: 'flex', minWidth: 200, width: 1100, height: 515}}>
+                    <Card sx={{ display: 'flex', minWidth: 200, width: 990, height: 515}}>
                         <Box sx={{ display: 'flex', alignItems: 'left'}}>  
                             {item.image && 
                             <CardMedia component = "img" sx= {{ width: 580, height: 515}}image = {item.image}/>
@@ -172,7 +176,7 @@ const Eligibility = props => {
                   <div class="main" id="plasma">
 
                     <Grid item>
-                      <Card sx={{ display: 'flex', minWidth: 200, width: 1100, height: 535}}>
+                      <Card sx={{ display: 'flex', minWidth: 200, width: 990, height: 535}}>
                           <Box sx={{ display: 'flex', alignItems: 'left'}}>  
                               {item.image && 
                               <CardMedia component = "img" sx= {{ width: 580, height: 700}}image = {item.image}/>
@@ -233,12 +237,36 @@ const Eligibility = props => {
                 <TravelAccordion /> 
               </Grid>  
           </div>
-           
 
-        
-        
-        
-        
+          <div class="main" id="medcond">
+              <Grid item>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Medical Conditions<br /></Typography>
+                <MedicalCondAccordion /> 
+              </Grid>  
+          </div>
+
+          <div class="main" id="medtreat">
+              <Grid item>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Medical Treatments<br /></Typography>
+                <MedicalTreatAccordion /> 
+              </Grid>  
+          </div>
+
+
+          <div class="main" id="life">
+              <Grid item>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Lifestyle<br /></Typography>
+                <LifestyleAccordion /> 
+              </Grid>  
+          </div>
+
+
+          <div class="main" id="std">
+              <Grid item>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Sexually Transmitted Diseases<br /></Typography>
+                <STDAccordion /> 
+              </Grid>  
+          </div>
         
         
         </Grid>
