@@ -204,7 +204,7 @@ const STDAccordion = () => {
                                         return(
                                         <>
                                             <Ul2>
-                                            <li >{point}</li>
+                                            <li key={point}>{point}</li>
                                             </Ul2>
                                         </>
                                         )
@@ -213,10 +213,10 @@ const STDAccordion = () => {
                                     <p className='p-info2'>You should not give blood if you have any of the following conditions that can be signs or symptoms of HIV/AIDS:</p>
                                     <>
                                         <Ul2>
-                                        <li >Fever</li>
-                                        <li >Enlarged lymph glands</li>
-                                        <li >Sore throat</li>
-                                        <li >Rash</li>
+                                        <li key="fever2">Fever</li>
+                                        <li key="enlarged2">Enlarged lymph glands</li>
+                                        <li key="sore2">Sore throat</li>
+                                        <li key="rash2">Rash</li>
                                         </Ul2>
                                     </>
                                 </>
@@ -237,7 +237,7 @@ const STDAccordion = () => {
                             return(
                               <>
                                 <Ul>
-                                  <li>{point}</li>
+                                <li key={point}>{point}</li>
                                 </Ul>
                               </>
                             )

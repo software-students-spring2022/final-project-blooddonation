@@ -20,7 +20,7 @@ import STDAccordion from './components/STDAccordion';
 const Eligibility = props => {
   return (
     <>
-      <body className="eligibilitybody">
+      <div className="eligibilitybody">
 
       <h1 className='title'>Eligibility</h1>
         
@@ -53,7 +53,7 @@ const Eligibility = props => {
           {EligibilityData.map((item)=>{
             return(
                 item.section === "Whole Blood Donation" ?
-                <div class="main" id="wholeblood">
+                <div className="main" id="wholeblood">
 
                   <Grid item>
                     <Card sx={{ display: 'flex', minWidth: 200, width: 990, height: 515}}>
@@ -66,19 +66,20 @@ const Eligibility = props => {
                             <CardContent>
 
 
-                                <Typography component = "div" variant = "h4" sx={{ pr: 15, pb: 1}}> {item.section}<br /></Typography>
+                                <Typography component = "div" variant = "h4" sx={{ pr: 15, pb: 1}} key="{item.section}"> {item.section}<br /></Typography>
 
                                 
                                
                                   {item.points.map((point)=>{
                                     return(
-                                      <Typography sx={{ pl: 0, pt: 2, pb: 0, color: 'red', fontSize: 30, display: 'flex',  flexDirection: 'row'}}>•  <Typography sx={{ pt: 1, pl: 1, pb: 0, color: 'black'}}>{point}</Typography></Typography>
+                                      <Typography component="div" sx={{ pl: 0, pt: 2, pb: 0, color: 'red', fontSize: 30, display: 'flex',  flexDirection: 'row'}}>•  <Typography component = "div" sx={{ pt: 1, pl: 1, pb: 0, color: 'black'}} key="{point}">{point}</Typography></Typography>
                                     );
                                   })}
                                   
                        
                                 {item.links.map((link)=>{
                                     return(
+                                      
                                       <Typography component = "div" variant = "subtitle1" sx={{ color: 'red', pt: 3, whiteSpace: 'nowrap'}}> {link}</Typography>
                                     );
                                 })}
@@ -94,7 +95,7 @@ const Eligibility = props => {
                  
                  <Grid item>
 
-                  <div class="main" id="powerred">
+                  <div className="main" id="powerred">
 
                     <Card sx={{ display: 'flex', minWidth: 200, width: 990, height: 540}}>
                         <Box sx={{ display: 'flex', alignItems: 'left'}}>  
@@ -106,13 +107,13 @@ const Eligibility = props => {
                             <CardContent>
 
 
-                            <Typography component = "div" variant = "h4" sx={{ pr: 15, pb: 1}}> {item.section}<br /></Typography>
+                            <Typography component = "div" variant = "h4" sx={{ pr: 15, pb: 1}} key="{item.section}"> {item.section}</Typography>
 
                                 
                                
                             {item.points.map((point)=>{
                               return(
-                                <Typography sx={{ pl: 0, pt: 2, pb: 0, color: 'red', fontSize: 30, display: 'flex',  flexDirection: 'row'}}>•  <Typography sx={{ pt: 1, pl: 1, pb: 0, color: 'black'}}>{point}</Typography></Typography>
+                                <Typography component = "div" sx={{ pl: 0, pt: 2, pb: 0, color: 'red', fontSize: 30, display: 'flex',  flexDirection: 'row'}}>•  <Typography component = "div" sx={{ pt: 1, pl: 1, pb: 0, color: 'black'}}>{point}</Typography></Typography>
                               );
                             })}
 
@@ -132,7 +133,7 @@ const Eligibility = props => {
 
                 :item.section === "Platelet Donation" ?
 
-                <div class="main" id="platelet">
+                <div className="main" id="platelet">
 
                   <Grid item>
                     <Card sx={{ display: 'flex', minWidth: 200, width: 990, height: 515}}>
@@ -145,13 +146,13 @@ const Eligibility = props => {
                             <CardContent>
 
 
-                                <Typography component = "div" variant = "h4" sx={{ pr: 15, pb: 1}}> {item.section}<br /></Typography>
+                                <Typography component = "div" variant = "h4" sx={{ pr: 15, pb: 1}} key="{item.section}"> {item.section}<br /></Typography>
 
                                 
                               
                                   {item.points.map((point)=>{
                                     return(
-                                      <Typography sx={{ pl: 0, pt: 2, pb: 0, color: 'red', fontSize: 30, display: 'flex',  flexDirection: 'row'}}>•  <Typography sx={{ pt: 1, pl: 1, pb: 0, color: 'black'}}>{point}</Typography></Typography>
+                                      <Typography component = "div" sx={{ pl: 0, pt: 2, pb: 0, color: 'red', fontSize: 30, display: 'flex',  flexDirection: 'row'}}>•  <Typography component = "div" sx={{ pt: 1, pl: 1, pb: 0, color: 'black'}} key="{point}">{point}</Typography></Typography>
                                     );
                                   })}
                                   
@@ -173,7 +174,7 @@ const Eligibility = props => {
                 
                 :item.section === "AB Elite Plasma Donation" ?
 
-                  <div class="main" id="plasma">
+                  <div className="main" id="plasma">
 
                     <Grid item>
                       <Card sx={{ display: 'flex', minWidth: 200, width: 990, height: 535}}>
@@ -186,13 +187,13 @@ const Eligibility = props => {
                               <CardContent>
 
 
-                                  <Typography component = "div" variant = "h4" sx={{ pr: 15, pb: 1}}> {item.section}<br /></Typography>
+                                  <Typography component = "div" variant = "h4" sx={{ pr: 15, pb: 1}} key="{item.section}"> {item.section}</Typography>
 
                                   
                                 
                                     {item.points.map((point)=>{
                                       return(
-                                        <Typography sx={{ pl: 0, pt: 2, pb: 0, color: 'red', fontSize: 30, display: 'flex',  flexDirection: 'row'}}>•  <Typography sx={{ pt: 1, pl: 1, pb: 0, color: 'black'}}>{point}</Typography></Typography>
+                                        <Typography component = "div" sx={{ pl: 0, pt: 2, pb: 0, color: 'red', fontSize: 30, display: 'flex',  flexDirection: 'row'}}>•  <Typography component = "div" sx={{ pt: 1, pl: 1, pb: 0, color: 'black'}} key="{point}">{point}</Typography></Typography>
                                       );
                                     })}
                                     
@@ -217,53 +218,53 @@ const Eligibility = props => {
             })
           }
               
-          <div class="main" id="meds">
+          <div className="main" id="meds">
               <Grid item>
-              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Medications and Vaccinations<br /></Typography>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Medications and Vaccinations</Typography>
                 <MedicationAccordion /> 
               </Grid>  
           </div>
 
-          <div class="main" id="general">
+          <div className="main" id="general">
               <Grid item>
-              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> General Health Considerations<br /></Typography>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> General Health Considerations</Typography>
                 <GeneralHealthAccordion /> 
               </Grid>  
           </div>
 
-          <div class="main" id="travel">
+          <div className="main" id="travel">
               <Grid item>
-              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Travel Outside the U.S., Immigration<br /></Typography>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Travel Outside the U.S., Immigration</Typography>
                 <TravelAccordion /> 
               </Grid>  
           </div>
 
-          <div class="main" id="medcond">
+          <div className="main" id="medcond">
               <Grid item>
-              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Medical Conditions<br /></Typography>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Medical Conditions</Typography>
                 <MedicalCondAccordion /> 
               </Grid>  
           </div>
 
-          <div class="main" id="medtreat">
+          <div className="main" id="medtreat">
               <Grid item>
-              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Medical Treatments<br /></Typography>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Medical Treatments</Typography>
                 <MedicalTreatAccordion /> 
               </Grid>  
           </div>
 
 
-          <div class="main" id="life">
+          <div className="main" id="life">
               <Grid item>
-              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Lifestyle<br /></Typography>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Lifestyle</Typography>
                 <LifestyleAccordion /> 
               </Grid>  
           </div>
 
 
-          <div class="main" id="std">
+          <div className="main" id="std">
               <Grid item>
-              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Sexually Transmitted Diseases<br /></Typography>
+              <Typography component = "div" variant = "h3" sx={{pt: 10, pb: 2, color: 'red'}}> Sexually Transmitted Diseases</Typography>
                 <STDAccordion /> 
               </Grid>  
           </div>
@@ -274,7 +275,7 @@ const Eligibility = props => {
 
        
 
-      </body>
+      </div>
 
     </>
     

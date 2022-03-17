@@ -194,7 +194,7 @@ const LifestyleAccordion = () => {
                             return(
                               <>
                                 <Ul>
-                                  <li>{point}</li>
+                                <li key={point}>{point}</li>
                                 </Ul>
                               </>
                             )

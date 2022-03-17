@@ -185,7 +185,7 @@ const MedicalTreatAccordion = () => {
                             return(
                               <>
                                 <Ul>
-                                  <li>{point}</li>
+                                <li key={point}>{point}</li>
                                 </Ul>
                               </>
                             )
