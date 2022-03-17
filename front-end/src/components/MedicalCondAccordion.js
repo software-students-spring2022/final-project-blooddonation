@@ -198,20 +198,20 @@ const MedicalCondAccordion = () => {
                     
                           { item.question === "Bleeding Condition" ? 
                               <>
-                                <p className='p-info2'>If you have a history of bleeding problems, you will be asked additional questions. 
+                                <p className='p-info2' key='listHeading1'>If you have a history of bleeding problems, you will be asked additional questions. 
                                                         If your blood does not clot normally, you should not donate since you may have excessive bleeding where the needle was placed. 
                                                         For the same reason, you should not donate if you are taking any "blood thinner" such as:</p>
-                                {answerObj.points.map((point)=>{
+                                {answerObj.points.map((point, index)=>{
                                     return(
                                     <>
                                         <Ul2>
-                                        <li >{point}</li>
+                                        <li key={point}>{point + index}</li>
                                         </Ul2>
                                     </>
                                     )
                                     })}
 
-                                <p className='p-info2'>If you are on aspirin, it is OK to donate whole blood. However, you must be off of aspirin for at least 2 full days in order to donate platelets by apheresis.  F
+                                <p className='p-info2' key='listending'>If you are on aspirin, it is OK to donate whole blood. However, you must be off of aspirin for at least 2 full days in order to donate platelets by apheresis.  F
                                                         or example, if you take aspirin products on Monday, the soonest you may donate platelets is Thursday. 
                                                         Donors with clotting disorder from Factor V who are not on anticoagulants are eligible to donate; however, all others must be evaluated by the health historian at the collection center.</p>
                               </>
@@ -219,25 +219,25 @@ const MedicalCondAccordion = () => {
 
                             :item.question === "HIV, AIDS" ? 
                                 <>
-                                    <p className='p-info2'>You should not give blood if you have AIDS or have ever had a positive HIV test, or if you have done something that puts you at risk for becoming infected with HIV.
+                                    <p className='p-info2'key='listHeading2'>You should not give blood if you have AIDS or have ever had a positive HIV test, or if you have done something that puts you at risk for becoming infected with HIV.
                                     You are at risk for getting infected if you:</p>
                                     {answerObj.points.map((point)=>{
                                         return(
                                         <>
                                             <Ul2>
-                                            <li >{point}</li>
+                                            <li key={point}>{point}</li>
                                             </Ul2>
                                         </>
                                         )
                                         })}
 
-                                    <p className='p-info2'>You should not give blood if you have any of the following conditions that can be signs or symptoms of HIV/AIDS:</p>
+                                    <p className='p-info2' key='listHeading3'>You should not give blood if you have any of the following conditions that can be signs or symptoms of HIV/AIDS:</p>
                                     <>
                                         <Ul2>
-                                        <li >Fever</li>
-                                        <li >Enlarged lymph glands</li>
-                                        <li >Sore throat</li>
-                                        <li >Rash</li>
+                                        <li key="fever">Fever</li>
+                                        <li key="enlarged">Enlarged lymph glands</li>
+                                        <li key="sore">Sore throat</li>
+                                        <li key="rash">Rash</li>
                                         </Ul2>
                                     </>
                                 </>
@@ -247,7 +247,7 @@ const MedicalCondAccordion = () => {
                                     {answerObj.points.map((point)=>{
                                         return(
                                             <>
-                                            <p className='p-info'>{point}</p>
+                                            <p className='p-info' key={point}>{point}</p>
                 
                                             </>
                                         )
@@ -258,7 +258,7 @@ const MedicalCondAccordion = () => {
                             return(
                               <>
                                 <Ul>
-                                  <li>{point}</li>
+                                <li key={point}>{point}</li>
                                 </Ul>
                               </>
                             )

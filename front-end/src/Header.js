@@ -1,6 +1,5 @@
 import './styles/Header.css'
 import logo from './images/logo.svg'
-import { Link } from 'react-router-dom'
 import {NavLink} from 'react-router-dom'
 
 /**
@@ -14,19 +13,20 @@ const Header = props => {
       <nav className="Header-navbar" >
         <ul className="nav-links">
           <li className="nav-item">
-            <Link to="/" className="logo"><img src={logo} alt="Our fabulous logo" /></Link>
+            <NavLink to="/" className="logo"><img src={logo} alt="Our fabulous logo" /></NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" to="/finddonationsite">Find Donation Site</NavLink>
+            <NavLink className={(navData) => (navData.isActive ? "active" : 'none')} to="/finddonationsite">Find Donation Site</NavLink>
+           
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" to="/FAQ">FAQ</NavLink>
+            <NavLink className={(navData) => (navData.isActive ? "active" : 'none')} to="/FAQ">FAQ</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" to="/profile">Profile</NavLink>
+            <NavLink className={(navData) => (navData.isActive ? "active" : 'none')} to="/profile">Profile</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink activeClassName="active" to="/ContactUs">Contact Us</NavLink>
+            <NavLink className={(navData) => (navData.isActive ? "active" : 'none')} to="/ContactUs">Contact Us</NavLink>
           </li>
           <li className="nav-item">
             <NavLink to="/login" style={({ isActive }) =>
