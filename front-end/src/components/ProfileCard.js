@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Card, CardContent, CardMedia, Box} from '@mui/material';
+import { Card, CardContent, CardMedia, Box, Chip} from '@mui/material';
 
 const ProfileCard = (props) => {
     return (
@@ -14,8 +14,11 @@ const ProfileCard = (props) => {
                 </Box>}
                 <Box>
                     <CardContent>
-                        {Object.entries(props.text).map(([key, value]) => 
-                            <t component = "div" variant = "h5">{`${key} : ${value}`}<br /></t>
+                        {props.text && Object.entries(props.text).map(([key, value]) => 
+                            <t component = "div" variant = "h5">{`${key} : ${value}`}<br/></t>
+                        )}
+                        {props.text_chip && props.text_chip.map((value) => 
+                            <Chip sx = {{mr: 2}} label={value} variant="outlined" />
                         )}
                     </CardContent>
                 </Box>
