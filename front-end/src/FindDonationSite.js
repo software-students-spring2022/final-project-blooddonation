@@ -8,10 +8,10 @@ import './styles/FindDonationSite.css'
 const FindDonationSite = props => {
   return (
     <>
-      <body className='find-body'>
+      <div className='find-body'>
         <h1>Hello and welcome!</h1>
         <p>This is our blood donation Find Donation Site Page</p>
-      </body>
+      </div>
 
     </>
   )
