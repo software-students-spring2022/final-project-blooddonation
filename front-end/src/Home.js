@@ -1,4 +1,8 @@
 import './styles/Home.css'
+import { Container , Grid, Item} from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import {national_blood_crisis_text} from './text/HomePageText';
 
 /**
  * A React component that represents the Home page of the app.
@@ -6,11 +10,31 @@ import './styles/Home.css'
  * @returns The contents of this component, in JSX form.
  */
 const Home = props => {
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+  
   return (
     <>
       <body className='home-body'>
-        <h1>Hello and welcome!</h1>
-        <p>This is our blood donation Home Page!</p>
+        <Container>
+          <h1>National Blood Crisis</h1>
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
+            <Item>{national_blood_crisis_text}</Item>
+          </Grid>
+          <Grid item xs={4}>
+            <Item>{national_blood_crisis_text}</Item>
+          </Grid>
+          <Grid item xs={4}>
+            <Item>{national_blood_crisis_text}</Item>
+          </Grid>
+        </Grid>
+        </Container>
       </body>
     </>
   )
