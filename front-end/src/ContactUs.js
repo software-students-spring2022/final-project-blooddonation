@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import './styles/ContactUs.css';
 import {
   Container,
@@ -5,6 +6,9 @@ import {
 } from '@mui/material';
 
 
+=======
+import './styles/ContactUs.css'
+>>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
 
 /**
  * A React component that represents the Home page of the app.
@@ -15,6 +19,7 @@ const ContactUs = props => {
   return (
     <>
       <body className='contact-body'>
+<<<<<<< HEAD
         <Container maxWidth="md">
           <h1 className='contact-h1'>Contact Us</h1>
           <Typography variant="body" component="div"
@@ -50,6 +55,10 @@ const ContactUs = props => {
             </div>
           </div>
         </Container>
+=======
+        <h1>Hello and welcome!</h1>
+        <p>This is our blood donation Contact Us Page!</p>
+>>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
       </body>
     </>
   )
