@@ -1,5 +1,5 @@
 import './styles/FAQHeader.css'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 /**
  * A React component that is used for the header displayed at the top of every page of the site.
@@ -9,19 +9,19 @@ import {Link} from 'react-router-dom'
 const FAQHeader = props => {
   return (
 
-    <body className='faqheaderbody'>
+    <div className='faqheaderbody'>
 
       <nav className='faqnav'>
           <div className="left">
             <h2 className='faqh2'>Frequently Asked Questions</h2>
           </div>
             <div className="right-links">
-            <Link to="./eligibility" className="links">Eligibility</Link>
-            <Link to="./otherwaystohelp" className="links">Other Ways To Help</Link>
+            <NavLink to="./eligibility" className="links">Eligibility</NavLink>
+            <NavLink to="./otherwaystohelp" className="links">Other Ways To Help</NavLink>
           </div>
       </nav>
       
-    </body>
+    </div>
    
   )
 }
