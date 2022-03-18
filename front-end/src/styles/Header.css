@@ -13,14 +13,10 @@
   font-size: calc(10px + 1vmin);
   color: black;
   position: sticky;
-<<<<<<< HEAD
-  width: 100%;
-=======
   width: auto;
   min-width: 1400px;
   margin-top:-20px;
   z-index: 2;
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
 }
 
 
@@ -37,11 +33,7 @@
 }
 .nav-item {
   display: inline-block;
-<<<<<<< HEAD
-  padding: 10px 15px;
-=======
   padding: 10px 15px 5px 20px;
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
 }
 
 .nav-item a {

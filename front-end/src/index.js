@@ -3,10 +3,7 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-<<<<<<< HEAD
 import 'font-awesome/css/font-awesome.min.css';
-=======
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
 
 
 ReactDOM.render(

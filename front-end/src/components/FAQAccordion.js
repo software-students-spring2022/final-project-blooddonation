@@ -3,11 +3,8 @@ import { FAQData } from './FAQData';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
 import { FiPlus, FiMinus } from 'react-icons/fi';
-<<<<<<< HEAD
 import {Link} from 'react-router-dom'
-=======
 import {NavLink} from 'react-router-dom'
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
 
 const AccordionSection = styled.div`
   flex: 0 0 100%;
@@ -169,17 +166,10 @@ const Accordion = () => {
                           { answerObj.subHeading === "Registration" ? 
                               <>
                                 <Ul>
-<<<<<<< HEAD
-                                  <li>You'll sign in and go over <Link to="./eligibility" className='linkStyle'>basic eligibility</Link></li>
-                                  <li>You'll be asked to show ID, such as your driver's license</li>
-                                  <li>You'll read some information about donating blood</li>
-                                  <li>You'll be asked for your complete address.  
-=======
                                   <li key="reg1">You'll sign in and go over <NavLink to="./eligibility" className='linkStyle'>basic eligibility</NavLink></li>
                                   <li key="reg2">You'll be asked to show ID, such as your driver's license</li>
                                   <li key="reg3">You'll read some information about donating blood</li>
                                   <li key="reg4">You'll be asked for your complete address.  
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
                                       Your address needs to be complete (including PO Box, street/apartment number) and 
                                       the place where you will receive your mail 8 weeks from donation</li>
 
@@ -190,18 +180,6 @@ const Accordion = () => {
                             
                                 <>
                                   <Ul>
-<<<<<<< HEAD
-                                    <li>If you're donating whole blood, an area on your arm will be cleansed and a brand new 
-                                        sterile needle will be inserted for the blood draw. (This feels like a quick pinch 
-                                        and is over in seconds.)</li>
-                                    <li>Other types of donations, like <Link to="./eligibility/plateletdonation" className='linkStyle'>platelets</Link>, are made using 
-                                        an aphaeresis machine that will be connected to both arms.</li>
-                                    <li>A <Link to="./eligibility/wholeblooddonation" className='linkStyle'>whole blood donation</Link> takes 8-10 minutes, during which 
-                                        you'll be seated comfortably or lying down.</li>
-                                    <li>When about a pint of whole blood has been collected, the donation is complete and a staff 
-                                        person will place a bandage on your arm.</li>
-                                    <li>For platelets, the aphaeresis machine will collect a small amount of blood, remove the platelets, 
-=======
                                     <li key="don1">If you're donating whole blood, an area on your arm will be cleansed and a brand new 
                                         sterile needle will be inserted for the blood draw. (This feels like a quick pinch 
                                         and is over in seconds.)</li>
@@ -212,7 +190,6 @@ const Accordion = () => {
                                     <li key="don4">When about a pint of whole blood has been collected, the donation is complete and a staff 
                                         person will place a bandage on your arm.</li>
                                     <li key="don5">For platelets, the aphaeresis machine will collect a small amount of blood, remove the platelets, 
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
                                         and return the rest of the blood through your other arm; this cycle will be repeated several times 
                                         for about 2 hours.</li>
 
@@ -223,21 +200,12 @@ const Accordion = () => {
                             
                                 <>
                                   <Ul>
-<<<<<<< HEAD
-                                    <li>Make an Appointment! Select a donation type and find a convenient time that works best for you. 
-                                    <Link to="/finddonationsite" className='linkStyle'>Find a donation site!</Link></li>
-                                    <li>Have iron-rich foods, such as red meat, fish, poultry, beans, spinach, iron-fortified cereals or raisins.</li>
-                                    <li>Get a good night's rest the night before your donation, eat healthy foods and drink plenty of liquids.</li>
-                                    <li>If you are donating platelets Don't take aspirin for 2 days before your appointment.</li>
-                                    <li>Ask a friend to donate at the same time to support each other and help with the national blood shortage! </li>
-=======
                                     <li key="bef1">Make an Appointment! Select a donation type and find a convenient time that works best for you. 
                                     <NavLink to="/finddonationsite" className='linkStyle'>Find a donation site!</NavLink></li>
                                     <li key="bef2">Have iron-rich foods, such as red meat, fish, poultry, beans, spinach, iron-fortified cereals or raisins.</li>
                                     <li key="bef3">Get a good night's rest the night before your donation, eat healthy foods and drink plenty of liquids.</li>
                                     <li key="bef4">If you are donating platelets Don't take aspirin for 2 days before your appointment.</li>
                                     <li key="bef5">Ask a friend to donate at the same time to support each other and help with the national blood shortage! </li>
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
 
                                   </Ul>
                                 </>
@@ -248,26 +216,15 @@ const Accordion = () => {
                                   <Ul>
                                     <p>These are the basic requirements for most donations:</p>
                                     <br></br>
-<<<<<<< HEAD
-                                    <li>You must be in good health. You generally feel well, even if you're being treated for a chronic condition.</li>
-                                    <li>In most states you must be 17 years old. 16 year olds may donate with parental permission if allowed by state law. 
-                                        If you're a teen donor check out our <Link to="./eligibility/informationforteens" className='linkStyle'>information for teens page!</Link></li>
-=======
                                     <li key="rule1">You must be in good health. You generally feel well, even if you're being treated for a chronic condition.</li>
                                     <li key="rule2">In most states you must be 17 years old. 16 year olds may donate with parental permission if allowed by state law. 
                                         If you're a teen donor check out our <NavLink to="./eligibility/informationforteens" className='linkStyle'>information for teens page!</NavLink></li>
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
                                     <br></br>
                                     <br></br>
                                     <br></br>
                                   </Ul>
-<<<<<<< HEAD
-                                  <p className='p-other'><Link to="/login" className='linkStyle'>Create a profile and take a quiz to determine your eligibility for each type of blood donation (Whole Blood Donation, 
-                                      Power Red Donation (Double Red Cell), Platelet Donation ,Plasma Donation)</Link></p>
-=======
                                   <p className='p-other'><NavLink to="/login" className='linkStyle'>Create a profile and take a quiz to determine your eligibility for each type of blood donation (Whole Blood Donation, 
                                       Power Red Donation (Double Red Cell), Platelet Donation ,Plasma Donation)</NavLink></p>
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
                                 </>
 
                             :answerObj.subHeading === "" ?
@@ -275,11 +232,7 @@ const Accordion = () => {
                                 answerObj.points.map((point)=>{
                                   return(
                                     <>
-<<<<<<< HEAD
-                                      <p className='p-info'>{point}</p>
-=======
                                       <p className='p-info' key={point}>{point}</p>
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
         
                                     </>
                                   )
@@ -289,11 +242,7 @@ const Accordion = () => {
                             return(
                               <>
                                 <Ul>
-<<<<<<< HEAD
-                                  <li>{point}</li>
-=======
                                 <li key={point}> {point}</li>
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
                                 </Ul>
                               </>
                             )

@@ -1,36 +1,3 @@
-<<<<<<< HEAD
-.eligibilitybody{
-    margin:0px;
-    margin-top:0px;
-    padding: 0px;
-  }
-
-  .eligibilitynav{
-    display: flex;
-    top: 50px;
-    width: 100%;
-    overflow: hidden;
-    height: 100px;
-  }
-
-  .left-links{
-    flex: 1 1 900px;
-    text-align: left;
-  }
-
-  .backlink {
-    display: inline-block;
-    text-align: right;
-    padding: 14px;
-    color: rgb(0, 0, 0);
-    text-decoration: underline;
-    font-weight: bold;
-  }
-
-  .links:hover {
-    color: gray;
-  }
-=======
 
 html {
   scroll-behavior: smooth;
@@ -269,6 +236,5 @@ html {
     margin-bottom: 20px;
     
   }
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
   
   

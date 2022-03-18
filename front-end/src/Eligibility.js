@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom'
 import './styles/Eligibility.css'
-<<<<<<< HEAD
-=======
 import { EligibilityData} from './components/EligibilityData';
 import { Card, CardContent, CardMedia, Box, Typography, Grid} from '@mui/material';
 import MedicationAccordion from './components/MedicationAccordion';
@@ -13,7 +11,6 @@ import LifestyleAccordion from './components/LifestyleAccordion';
 import STDAccordion from './components/STDAccordion';
 
 
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
 
 /**
  * A React component that represents the Home page of the app.
@@ -23,32 +20,6 @@ import STDAccordion from './components/STDAccordion';
 const Eligibility = props => {
   return (
     <>
-<<<<<<< HEAD
-      <body className="eligibilitybody">
-       <nav className='eligibilitynav'>
-        <div className="left-links">
-          <Link to="/FAQ" className="backlink">Back to FAQ</Link>
-        </div>
-      </nav>
-    </body>
-
-      <h1>Eligibility!</h1>
-      <p>
-        Check out the <Link to="./informationforteens">Information for Teens</Link>.
-      </p>
-      <p>
-        Check out the <Link to="./wholeblooddonation">Whole Blood Donation</Link>.
-      </p>
-      <p>
-        Check out the <Link to="./powerreddonation">Power Red Donation</Link>.
-      </p>
-      <p>
-        Check out the <Link to="./plateletdonation">Platelet Donation</Link>.
-      </p>
-      <p>
-        Check out the <Link to="./abeliteplasmadonation">AB Elite Plasma Donation</Link>.
-      </p>
-=======
       <div className="eligibilitybody">
 
       <h1 className='title'>Eligibility</h1>
@@ -306,7 +277,6 @@ const Eligibility = props => {
 
       </div>
 
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
     </>
     
   )

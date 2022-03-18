@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import './styles/Home.css';
 import { Card, CardContent, Typography, Grid,CardMedia } from '@mui/material';
-=======
-import './styles/Home.css'
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
 
 /**
  * A React component that represents the Home page of the app.
@@ -15,7 +11,6 @@ const Home = props => {
     <>
       <body className='home-body'>
         <h1>Hello and welcome!</h1>
-<<<<<<< HEAD
         <Grid container>
           <Grid item xs={7}>
             <Card className="home-card" sx={{ boxShadow: 1 }}>
@@ -28,7 +23,7 @@ const Home = props => {
                   There is a constant need for a regular supply of blood because it can be stored only for a limited period of time before use. Regular blood donation by a sufficient number of healthy people is needed to ensure that blood will always be available whenever and wherever it is needed.
                 </Typography>
                 <Typography className='card-item' variant="body2" color="text.secondary" sx={{ textAlign: 'left', margin: 2 }}>
-                  Blood is the most precious gift that anyone can give to another person – the gift of life. A decision to donate your blood can save a life, or even several if your blood is separated into its components – red cells, platelets and plasma – which can be used individually for patients with specific conditions.
+                  Blood is the most precious gift that anyone can give to another person - the gift of life. A decision to donate your blood can save a life, or even several if your blood is separated into its components – red cells, platelets and plasma – which can be used individually for patients with specific conditions.
                 </Typography>
               </CardContent>
             </Card>
@@ -45,9 +40,6 @@ const Home = props => {
           </Grid>
         </Grid>
 
-=======
-        <p>This is our blood donation Home Page!</p>
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
       </body>
     </>
   )

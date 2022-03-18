@@ -14,10 +14,7 @@ import ABElitePlasmaDonation from './ABElitePlasmaDonation'
 import PlateletDonation from './PlateletDonation'
 import PowerRedDonation from './PowerRedDonation'
 import InformationForTeens from './InformationForTeens'
-<<<<<<< HEAD
-=======
 import CreateAccount from './CreateAccount'
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
 
 
 const App = props => {
@@ -33,10 +30,7 @@ const App = props => {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/contactus" element={<ContactUs />}></Route>
             <Route path="/login" element={<LogIn />}></Route>
-<<<<<<< HEAD
-=======
             <Route path="/createaccount" element={<CreateAccount />}></Route>
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
             <Route path="FAQ/eligibility" element={<Eligibility />}/>
             <Route path="FAQ/otherwaystohelp" element={<OtherWaysToHelp />}/>
             <Route path="FAQ/eligibility/informationforteens" element={<InformationForTeens />}/>
@@ -44,10 +38,7 @@ const App = props => {
             <Route path="FAQ/eligibility/abeliteplasmadonation" element={<ABElitePlasmaDonation/>}/>
             <Route path="FAQ/eligibility/plateletdonation" element={<PlateletDonation />}/>
             <Route path="FAQ/eligibility/powerreddonation" element={<PowerRedDonation />}/>
-<<<<<<< HEAD
 
-=======
->>>>>>> fb30b8ac802ab5d8d428cd98d306aab5afd3cf57
           </Routes>
         </main>
       </Router>
