@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
+import { TextField, Button, Input, Stack } from '@mui/material';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
@@ -18,7 +19,7 @@ const Background = styled.div`
 
 const ModalWrapper = styled.div`
   width: 800px;
-  height: 500px;
+  height: 600px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
@@ -31,18 +32,64 @@ const ModalWrapper = styled.div`
 
 
 
+const ModalContentCreate = styled.div`
+  display: flex;
+  flex-direction: column;
+  line-height: 1.8;
+  align-items: center;
+  justify-content: start;
+  margin-top: 60px;
+  color: #141414;
+  width: 780px;
+  height: 500px;
+
+  .question-section {
+    font-size: 30px;
+    
+  }
+
+  .answer-section {
+    font-size: 30px;
+    top: 20px;
+  }
+
+  button {
+    padding: 10px 50px;
+    margin-right: 10px;
+    background: #141414;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+`;
+
+
+
+
 const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   line-height: 1.8;
+  align-items: center;
+  justify-content: start;
+  margin-top: 100px;
   color: #141414;
-  p {
-    margin-bottom: 1rem;
+  width: 780px;
+  height: 500px;
+
+  .question-section {
+    font-size: 30px;
+    
   }
+
+  .answer-section {
+    font-size: 30px;
+    top: 20px;
+  }
+
   button {
-    padding: 10px 24px;
+    padding: 10px 50px;
+    margin-right: 10px;
     background: #141414;
     color: #fff;
     border: none;
@@ -92,6 +139,33 @@ export const Modal = ({ showModal, setShowModal }) => {
     ];
 
 
+    const accountData = [
+        {
+            firstName:"",
+            lastName:"",
+            email:"", 
+            password: "",
+            age: 0,
+            eligible: []
+        },
+
+        {
+            firstName: "Rachel",
+            lastName: "Kindagen",
+            email: "rmk461@nyu.edu", 
+            password: "helloworld123",
+            age: 21,
+            eligible: ["Whole Blood", "Power Red", "Platelet"]
+        },
+
+        
+        
+    ];
+
+
+    
+
+
     
 
     const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -100,7 +174,33 @@ export const Modal = ({ showModal, setShowModal }) => {
     const [showCreate, setCreate] = useState(false);
     const [showEnd, setEnd] = useState(false);
     const [score, setScore] = useState(0);
+    const [showPassword,setShow] = useState(false);
     //const [start, setStart] = useState(false);
+
+
+    const [LoginData, setLoginData] = useState({
+        email:"", 
+        password: ""
+    })
+    const handleSubmit = (e) => {
+        // Send user data to backend here
+
+        e.preventDefault()
+
+    };
+
+
+    const [createAccountData, setCreateAccountData] = useState({
+        firstName:"",
+        lastName:"",
+        email:"", 
+        password: ""
+    })
+    const handleRegister = (e) => {
+        // Send user data to backend here
+        e.preventDefault()
+
+    };
 
     const handleAnswerOptionClick = (isCorrect, currentQuestion) => {
 
@@ -200,8 +300,108 @@ export const Modal = ({ showModal, setShowModal }) => {
                         <ModalContent>
                         <h1>Login</h1>
 
-                        <button onClick={() => handleBackClick()}>back</button>
+                        <form onSubmit={handleSubmit}>
+                                <Stack alignItems = 'center' spacing = {2}>
+                                
+
+                                <TextField 
+                                    sx= {{ width: '100%'}}
+                                    required 
+                                    label = "Email"
+                                    value = {LoginData.email}
+                                    name = "email"
+                                    onChange = {(e) => setLoginData({...LoginData, email: e.target.value})}
+                                />
+                                <TextField 
+                                    sx= {{ width: '100%'}}
+                                    type={showPassword?"text":"password"}
+                                    required 
+                                    label = "Password"
+                                    value = {LoginData.password}
+                                    name = "password"
+                                    onChange = {(e) => setLoginData({...LoginData, password: e.target.value})}
+                                />
+                                </Stack>
+                                    
+                                <Input 
+                                    type = "submit" value = "Submit" 
+                                    onClick={() => {setLogin(false);
+                                    setCurrentQuestion(2);}}>
+                                        LogIn
+                                </Input><br></br>
+
+                                <h1>Don't Have an Account?</h1>
+
+                                <Button 
+                                    onClick={() => {setLogin(false);
+                                    setCreate(true);}}>
+                                        Create Account
+                                </Button>
+                        </form>
                         </ModalContent>
+
+
+                    ):showCreate ?(
+
+                        <ModalContentCreate>
+                        <h1>Create Account</h1>
+
+                        <form onSubmit={handleRegister}>
+                                <Stack alignItems = 'center' spacing = {2}>
+
+                                <TextField 
+                                    sx= {{ width: '100%'}}
+                                    required 
+                                    label = "First Name"
+                                    value = {createAccountData.firstName}
+                                    name = "firstName"
+                                    onChange = {(e) => setCreateAccountData({...createAccountData, email: e.target.value})}
+                                />
+
+                                <TextField 
+                                    sx= {{ width: '100%'}}
+                                    required 
+                                    label = "Last Name"
+                                    value = {createAccountData.lastName}
+                                    name = "lastName"
+                                    onChange = {(e) => setCreateAccountData({...createAccountData, email: e.target.value})}
+                                />
+                                
+
+                                <TextField 
+                                    sx= {{ width: '100%'}}
+                                    required 
+                                    label = "Email"
+                                    value = {LoginData.email}
+                                    name = "email"
+                                    onChange = {(e) => setCreateAccountData({...createAccountData, email: e.target.value})}
+                                />
+                                <TextField 
+                                    sx= {{ width: '100%'}}
+                                    required 
+                                    label = "Password"
+                                    value = {LoginData.password}
+                                    name = "password"
+                                    onChange = {(e) => setCreateAccountData({...createAccountData, password: e.target.value})}
+                                />
+                                </Stack>
+                                    
+                                <Input 
+                                    type = "submit" value = "Submit" 
+                                    onClick={() => {setCreate(false);
+                                    setCurrentQuestion(2);}}>
+                                        Register
+                                </Input><br></br>
+
+                                <h1>Already Have an Account?</h1>
+
+                                <Button 
+                                    onClick={() => {setLogin(true);
+                                    setCreate(false);}}>
+                                        Login
+                                </Button>
+                        </form>
+                        </ModalContentCreate>
 
 
                     ):showEnd ?(
@@ -213,7 +413,7 @@ export const Modal = ({ showModal, setShowModal }) => {
 
                     )
                     :(
-                        <>
+                        <ModalContent>
                             <div className='question-section'>
                                 <div className='question-text'>{questions[currentQuestion].questionText}</div>
                             </div>
@@ -222,13 +422,17 @@ export const Modal = ({ showModal, setShowModal }) => {
                                     <button onClick={() => handleAnswerOptionClick(answerOption.isCorrect, currentQuestion)}>{answerOption.answerText}</button>
                                 ))}
                             </div>
-                        </>
+                        </ModalContent>
                     )
                     
                     }
                 <CloseModalButton
                     aria-label='Close modal'
-                    onClick={() => setShowModal(prev => !prev)}
+                    onClick={() => {setShowModal(prev => !prev);
+                        setLogin(false);
+                        setCreate(false);
+                        setEnd(false);
+                        setCurrentQuestion(0);}}
                 />
                 </ModalWrapper>
             </animated.div>
