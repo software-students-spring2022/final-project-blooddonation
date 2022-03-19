@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import './Eligibility.css'
+import './styles/Eligibility.css'
 import { EligibilityData} from './components/EligibilityData';
 import { Card, CardContent, CardMedia, Box, Typography, Grid} from '@mui/material';
 import MedicationAccordion from './components/MedicationAccordion';
