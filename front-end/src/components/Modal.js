@@ -227,26 +227,26 @@ export const Modal = ({ showModal, setShowModal }) => {
         {
             questionText: 'Do you have an Account?',
             answerOptions: [
-                { answerText: 'Yes', isCorrect: true },
-                { answerText: 'No', isCorrect: false },
+                { answerText: 'Yes', isCorrect: "t" },
+                { answerText: 'No', isCorrect: "f" },
                 
             ],
         },
         {
             questionText: 'Would you like to create an account?',
             answerOptions: [
-                { answerText: 'Yes', isCorrect: true },
-                { answerText: 'No', isCorrect: false },
+                { answerText: 'Yes', isCorrect: "t" },
+                { answerText: 'No', isCorrect: "f" },
                 
             ],
         },
         {
             questionText: 'What type of donation would you like to make?',
             answerOptions: [
-                { answerText: 'Whole Blood', isCorrect: true },
-                { answerText: 'Power Red (Double Red Cell)', isCorrect: true},
-                { answerText: 'Platelet', isCorrect: true },
-                { answerText: 'Plasma', isCorrect: true }
+                { answerText: 'Whole Blood', isCorrect: "Whole" },
+                { answerText: 'Power Red (Double Red Cell)', isCorrect: "Power"},
+                { answerText: 'Platelet', isCorrect: "Platelet"},
+                { answerText: 'Plasma', isCorrect: "Plasma"}
                 
             ],
         },
@@ -337,17 +337,17 @@ export const Modal = ({ showModal, setShowModal }) => {
 
     const handleAnswerOptionClick = (isCorrect, currentQuestion) => {
 
-        if (isCorrect && questions[currentQuestion].questionText === "Do you have an Account?") {
+        if (isCorrect === "t" && questions[currentQuestion].questionText === "Do you have an Account?") {
 
             setLogin(true);
              
 
         }
-        else if (isCorrect && questions[currentQuestion].questionText === "Would you like to create an account?") {
+        else if (isCorrect === "t" && questions[currentQuestion].questionText === "Would you like to create an account?") {
             setCreate(true);
             
         }
-        else if (isCorrect && questions[currentQuestion].questionText === "What type of donation would you like to make?" && questions[currentQuestion].answerOptions.filter(textObj => textObj.answerText === 'Whole Blood')) {
+        else if (isCorrect === "Whole" && questions[currentQuestion].questionText === "What type of donation would you like to make?" && questions[currentQuestion].answerOptions.filter(textObj => textObj.answerText === 'Whole Blood')) {
             if(loggedIn){
 
                 const user = accountData.filter(accountObj => accountObj.email === LoginData.email);
@@ -370,7 +370,7 @@ export const Modal = ({ showModal, setShowModal }) => {
             
             
         }
-        else if (isCorrect && questions[currentQuestion].questionText === "What type of donation would you like to make?" && questions[currentQuestion].answerOptions.filter(textObj => textObj.answerText === 'Power Red (Double Red Cell)')) {
+        else if (isCorrect === "Power" && questions[currentQuestion].questionText === "What type of donation would you like to make?" && questions[currentQuestion].answerOptions.filter(textObj => textObj.answerText === 'Power Red (Double Red Cell)')) {
             if(loggedIn){
 
                 const user = accountData.filter(accountObj => accountObj.email === LoginData.email);
@@ -393,7 +393,7 @@ export const Modal = ({ showModal, setShowModal }) => {
             
             
         }
-        else if (isCorrect && questions[currentQuestion].questionText === "What type of donation would you like to make?" && questions[currentQuestion].answerOptions.filter(textObj => textObj.answerText === 'Platelet')) {
+        else if (isCorrect === "Platelet" && questions[currentQuestion].questionText === "What type of donation would you like to make?" && questions[currentQuestion].answerOptions.filter(textObj => textObj.answerText === 'Platelet')) {
             if(loggedIn){
 
                 const user = accountData.filter(accountObj => accountObj.email === LoginData.email);
@@ -416,7 +416,7 @@ export const Modal = ({ showModal, setShowModal }) => {
             
             
         }
-        else if (isCorrect && questions[currentQuestion].questionText === "What type of donation would you like to make?" && questions[currentQuestion].answerOptions.filter(textObj => textObj.answerText === 'Plasma')) {
+        else if (isCorrect === "Plasma" && questions[currentQuestion].questionText === "What type of donation would you like to make?" && questions[currentQuestion].answerOptions.filter(textObj => textObj.answerText === 'Plasma')) {
             if(loggedIn){
 
                 const user = accountData.filter(accountObj => accountObj.email === LoginData.email);
@@ -475,17 +475,17 @@ export const Modal = ({ showModal, setShowModal }) => {
             setScore(score + 1);
         }
 
-        if(quizQuestions.questionText === "Do you have Heart Disease?"){
+        if(quizQuestions.questionText === "Do you have Heart Disease?" && isCorrect === false){
             setHeartDisease(true);
             setScore(score + 1);
 
         }
-        else if(quizQuestions.questionText === "Do you have/had cancer?"){
+        else if(quizQuestions.questionText === "Do you have/had cancer?" && isCorrect === false){
             setCancer(true);
             setScore(score + 1);
 
         }
-        else if(quizQuestions.questionText === "Do you have a bleeding Condition?"){
+        else if(quizQuestions.questionText === "Do you have a bleeding Condition?" && isCorrect === false){
             setBleedingCondition(true);
             setScore(score + 1);
 
