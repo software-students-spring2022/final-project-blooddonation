@@ -332,7 +332,7 @@ const Ul = styled.div`
       }
 `;
 
-export const Modal = ({ showModal, setShowModal }) => {
+export const MapOverlays = ({ showModal, setShowModal }) => {
 
 
     //important data

@@ -1,7 +1,7 @@
 import './styles/FindDonationSite.css'
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Modal } from './components/Modal';
+import { MapOverlays } from './components/MapOverlays';
 
 /**
  * A React component that represents the Home page of the app.
@@ -36,7 +36,7 @@ function FindDonationSite() {
       <div className='find-body'>
         <h1>Hello and welcome!</h1>
         <Button onClick={openModal}>This is our blood donation Find Donation Site Page, click for questions/overlays</Button>
-        <Modal showModal={showModal} setShowModal={setShowModal} />
+        <MapOverlays showModal={showModal} setShowModal={setShowModal} />
  
       </div>
      
