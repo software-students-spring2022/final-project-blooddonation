@@ -25,7 +25,6 @@ const Eligibility = props => {
       <h1 className='title'>Eligibility</h1>
         
         <div className='sidenav'>
-
             <div className='movelink'><Link to="/FAQ" className="backlink">Back to FAQ</Link></div>
             <div className='site-container'><a href="/finddonationsite" className='findSite-link'>Find a Donation Site</a></div>
             <div className="container">
