@@ -92,7 +92,7 @@ const Eligibility = props => {
 
                 :item.section === "Power Red Donation (Double Red Cell)" ?
                  
-                 <Grid item>
+        
 
                   <div className="main" id="powerred">
 
@@ -128,7 +128,7 @@ const Eligibility = props => {
                         </Box>
                     </Card>
                   </div>
-                 </Grid>
+              
 
                 :item.section === "Platelet Donation" ?
 
