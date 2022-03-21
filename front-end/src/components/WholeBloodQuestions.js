@@ -44,7 +44,7 @@ export const WholeBloodQuestions = [
 
         questionText: 'Do you have a bleeding Condition?',
         answerOptions: [
-            { answerText: 'Yes', isCorrect: false },
+            { answerText: 'Yes', isCorrect: 'bleeding'},
             { answerText: 'No', isCorrect: true },
             
         ],
@@ -78,7 +78,7 @@ export const WholeBloodQuestions = [
 
         questionText: 'Do you have/had cancer?',
         answerOptions: [
-            { answerText: 'Yes', isCorrect: false },
+            { answerText: 'Yes', isCorrect: 'cancer'},
             { answerText: 'No', isCorrect: true },
             
         ],
@@ -123,7 +123,7 @@ export const WholeBloodQuestions = [
 
         questionText: 'Do you have Heart Disease?',
         answerOptions: [
-            { answerText: 'Yes', isCorrect: false},
+            { answerText: 'Yes', isCorrect: 'heart'},
             { answerText: 'No', isCorrect: true },
             
         ],
@@ -253,7 +253,7 @@ export const WholeBloodQuestions = [
 
     {
 
-        questionText: 'Had a tattoo in the last 3 months?',
+        questionText: 'Have you gotten a tattoo in the last 3 months?',
         answerOptions: [
             { answerText: 'Yes', isCorrect: false},
             { answerText: 'No', isCorrect: true },

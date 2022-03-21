@@ -48,6 +48,8 @@ const ModalContentCreate = styled.div`
   width: 780px;
   height: 500px;
 
+  
+
   button {
     padding: 10px 50px;
     margin-right: 10px;
@@ -121,6 +123,51 @@ const ModalContent = styled.div`
 `;
 
 
+const ModalContentQuizRes = styled.div`
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  align-items: center;
+  justify-content: start;
+  margin-top: 60px;
+  color: #141414;
+  width: 790px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  
+  p{
+      padding-bottom: 10px;
+      padding-top: 5px;
+  }
+
+  .spacing{
+      padding-bottom: 10px;
+      padding-top: 30px;
+  }
+
+  button {
+    padding: 10px 50px;
+    margin-right: 10px;
+    background: #141414;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover{
+    background: #A9A9A9;
+  }
+
+  .redirect-link:hover{
+    color: #141414;
+  }
+
+  .redirect-link {
+    color: #fff;
+    text-decoration: none;
+  }
+`;
+
 const ModalContentNotification = styled.div`
   display: flex;
   flex-direction: column;
@@ -131,6 +178,74 @@ const ModalContentNotification = styled.div`
   color: #141414;
   width: 780px;
   height: 500px;
+
+  p{
+    padding-bottom: 10px;
+    padding-top: 5px;
+  }
+
+ .spacing{
+    padding-bottom: 10px;
+    padding-top: 30px;
+  }
+
+
+  button {
+    padding: 10px 50px;
+    margin-right: 10px;
+    background: #141414;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover{
+    background: #A9A9A9;
+  }
+
+  .redirect-link:hover{
+    color: #141414;
+  }
+
+  .redirect-link {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .emphasis{
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+    
+  }
+
+  .paragraph-link{
+    color: red;
+    text-decoration: underline;
+  }
+`;
+
+const ModalContentSmall = styled.div`
+  display: flex;
+  flex-direction: column;
+  line-height: 1.8;
+  align-items: center;
+  justify-content: start;
+  margin-top: 100px;
+  color: #141414;
+  width: 780px;
+  height: 500px;
+
+  p{
+    padding-bottom: 10px;
+    padding-top: 5px;
+  }
+
+ .spacing{
+    padding-bottom: 10px;
+    padding-top: 30px;
+  }
+
 
   button {
     padding: 10px 50px;
@@ -197,16 +312,14 @@ const BackButton = styled.div`
 
 const Ul = styled.div`
     list-style: none;
-
-     li{
-        font-size: 20px;
-     }
+    padding-bottom: 20px;
+    padding-top: 10px;
 
       li:before {
         content: "• "; 
         color: red; 
         font-weight: bold;
-        font-size: 30px; 
+        font-size: 20px; 
         display: inline-block; 
         width: 1em; 
       }
@@ -215,7 +328,7 @@ const Ul = styled.div`
         color: red;
         font-weight: bold;
         text-decoration: underline;
-        font-size: 20px;
+   
       }
 `;
 
@@ -470,24 +583,27 @@ export const Modal = ({ showModal, setShowModal }) => {
 
 
     const handleQuizAnswerOptionClick = (isCorrect, quizCurrentQuestion, quizQuestions) => {
+        
 
         if (isCorrect) {
             setScore(score + 1);
         }
 
-        if(quizQuestions.questionText === "Do you have Heart Disease?" && isCorrect === false){
+        if(quizQuestions[quizCurrentQuestion].questionText === "Do you have Heart Disease?" && isCorrect === "heart"){
             setHeartDisease(true);
             setScore(score + 1);
-
+ 
         }
-        else if(quizQuestions.questionText === "Do you have/had cancer?" && isCorrect === false){
+        else if(quizQuestions[quizCurrentQuestion].questionText === "Do you have/had cancer?" && isCorrect === "cancer" ){
             setCancer(true);
             setScore(score + 1);
+    
 
         }
-        else if(quizQuestions.questionText === "Do you have a bleeding Condition?" && isCorrect === false){
+        else if(quizQuestions[quizCurrentQuestion].questionText === "Do you have a bleeding Condition?" && isCorrect === "bleeding"){
             setBleedingCondition(true);
             setScore(score + 1);
+        
 
         }
 
@@ -546,56 +662,7 @@ export const Modal = ({ showModal, setShowModal }) => {
     };
 
 
-    const handleQuizBackClick = (quizCurrentQuestion, quizQuestions) => {
-        const quizBackQuestion = quizCurrentQuestion - 1;
-
-        if(quizQuestions.questionText === "Do you have Heart Disease?"){
-            setHeartDisease(false);
-        
-
-        }
-        else if(quizQuestions.questionText === "Do you have/had cancer?"){
-            setCancer(false);
-          
-
-        }
-        else if(quizQuestions.questionText === "Do you have a bleeding Condition?"){
-            setBleedingCondition(false);
-  
-
-        }
-
-
-        if (quizBackQuestion > 0) {
-            setQuizCurrentQuestion(quizBackQuestion);
-            setScore(score - 1);
-            
-        }
-        else if (quizBackQuestion === 0) {
-            setQuizCurrentQuestion(0);
-            setScore(score - 1);
-        }  
-        else {
-            setWholeBlood(false);
-            setPowerRed(false);
-            setPlatelet(false);
-            setPlasma(false);
-            setQuizCurrentQuestion(0);
-            setCurrentQuestion(2);
-            setScore(0);
-            setBleedingCondition(false);
-            setCancer(false);
-            setHeartDisease(false);
-            setDone(false);
     
-
-
-        }
-
-
-        
-    };
-
 
     const handleLoginBackClick = (currentQuestion) => {
         
@@ -741,7 +808,7 @@ export const Modal = ({ showModal, setShowModal }) => {
                                     </Button>
                             </form>
                             </ModalContent>
-                            <BackButton onClick={() => handleLoginBackClick(currentQuestion)}> Back {currentQuestion}</BackButton>
+                            <BackButton onClick={() => handleLoginBackClick(currentQuestion)}> Back </BackButton>
                         </>
 
                     ):showCreate ?(
@@ -805,26 +872,207 @@ export const Modal = ({ showModal, setShowModal }) => {
                                     </Button>
                             </form>
                             </ModalContentCreate>
-                            <BackButton onClick={() => handleCreateBackClick(currentQuestion)}> Back {currentQuestion}</BackButton>
+                            <BackButton onClick={() => handleCreateBackClick(currentQuestion)}> Back</BackButton>
                         </>
 
                     ):showEligible ?(
 
                         <>
-                            {cancer === false && heartDisease === false && bleedingCondition === false?(
-                                    <ModalContentNotification>
-                                        <h1>Congratulations, You're Eligible!</h1>
-                                        <p>Make sure you are feeling well before your appointment! Also if you are a teen donor please check out <NavLink to="FAQ/eligibility/informationforteens" className='paragraph-link'>our information for teens page!</NavLink> </p>
-                                        <Button><a href="http://example.com/" target="_blank" rel="noopener noreferrer">Click Here to make an appointment!</a></Button>
-                                    </ModalContentNotification>
+                            {heartDisease && cancer === false && bleedingCondition === false?(
+                                                       
+                                    <ModalContentQuizRes>
+                                    <h1>You may be eligible! please read below</h1>
+                                    <p> You indicated that you have heart disease. In general, as long as you have been medically evaluated and treated, have have had no heart related symptoms such as chest pain and have no limitations or restrictions on your normal daily activities. Additionally: </p>
+                                    <Ul>
+                                        <li>Wait at least 6 months following an episode of angina.</li>
+                                        <li>Wait at least 6 months following a heart attack.</li>
+                                        <li>Wait at least 6 months after bypass surgery or angioplasty.</li>
+                                        <li>Wait at least 6 months after a change in your heart condition that resulted in a change to your medications.</li>
+                                    </Ul>
+                                    <p>If you have a pacemaker, you ARE eligible to donate as long as your pulse is between 50 and 100 beats per minute and you meet the other heart disease criteria. 
+                                    You should discuss your situation with your personal healthcare provider and those at the donation site .</p>
+                                    <div className='spacing'><Button><a href="http://example.com/" target="_blank" rel="noopener noreferrer" className='redirect-link'>Click Here to make an appointment!</a></Button></div>
+                                    <Button><NavLink to="/FAQ/otherwaystohelp" className='redirect-link'>Not Eligible? Find other ways to help!</NavLink></Button>
+                                    </ModalContentQuizRes>
+               
+                                                  
+                                                   
+                            ):cancer && heartDisease === false && bleedingCondition === false?(
+
+                                <ModalContentSmall>
+                                    <h1>You may be eligible! please read below</h1>
+                                    <p> You indicated that you have or haf cancer. Please know that eligibility depends on the type of cancer and treatment history. If you had leukemia or lymphoma, you are NOT eligible to donate. 
+                                        If you had other types of cancer you ARE eligible to donate, if the cancer has been treated successfully and it has been more than 12 months since treatment was completed and there has been no cancer recurrence in this time. 
+                                        Lower risk in-situ cancers including squamous or basal cell cancers of the skin that have been completely removed and healed do not require a 12-month waiting period.
+                                        You should discuss your situation with those at your donation site</p>
+                                        <div className='spacing'><Button><a href="http://example.com/" target="_blank" rel="noopener noreferrer" className='redirect-link'>Click Here to make an appointment!</a></Button></div>
+                                    <Button><NavLink to="/FAQ/otherwaystohelp" className='redirect-link'>Not Eligible? Find other ways to help!</NavLink></Button>
+                                </ModalContentSmall>
 
 
-                                ):null
+                            ):bleedingCondition && cancer === false && heartDisease === false?(
+                                <ModalContentQuizRes>
+                                    <h1>You may be eligible! please read below</h1>
+                                    <p> You indicated that you have a bleeding condition. You will be asked additional questions at the site. If your blood clots abnormally, you should NOT donate because you may have excessive bleeding where the needle is placed. 
+                                        You should NOT donate if you are taking any "blood thinner" such as:</p>
+                                    <Ul>
+                                        <li>Atrixa (fondaparinux)</li>
+                                        <li>Heparin</li>
+                                        <li>Jantoven (warfarin)</li> 
+                                        <li>Lovenox (enoxaparin)</li> 
+                                        <li>Pradaxa (dabigatran)</li> 
+                                        <li>Savaysa (edoxaban)</li> 
+                                        <li>Warfilone (warfarin)</li>
+                                        <li>Coumadin (warfarin)</li>
+                                        <li>Eliquis (apixaban)</li>
+                                        <li>Fragmin (dalteparin)</li>
+                                        <li>Xarelto (rivaroxaban)</li>
+                                    </Ul>
+                                    <p> If you are on aspirin, you ARE eligible donate whole blood. 
+                                        However, you must be off of aspirin for at least 2 full days in order to donate platelets by apheresis.</p>
+                                        <div className='spacing'><Button><a href="http://example.com/" target="_blank" rel="noopener noreferrer" className='redirect-link'>Click Here to make an appointment!</a></Button></div>
+                                    <Button><NavLink to="/FAQ/otherwaystohelp" className='redirect-link'>Not Eligible? Find other ways to help!</NavLink></Button>
+                                    </ModalContentQuizRes>
+
+
+                            ):cancer && heartDisease && bleedingCondition === false? (
+
+                                <ModalContentQuizRes>
+                                    <h1>You may be eligible! please read below</h1>
+                                    <p> You indicated that you have or haf cancer. Please know that eligibility depends on the type of cancer and treatment history. If you had leukemia or lymphoma, you are NOT eligible to donate. 
+                                        If you had other types of cancer you ARE eligible to donate, if the cancer has been treated successfully and it has been more than 12 months since treatment was completed and there has been no cancer recurrence in this time. 
+                                        Lower risk in-situ cancers including squamous or basal cell cancers of the skin that have been completely removed and healed do not require a 12-month waiting period.
+                                        You should discuss your situation with those at your donation site</p>
+                                    <br></br>
+                                    <p> You also indicated that you have heart disease. In general, as long as you have been medically evaluated and treated, have have had no heart related symptoms such as chest pain and have no limitations or restrictions on your normal daily activities. Additionally: </p>
+                                    <Ul>
+                                        <li>Wait at least 6 months following an episode of angina.</li>
+                                        <li>Wait at least 6 months following a heart attack.</li>
+                                        <li>Wait at least 6 months after bypass surgery or angioplasty.</li>
+                                        <li>Wait at least 6 months after a change in your heart condition that resulted in a change to your medications.</li>
+                                    </Ul>
+                                    <p>If you have a pacemaker, you ARE eligible to donate as long as your pulse is between 50 and 100 beats per minute and you meet the other heart disease criteria. 
+                                    You should discuss your situation with your personal healthcare provider and those at the donation site .</p>
+                                    <div className='spacing'><Button><a href="http://example.com/" target="_blank" rel="noopener noreferrer" className='redirect-link'>Click Here to make an appointment!</a></Button></div>
+                                    <Button><NavLink to="/FAQ/otherwaystohelp" className='redirect-link'>Not Eligible? Find other ways to help!</NavLink></Button>
+                                </ModalContentQuizRes>
+
+                            ):cancer && heartDisease === false && bleedingCondition?(
+                                <ModalContentQuizRes>
+                                    <h1>You may be eligible! please read below</h1>
+                                    <p> You indicated that you have or haf cancer. Please know that eligibility depends on the type of cancer and treatment history. If you had leukemia or lymphoma, you are NOT eligible to donate. 
+                                        If you had other types of cancer you ARE eligible to donate, if the cancer has been treated successfully and it has been more than 12 months since treatment was completed and there has been no cancer recurrence in this time. 
+                                        Lower risk in-situ cancers including squamous or basal cell cancers of the skin that have been completely removed and healed do not require a 12-month waiting period.
+                                        You should discuss your situation with those at your donation site</p>
+                                    <br></br>
+                                    <p> You also indicated that you have a bleeding condition. You will be asked additional questions at the site. If your blood clots abnormally, you should NOT donate because you may have excessive bleeding where the needle is placed. 
+                                        You should NOT donate if you are taking any "blood thinner" such as:</p>
+                                    <Ul>
+                                        <li>Atrixa (fondaparinux)</li>
+                                        <li>Heparin</li>
+                                        <li>Jantoven (warfarin)</li> 
+                                        <li>Lovenox (enoxaparin)</li> 
+                                        <li>Pradaxa (dabigatran)</li> 
+                                        <li>Savaysa (edoxaban)</li> 
+                                        <li>Warfilone (warfarin)</li>
+                                        <li>Coumadin (warfarin)</li>
+                                        <li>Eliquis (apixaban)</li>
+                                        <li>Fragmin (dalteparin)</li>
+                                        <li>Xarelto (rivaroxaban)</li>
+                                    </Ul>
+                                    <p> If you are on aspirin, you ARE eligible donate whole blood. 
+                                        However, you must be off of aspirin for at least 2 full days in order to donate platelets by apheresis.</p>
+                                        <div className='spacing'><Button><a href="http://example.com/" target="_blank" rel="noopener noreferrer" className='redirect-link'>Click Here to make an appointment!</a></Button></div>
+                                    <Button><NavLink to="/FAQ/otherwaystohelp" className='redirect-link'>Not Eligible? Find other ways to help!</NavLink></Button>
+                                </ModalContentQuizRes>
+                                
+                            ):heartDisease && cancer === false && bleedingCondition?(
+                                <ModalContentQuizRes>
+                                    <h1>You may be eligible! please read below</h1>
+                                    <p> You indicated that you have heart disease. In general, as long as you have been medically evaluated and treated, have have had no heart related symptoms such as chest pain and have no limitations or restrictions on your normal daily activities. Additionally: </p>
+                                    <Ul>
+                                        <li>Wait at least 6 months following an episode of angina.</li>
+                                        <li>Wait at least 6 months following a heart attack.</li>
+                                        <li>Wait at least 6 months after bypass surgery or angioplasty.</li>
+                                        <li>Wait at least 6 months after a change in your heart condition that resulted in a change to your medications.</li>
+                                    </Ul>
+                                    <p>If you have a pacemaker, you ARE eligible to donate as long as your pulse is between 50 and 100 beats per minute and you meet the other heart disease criteria. 
+                                    You should discuss your situation with your personal healthcare provider and those at the donation site .</p>
+                                    <br></br>
+                                    <p> You also indicated that you have a bleeding condition. You will be asked additional questions at the site. If your blood clots abnormally, you should NOT donate because you may have excessive bleeding where the needle is placed. 
+                                        You should NOT donate if you are taking any "blood thinner" such as:</p>
+                                    <Ul>
+                                        <li>Atrixa (fondaparinux)</li>
+                                        <li>Heparin</li>
+                                        <li>Jantoven (warfarin)</li> 
+                                        <li>Lovenox (enoxaparin)</li> 
+                                        <li>Pradaxa (dabigatran)</li> 
+                                        <li>Savaysa (edoxaban)</li> 
+                                        <li>Warfilone (warfarin)</li>
+                                        <li>Coumadin (warfarin)</li>
+                                        <li>Eliquis (apixaban)</li>
+                                        <li>Fragmin (dalteparin)</li>
+                                        <li>Xarelto (rivaroxaban)</li>
+                                    </Ul>
+                                    <p> If you are on aspirin, you ARE eligible donate whole blood. 
+                                        However, you must be off of aspirin for at least 2 full days in order to donate platelets by apheresis.</p>
+                                        <div className='spacing'><Button><a href="http://example.com/" target="_blank" rel="noopener noreferrer" className='redirect-link'>Click Here to make an appointment!</a></Button></div>
+                                    <Button><NavLink to="/FAQ/otherwaystohelp" className='redirect-link'>Not Eligible? Find other ways to help!</NavLink></Button>
+
+                                </ModalContentQuizRes>
+                            ):cancer && heartDisease && bleedingCondition ?(
+                                <ModalContentQuizRes>
+                                     <h1>You may be eligible! please read below</h1>
+                                    <p> You indicated that you have or haf cancer. Please know that eligibility depends on the type of cancer and treatment history. If you had leukemia or lymphoma, you are NOT eligible to donate. 
+                                        If you had other types of cancer you ARE eligible to donate, if the cancer has been treated successfully and it has been more than 12 months since treatment was completed and there has been no cancer recurrence in this time. 
+                                        Lower risk in-situ cancers including squamous or basal cell cancers of the skin that have been completely removed and healed do not require a 12-month waiting period.
+                                        You should discuss your situation with those at your donation site</p>
+                                    <br></br>
+                                    <p> You also indicated that you have a bleeding condition. You will be asked additional questions at the site. If your blood clots abnormally, you should NOT donate because you may have excessive bleeding where the needle is placed. 
+                                        You should NOT donate if you are taking any "blood thinner" such as:</p>
+                                    <Ul>
+                                        <li>Atrixa (fondaparinux)</li>
+                                        <li>Heparin</li>
+                                        <li>Jantoven (warfarin)</li> 
+                                        <li>Lovenox (enoxaparin)</li> 
+                                        <li>Pradaxa (dabigatran)</li> 
+                                        <li>Savaysa (edoxaban)</li> 
+                                        <li>Warfilone (warfarin)</li>
+                                        <li>Coumadin (warfarin)</li>
+                                        <li>Eliquis (apixaban)</li>
+                                        <li>Fragmin (dalteparin)</li>
+                                        <li>Xarelto (rivaroxaban)</li>
+                                    </Ul>
+                                    <p> If you are on aspirin, you ARE eligible donate whole blood. 
+                                        However, you must be off of aspirin for at least 2 full days in order to donate platelets by apheresis.</p>
+                                    
+                                    <br></br>
+                                    <p> You indicated also that you have heart disease. In general, as long as you have been medically evaluated and treated, have have had no heart related symptoms such as chest pain and have no limitations or restrictions on your normal daily activities. Additionally: </p>
+                                    <Ul>
+                                        <li>Wait at least 6 months following an episode of angina.</li>
+                                        <li>Wait at least 6 months following a heart attack.</li>
+                                        <li>Wait at least 6 months after bypass surgery or angioplasty.</li>
+                                        <li>Wait at least 6 months after a change in your heart condition that resulted in a change to your medications.</li>
+                                    </Ul>
+                                    <p>If you have a pacemaker, you ARE eligible to donate as long as your pulse is between 50 and 100 beats per minute and you meet the other heart disease criteria. 
+                                    You should discuss your situation with your personal healthcare provider and those at the donation site .</p>
+                                    <div className='spacing'><Button><a href="http://example.com/" target="_blank" rel="noopener noreferrer" className='redirect-link'>Click Here to make an appointment!</a></Button></div>
+                                    <Button><NavLink to="/FAQ/otherwaystohelp" className='redirect-link'>Not Eligible? Find other ways to help!</NavLink></Button>
+                                </ModalContentQuizRes>
+
+                            ):(
+                                <ModalContentNotification>
+                                    <h1>Congratulations, You're Eligible!</h1>
+                                    <p>Make sure you are feeling well before your appointment! Also if you are a teen donor please check out <NavLink to="FAQ/eligibility/informationforteens" className='paragraph-link'>our information for teens page!</NavLink> </p>
+                                    <Button><a href="http://example.com/" target="_blank" rel="noopener noreferrer" className='redirect-link'>Click Here to make an appointment!</a></Button>
+                                </ModalContentNotification>
+
+                            )
                             }
                         </>
                     ):showNotEligible ?(
                         <ModalContentNotification>
-                        <h1>Sorry, You're Not Eligible {score} {WholeBloodQuestions.length}</h1>
+                        <h1>Sorry, You're Not Eligible</h1>
                         <h3> There are still other ways that you can help!</h3>
                         <Button><NavLink to="/FAQ/otherwaystohelp" className='redirect-link'>Check out our Other Ways To Help page for more info!</NavLink></Button>
                         </ModalContentNotification>
@@ -835,21 +1083,8 @@ export const Modal = ({ showModal, setShowModal }) => {
                               {done ? (
                                   <>
 
-                                    {score === WholeBloodQuestions.length? (setEligible(true)):null}
-                                    {showEligible ? (
-                                        <ModalContentNotification>
-                                            <h1>Congratulations, You're Eligible!</h1>
-                                            <p>Make sure you are feeling well before your appointment! Also if you are a teen donor please check out <NavLink to="FAQ/eligibility/informationforteens" className='paragraph-link'>our information for teens page!</NavLink> </p>
-                                            <Button><a href="http://example.com/" target="_blank" rel="noopener noreferrer">Click Here to make an appointment!</a></Button>
-                                        </ModalContentNotification>
+                                    {score === WholeBloodQuestions.length? (setEligible(true)):(setNotEligible(true))}
 
-                                    ):(
-                                        <ModalContentNotification>
-                                            <h1>Sorry, You're Not Eligible {score} {WholeBloodQuestions.length}</h1>
-                                            <h3> There are still other ways that you can help!</h3>
-                                            <Button><NavLink to="/FAQ/otherwaystohelp" className='redirect-link'>Check out our Other Ways To Help page for more info!</NavLink></Button>
-                                        </ModalContentNotification>
-                                    )}
                                   </>
 
                               ):(
@@ -861,12 +1096,12 @@ export const Modal = ({ showModal, setShowModal }) => {
                                             </div>
                                             <div className='answer-section'>
                                                 {WholeBloodQuestions[quizCurrentQuestion].answerOptions.map((answerOption) => (
-                                                    <button onClick={() => handleQuizAnswerOptionClick (answerOption.isCorrect, quizCurrentQuestion, WholeBloodQuestions)}>{answerOption.answerText}</button>
+                                                    <button onClick={() => {handleQuizAnswerOptionClick (answerOption.isCorrect, quizCurrentQuestion, WholeBloodQuestions)}}>{answerOption.answerText}</button>
                                                 ))}
                                             </div>
 
                                         </ModalContent>
-                                        <BackButton onClick={() => handleQuizBackClick(quizCurrentQuestion, WholeBloodQuestions)}> Back</BackButton>
+                                        
                                     </>
                               )}
                            
@@ -875,51 +1110,93 @@ export const Modal = ({ showModal, setShowModal }) => {
 
                     ):powerRedQuiz ?(
                         <>
-                            <ModalContent>
-                                <h1>Power Red (Double Red) Eligibility Quiz</h1>
-                                <div className='question-section'>
-                                    <div className='question-text'>{PowerRedQuestions[quizCurrentQuestion].questionText}</div>
-                                </div>
-                                <div className='answer-section'>
-                                    {PowerRedQuestions[quizCurrentQuestion].answerOptions.map((answerOption) => (
-                                        <button onClick={() => handleQuizAnswerOptionClick (answerOption.isCorrect, quizCurrentQuestion, PowerRedQuestions)}>{answerOption.answerText}</button>
-                                    ))}
-                                </div>
+                            {done ? (
+                                  <>
 
-                            </ModalContent>
-                            <BackButton onClick={() => handleQuizBackClick(quizCurrentQuestion, PowerRedQuestions)}> Back</BackButton>
-                        </>
+                                    {score === PowerRedQuestions.length? (setEligible(true)):(setNotEligible(true))}
+
+                                  </>
+
+                              ):(
+                                  <>
+                                    <ModalContent>
+                                        <h1>Power Red (Double Red) Eligibility Quiz</h1>
+                                        <div className='question-section'>
+                                            <div className='question-text'>{PowerRedQuestions[quizCurrentQuestion].questionText}</div>
+                                        </div>
+                                        <div className='answer-section'>
+                                            {PowerRedQuestions[quizCurrentQuestion].answerOptions.map((answerOption) => (
+                                                <button onClick={() => handleQuizAnswerOptionClick (answerOption.isCorrect, quizCurrentQuestion, PowerRedQuestions)}>{answerOption.answerText}</button>
+                                            ))}
+                                        </div>
+
+                                    </ModalContent>
+                                   
+                            
+
+                                  </>
+                              )
+                            }
+                             </>
                     ):plateletQuiz ?(
                         <>
-                            <ModalContent>
-                                <h1>Platelet Eligibility Quiz</h1>
-                                <div className='question-section'>
-                                    <div className='question-text'>{PlateletQuestions[quizCurrentQuestion].questionText}</div>
-                                </div>
-                                <div className='answer-section'>
-                                    {PlateletQuestions[quizCurrentQuestion].answerOptions.map((answerOption) => (
-                                        <button onClick={() => handleQuizAnswerOptionClick (answerOption.isCorrect, quizCurrentQuestion, PlateletQuestions)}>{answerOption.answerText}</button>
-                                    ))}
-                                </div>
 
-                            </ModalContent>
-                            <BackButton onClick={() => handleQuizBackClick(quizCurrentQuestion, PlateletQuestions)}> Back</BackButton>
-                        </>
+                            {done ? (
+                                  <>
+
+                                    {score === PlateletQuestions.length? (setEligible(true)):(setNotEligible(true))}
+
+                                  </>
+
+                              ):(
+                                  <>
+
+                                    <ModalContent>
+                                        <h1>Platelet Eligibility Quiz</h1>
+                                        <div className='question-section'>
+                                            <div className='question-text'>{PlateletQuestions[quizCurrentQuestion].questionText}</div>
+                                        </div>
+                                        <div className='answer-section'>
+                                            {PlateletQuestions[quizCurrentQuestion].answerOptions.map((answerOption) => (
+                                                <button onClick={() => handleQuizAnswerOptionClick (answerOption.isCorrect, quizCurrentQuestion, PlateletQuestions)}>{answerOption.answerText}</button>
+                                            ))}
+                                        </div>
+
+                                    </ModalContent>
+                                    
+                                  </>
+                              )
+                            }       
+                            </>
                     ):plasmaQuiz ?(
                         <>
-                            <ModalContent>
-                                <h1>Plasma Donation Eligibility Quiz</h1>
-                                <div className='question-section'>
-                                    <div className='question-text'>{PlasmaQuestions[quizCurrentQuestion].questionText}</div>
-                                </div>
-                                <div className='answer-section'>
-                                    {PlasmaQuestions[quizCurrentQuestion].answerOptions.map((answerOption) => (
-                                        <button onClick={() => handleQuizAnswerOptionClick (answerOption.isCorrect, quizCurrentQuestion, PlasmaQuestions)}>{answerOption.answerText}</button>
-                                    ))}
-                                </div>
+                            {done ? (
+                                  <>
 
-                            </ModalContent>
-                            <BackButton onClick={() => handleQuizBackClick(quizCurrentQuestion, PlasmaQuestions)}> Back</BackButton>
+                                    {score === PlasmaQuestions.length? (setEligible(true)):(setNotEligible(true))}
+
+                                  </>
+
+                              ):(
+                                  
+                                  <>
+                                        <ModalContent>
+                                            <h1>Plasma Donation Eligibility Quiz</h1>
+                                            <div className='question-section'>
+                                                <div className='question-text'>{PlasmaQuestions[quizCurrentQuestion].questionText}</div>
+                                            </div>
+                                            <div className='answer-section'>
+                                                {PlasmaQuestions[quizCurrentQuestion].answerOptions.map((answerOption) => (
+                                                    <button onClick={() => handleQuizAnswerOptionClick (answerOption.isCorrect, quizCurrentQuestion, PlasmaQuestions)}>{answerOption.answerText}</button>
+                                                ))}
+                                            </div>
+
+                                        </ModalContent>
+                                         
+                                  </>
+                              )
+                            }
+                           
                         </>
                     ):(
                         <>
