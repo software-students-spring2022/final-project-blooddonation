@@ -1,7 +1,7 @@
 import { TextField, Button, Input, Stack } from '@mui/material';
-import {NavLink} from 'react-router-dom'
 import { useState } from "react";
 import { Link } from 'react-router-dom'
+import { accountData } from './components/AccountData';
 
 /**
  * A React component that represents the Home page of the app.
@@ -24,8 +24,18 @@ const LogIn = props => {
   const [showPassword,setShow] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
+  const handleLoginData = () =>{
+    const person = accountData.filter(personObj => {return(personObj.email === LoginData.email)});
+    person[0].loggedIn = true;
+    console.log(accountData.filter(personObj => { return (personObj.email === LoginData.email)}))
+
+
+  };
+
+
   return (
     <>
+      {loggedIn}
       <form onSubmit={handleSubmit}>
           <Stack alignItems = 'center' spacing = {2}>
           
@@ -48,11 +58,15 @@ const LogIn = props => {
               onChange = {(e) => setLoginData({...LoginData, password: e.target.value})}
           />
           </Stack>
+         
               
-          <Button component = {Link} to = {'/profile'}  onClick={() => {setLoggedIn(true);}}>Login</Button><br></br>
+          <Button component = {Link} to = {'/profile'}  onClick={(handleLoginData())}>Login</Button><br></br>
           <h1>Don't have an Account?</h1>
           <Button component = {Link} to = {'/createaccount'}>Create an Account</Button>
       </form>
+  
+    
+
     </>
   )
 }
