@@ -8,6 +8,7 @@ import { WholeBloodQuestions } from './WholeBloodQuestions';
 import { PowerRedQuestions } from './PowerRedQuestions';
 import { PlateletQuestions } from './PlateletQuestions';
 import { PlasmaQuestions } from './PlasmaQuestions';
+import { accountData } from './AccountData';
 
 const Background = styled.div`
   width: 100%;
@@ -366,29 +367,6 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
         
     ];
 
-
-    const accountData = [
-        {
-            firstName:"",
-            lastName:"",
-            email:"", 
-            password: "",
-            age: 0,
-            eligible: []
-        },
-
-        {
-            firstName: "Rachel",
-            lastName: "Kindagen",
-            email: "rmk461@nyu.edu", 
-            password: "helloworld123",
-            age: 21,
-            eligible: ["Whole Blood", "Power Red", "Platelet"]
-        },
-
-        
-        
-    ];
 
 
   
@@ -759,20 +737,17 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
     //overlay content
     return (
         <>
+      
         {showModal ? ( 
             <Background onClick={closeModal} ref={modalRef}>
             <animated.div style={animation}>
                 <ModalWrapper showModal={showModal}>
                     {showLogin ?(
-
                         <>
                             <ModalContent>
                             <h1>Login</h1>
-
                             <form onSubmit={handleSubmit}>
                                     <Stack alignItems = 'center' spacing = {2}>
-                                    
-
                                     <TextField 
                                         sx= {{ width: '100%'}}
                                         required 
