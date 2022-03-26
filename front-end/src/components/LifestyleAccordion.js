@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
-import { LifestyleData } from './LifestyleData';
-import styled from 'styled-components';
-import { IconContext } from 'react-icons';
-import { FiPlus, FiMinus } from 'react-icons/fi';
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { LifestyleData } from "./LifestyleData";
+import styled from "styled-components";
+import { IconContext } from "react-icons";
+import { FiPlus, FiMinus } from "react-icons/fi";
 
 const AccordionSection = styled.div`
   flex: 0 0 100%;
@@ -20,7 +19,6 @@ const AccordionSection = styled.div`
 
 const Container = styled.div`
   top: 5%;
-
 `;
 
 const Wrap = styled.div`
@@ -35,8 +33,6 @@ const Wrap = styled.div`
   border-top: 1px solid #ff0000;
   border-radius: 5px;
 
-
-
   h1 {
     padding: 2rem;
     font-size: 2rem;
@@ -44,7 +40,6 @@ const Wrap = styled.div`
   h2 {
     padding: 1rem;
     font-size: 2rem;
-    
   }
   span {
     margin-right: 1.5rem;
@@ -60,14 +55,11 @@ const Dropdown = styled.div`
   justify-content: left;
   align-items: left;
   text-align: center;
-  margin-top:0px;
+  margin-top: 0px;
   border-radius: 5px;
   border-bottom: 1px solid #ff0000;
   border-top: 1px solid #ff0000;
   overflow-y: scroll;
-  
-
-
 
   p {
     font-size: 2rem;
@@ -97,53 +89,43 @@ const Dropdown = styled.div`
     border-top: 2px solid white;
     text-decoration: underline;
     color: white;
-    
   }
 
-  .linkStyle{
+  .linkStyle {
     color: red;
     font-weight: bold;
     text-decoration: underline;
-    
   }
-  
 `;
 
 const Ul = styled.div`
-    list-style: none;
+  list-style: none;
 
-     li{
-        font-size: 20px;
-     }
+  li {
+    font-size: 20px;
+  }
 
-      li:before {
-        content: "• "; 
-        color: red; 
-        font-weight: bold;
-        font-size: 30px; 
-        display: inline-block; 
-        width: 1em; 
-      }
+  li:before {
+    content: "• ";
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+    display: inline-block;
+    width: 1em;
+  }
 
-      .linkStyle{
-        color: red;
-        font-weight: bold;
-        text-decoration: underline;
-        font-size: 20px;
-      }
+  .linkStyle {
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 20px;
+  }
 `;
-  
-  
-
-
-
-
-
 
 const LifestyleAccordion = () => {
   const [clicked, setClicked] = useState(false);
 
-  const toggle = index => {
+  const toggle = (index) => {
     if (clicked === index) {
       //if clicked question is already active, then close it
       return setClicked(null);
@@ -152,9 +134,8 @@ const LifestyleAccordion = () => {
     setClicked(index);
   };
 
-
   return (
-    <IconContext.Provider value={{ color: '#ff0000', size: '25px' }}>
+    <IconContext.Provider value={{ color: "#ff0000", size: "25px" }}>
       <AccordionSection>
         <Container>
           {LifestyleData.map((item, index) => {
@@ -166,45 +147,50 @@ const LifestyleAccordion = () => {
                 </Wrap>
                 {clicked === index ? (
                   <Dropdown>
-                   { 
-                    item.answer.map((answerObj)=>{
-                      return(
+                    {item.answer.map((answerObj) => {
+                      return (
                         <>
-                    
-                          { item.question === "Age" ? 
-                              <>
-                                <p className='p-info2'>You must be at least 17 years old to donate, or 16 years old with parental/guardian consent, if allowed by state law. (<Link to="./eligibility/informationforteens" className='linkStyle'>Find out more information for teen donors)</Link>
-                                                        There is no upper age limit for blood donation as long as you are well with no restrictions or limitations to your activities.</p>
-                                
-                              </>
-                            :answerObj.points.length === 1 ?
-                            
+                          {item.question === "Age" ? (
+                            <>
+                              <p className="p-info2">
+                                You must be at least 17 years old to donate, or
+                                16 years old with parental/guardian consent, if
+                                allowed by state law. (
+                                <Link
+                                  to="./eligibility/informationforteens"
+                                  className="linkStyle"
+                                >
+                                  Find out more information for teen donors)
+                                </Link>
+                                There is no upper age limit for blood donation
+                                as long as you are well with no restrictions or
+                                limitations to your activities.
+                              </p>
+                            </>
+                          ) : answerObj.points.length === 1 ? (
+                            <>
+                              {answerObj.points.map((point) => {
+                                return (
+                                  <>
+                                    <p className="p-info">{point}</p>
+                                  </>
+                                );
+                              })}
+                            </>
+                          ) : (
+                            answerObj.points.map((point) => {
+                              return (
                                 <>
-                                    {answerObj.points.map((point)=>{
-                                        return(
-                                            <>
-                                            <p className='p-info'>{point}</p>
-                
-                                            </>
-                                        )
-                                    })}
+                                  <Ul>
+                                    <li key={point}>{point}</li>
+                                  </Ul>
                                 </>
-
-                            :answerObj.points.map((point)=>{
-                            return(
-                              <>
-                                <Ul>
-                                <li key={point}>{point}</li>
-                                </Ul>
-                              </>
-                            )
-                            })}
-                       </>
-                      
-                      
-                     )
-
-                   })}
+                              );
+                            })
+                          )}
+                        </>
+                      );
+                    })}
                   </Dropdown>
                 ) : null}
               </>

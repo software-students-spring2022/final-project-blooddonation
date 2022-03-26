@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { STDData } from './STDData';
-import styled from 'styled-components';
-import { IconContext } from 'react-icons';
-import { FiPlus, FiMinus } from 'react-icons/fi';
-
+import React, { useState } from "react";
+import { STDData } from "./STDData";
+import styled from "styled-components";
+import { IconContext } from "react-icons";
+import { FiPlus, FiMinus } from "react-icons/fi";
 
 const AccordionSection = styled.div`
   flex: 0 0 100%;
@@ -19,7 +18,6 @@ const AccordionSection = styled.div`
 
 const Container = styled.div`
   top: 5%;
-
 `;
 
 const Wrap = styled.div`
@@ -34,8 +32,6 @@ const Wrap = styled.div`
   border-top: 1px solid #ff0000;
   border-radius: 5px;
 
-
-
   h1 {
     padding: 2rem;
     font-size: 2rem;
@@ -43,7 +39,6 @@ const Wrap = styled.div`
   h2 {
     padding: 1rem;
     font-size: 2rem;
-    
   }
   span {
     margin-right: 1.5rem;
@@ -59,14 +54,11 @@ const Dropdown = styled.div`
   justify-content: left;
   align-items: left;
   text-align: center;
-  margin-top:0px;
+  margin-top: 0px;
   border-radius: 5px;
   border-bottom: 1px solid #ff0000;
   border-top: 1px solid #ff0000;
   overflow-y: scroll;
-  
-
-
 
   p {
     font-size: 2rem;
@@ -96,79 +88,68 @@ const Dropdown = styled.div`
     border-top: 2px solid white;
     text-decoration: underline;
     color: white;
-    
   }
 
-  .linkStyle{
+  .linkStyle {
     color: red;
     font-weight: bold;
     text-decoration: underline;
-    
   }
-  
 `;
 
 const Ul = styled.div`
-    list-style: none;
+  list-style: none;
 
-     li{
-        font-size: 20px;
-     }
+  li {
+    font-size: 20px;
+  }
 
-      li:before {
-        content: "• "; 
-        color: red; 
-        font-weight: bold;
-        font-size: 30px; 
-        display: inline-block; 
-        width: 1em; 
-      }
+  li:before {
+    content: "• ";
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+    display: inline-block;
+    width: 1em;
+  }
 
-      .linkStyle{
-        color: red;
-        font-weight: bold;
-        text-decoration: underline;
-        font-size: 20px;
-      }
+  .linkStyle {
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 20px;
+  }
 `;
-
 
 const Ul2 = styled.div`
-    list-style: none;
-    padding-left: 20px;
+  list-style: none;
+  padding-left: 20px;
 
-     li{
-        font-size: 20px;
-     }
+  li {
+    font-size: 20px;
+  }
 
-      li:before {
-        content: "• "; 
-        color: red; 
-        font-weight: bold;
-        font-size: 30px; 
-        display: inline-block; 
-        width: 1em; 
-      }
+  li:before {
+    content: "• ";
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+    display: inline-block;
+    width: 1em;
+  }
 
-      .linkStyle{
-        color: red;
-        font-weight: bold;
-        text-decoration: underline;
-        font-size: 20px;
-      }
+  .linkStyle {
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 20px;
+  }
 `;
-  
-  
-
-
-
-
-
 
 const STDAccordion = () => {
   const [clicked, setClicked] = useState(false);
 
-  const toggle = index => {
+  const toggle = (index) => {
     if (clicked === index) {
       //if clicked question is already active, then close it
       return setClicked(null);
@@ -177,9 +158,8 @@ const STDAccordion = () => {
     setClicked(index);
   };
 
-
   return (
-    <IconContext.Provider value={{ color: '#ff0000', size: '25px' }}>
+    <IconContext.Provider value={{ color: "#ff0000", size: "25px" }}>
       <AccordionSection>
         <Container>
           {STDData.map((item, index) => {
@@ -191,63 +171,66 @@ const STDAccordion = () => {
                 </Wrap>
                 {clicked === index ? (
                   <Dropdown>
-                   { 
-                    item.answer.map((answerObj)=>{
-                      return(
+                    {item.answer.map((answerObj) => {
+                      return (
                         <>
-                    
-                          { item.question === "HIV, AIDS" ? 
-                                <>
-                                    <p className='p-info2'>You should not give blood if you have AIDS or have ever had a positive HIV test, or if you have done something that puts you at risk for becoming infected with HIV.
-                                    You are at risk for getting infected if you:</p>
-                                    {answerObj.points.map((point)=>{
-                                        return(
-                                        <>
-                                            <Ul2>
-                                            <li key={point}>{point}</li>
-                                            </Ul2>
-                                        </>
-                                        )
-                                        })}
+                          {item.question === "HIV, AIDS" ? (
+                            <>
+                              <p className="p-info2">
+                                You should not give blood if you have AIDS or
+                                have ever had a positive HIV test, or if you
+                                have done something that puts you at risk for
+                                becoming infected with HIV. You are at risk for
+                                getting infected if you:
+                              </p>
+                              {answerObj.points.map((point) => {
+                                return (
+                                  <>
+                                    <Ul2>
+                                      <li key={point}>{point}</li>
+                                    </Ul2>
+                                  </>
+                                );
+                              })}
 
-                                    <p className='p-info2'>You should not give blood if you have any of the following conditions that can be signs or symptoms of HIV/AIDS:</p>
-                                    <>
-                                        <Ul2>
-                                        <li key="fever2">Fever</li>
-                                        <li key="enlarged2">Enlarged lymph glands</li>
-                                        <li key="sore2">Sore throat</li>
-                                        <li key="rash2">Rash</li>
-                                        </Ul2>
-                                    </>
-                                </>
-                            :answerObj.points.length === 1 ?
-                            
-                                <>
-                                    {answerObj.points.map((point)=>{
-                                        return(
-                                            <>
-                                            <p className='p-info'>{point}</p>
-                
-                                            </>
-                                        )
-                                    })}
-                                </>
-
-                            :answerObj.points.map((point)=>{
-                            return(
+                              <p className="p-info2">
+                                You should not give blood if you have any of the
+                                following conditions that can be signs or
+                                symptoms of HIV/AIDS:
+                              </p>
                               <>
-                                <Ul>
-                                <li key={point}>{point}</li>
-                                </Ul>
+                                <Ul2>
+                                  <li key="fever2">Fever</li>
+                                  <li key="enlarged2">Enlarged lymph glands</li>
+                                  <li key="sore2">Sore throat</li>
+                                  <li key="rash2">Rash</li>
+                                </Ul2>
                               </>
-                            )
-                            })}
-                       </>
-                      
-                      
-                     )
-
-                   })}
+                            </>
+                          ) : answerObj.points.length === 1 ? (
+                            <>
+                              {answerObj.points.map((point) => {
+                                return (
+                                  <>
+                                    <p className="p-info">{point}</p>
+                                  </>
+                                );
+                              })}
+                            </>
+                          ) : (
+                            answerObj.points.map((point) => {
+                              return (
+                                <>
+                                  <Ul>
+                                    <li key={point}>{point}</li>
+                                  </Ul>
+                                </>
+                              );
+                            })
+                          )}
+                        </>
+                      );
+                    })}
                   </Dropdown>
                 ) : null}
               </>
