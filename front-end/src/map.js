@@ -39,9 +39,9 @@ city.each(); {
         href='https://donate.nybc.org/donor/schedules/center/44' /{">"}
         rel='stylesheet'{">"}</>
 
-    {"}"};
+    {"}"}
 
-    return </FindDonationSite> 
+    </FindDonationSitelink>
 
 
 }
