@@ -15,6 +15,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    age: {
+      type: Number,
+      required: true,
+    },
+    eligible : {
+      type: Array,
+      required: false,
+    }
   },
   {
     timestamps: true,
