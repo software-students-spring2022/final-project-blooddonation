@@ -63,8 +63,7 @@ const LogIn = (props) => {
             }
           />
         </Stack>
-
-        <Button component={Link} to={"/profile"} onClick={handleLoginData()}>
+        <Button component={Link} to={"/profile"}>
           Login
         </Button>
         <br></br>
