@@ -15,6 +15,7 @@ import PlateletDonation from "./PlateletDonation";
 import PowerRedDonation from "./PowerRedDonation";
 import InformationForTeens from "./InformationForTeens";
 import CreateAccount from "./CreateAccount";
+import EligibilityQuestionnaire from "./EligibilityQuestionnaire";
 
 const App = (props) => {
   return (
@@ -55,6 +56,10 @@ const App = (props) => {
               path="FAQ/eligibility/powerreddonation"
               element={<PowerRedDonation />}
             />
+            <Route
+              path="/createaccount/eligibilityquestionnaire"
+              element={<EligibilityQuestionnaire />}
+            ></Route>
           </Routes>
         </main>
       </Router>
