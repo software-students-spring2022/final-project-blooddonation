@@ -63,17 +63,12 @@ const LogIn = (props) => {
             }
           />
         </Stack>
-<<<<<<< HEAD
-
         <Button
           component={Link}
           to={"/profile"}
           type="submit"
           onClick={handleLoginData()}
         >
-=======
-        <Button component={Link} to={"/profile"}>
->>>>>>> eb431fd3a18b60a3012734468eb606c42a3f9fe0
           Login
         </Button>
         <br></br>
