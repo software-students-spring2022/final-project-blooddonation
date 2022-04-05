@@ -9,7 +9,7 @@ import { Card, CardContent, Typography, Grid, CardMedia } from "@mui/material";
 const Home = (props) => {
   return (
     <>
-      <body className="home-body">
+      <div className="home-body">
         <h1 style={{ margin: "20px" }}>Hello and welcome!</h1>
         <Grid container>
           <Grid item xs={7}>
@@ -72,7 +72,7 @@ const Home = (props) => {
             </Card>
           </Grid>
         </Grid>
-      </body>
+      </div>
     </>
   );
 };

@@ -1,6 +1,6 @@
 export const EligibilityQuestionnaireData = [
   {
-    questionText: "Are you 17 years old or older?",
+    questionText: "How old are you?",
     answerOptions: [],
   },
 
@@ -38,6 +38,14 @@ export const EligibilityQuestionnaireData = [
   },
 
   {
+    questionText: "Have you donated plasma less than 13 times this year?",
+    answerOptions: [
+      { answerText: "Yes", isCorrect: true },
+      { answerText: "No", isCorrect: false },
+    ],
+  },
+
+  {
     questionText: "Have you donated platelets in the last 7 days?",
     answerOptions: [
       { answerText: "Yes", isCorrect: false },
@@ -47,15 +55,6 @@ export const EligibilityQuestionnaireData = [
 
   {
     questionText: "Have you donated platelets less than 24 times this year?",
-    answerOptions: [
-      { answerText: "Yes", isCorrect: true },
-      { answerText: "No", isCorrect: false },
-    ],
-  },
-
-  {
-    questionText:
-      "If you are a Male donors are you at least 17 years old, and at least 5 feet 1 inch tall, and weigh at least 130 lbs? If you are a female donor are you at least 19 years old, at least 5 feet 5 inches tall, and weigh at least 150 lbs?",
     answerOptions: [
       { answerText: "Yes", isCorrect: true },
       { answerText: "No", isCorrect: false },
@@ -81,7 +80,8 @@ export const EligibilityQuestionnaireData = [
   },
 
   {
-    questionText: "Have you donated plasma less than 13 times this year?",
+    questionText:
+      "If you are a Male donors are you at least 17 years old, and at least 5 feet 1 inch tall, and weigh at least 130 lbs? If you are a female donor are you at least 19 years old, at least 5 feet 5 inches tall, and weigh at least 150 lbs?",
     answerOptions: [
       { answerText: "Yes", isCorrect: true },
       { answerText: "No", isCorrect: false },
