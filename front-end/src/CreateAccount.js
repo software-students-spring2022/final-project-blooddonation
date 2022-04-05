@@ -14,11 +14,14 @@ const CreateAccount = (props) => {
     email: "",
     password: "",
   });
+
   const handleSubmit = (e) => {
     // Send user data to backend here
     e.preventDefault();
     console.log(accountData);
   };
+
+  const [showPassword] = useState(false);
 
   return (
     <>
@@ -58,6 +61,7 @@ const CreateAccount = (props) => {
           />
           <TextField
             sx={{ width: "25%" }}
+            type={showPassword ? "text" : "password"}
             required
             label="Password"
             value={accountData.password}
@@ -67,10 +71,13 @@ const CreateAccount = (props) => {
             }
           />
         </Stack>
-
-        <Input type="submit" value="Submit">
+        <Button
+          component={Link}
+          to={"./eligibilityquestionnaire"}
+          type="submit"
+        >
           Register
-        </Input>
+        </Button>
         <br></br>
         <h1>Already have an account?</h1>
         <Button component={Link} to={"/login"}>

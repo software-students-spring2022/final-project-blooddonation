@@ -10,6 +10,11 @@ import { Link } from "react-router-dom";
  * @returns The contents of this component, in JSX form.
  */
 
+//on line 20 we can instead check if the user is authenticated and if they are then display that user's info
+//when displaying the user info add a check to see if their eligibility array is of length 0 and if it is then display a message
+// telling them that they are not eligible to donate anything and give link to other ways to help page
+//if their age is below 17 tell them that they are too young on the profile page
+
 const Profile = (props) => {
   return (
     <>
