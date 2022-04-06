@@ -9,7 +9,7 @@ import { Container, Typography } from "@mui/material";
 const ContactUs = (props) => {
   return (
     <>
-      <body className="contact-body">
+      <div className="contact-body">
         <Container maxWidth="md">
           <h1 className="contact-h1">Contact Us</h1>
           <Typography
@@ -49,7 +49,7 @@ const ContactUs = (props) => {
             </div>
           </div>
         </Container>
-      </body>
+      </div>
     </>
   );
 };

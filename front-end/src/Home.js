@@ -16,7 +16,7 @@ import { Section1, Section2, Section3 } from "./components/HomeData";
 const Home = (props) => {
   return (
     <>
-      <body className="home-body">
+      <div className="home-body">
         <h1 style={{ margin: "20px" }}>Hello and welcome!</h1>
 
         <Grid container>
@@ -122,7 +122,7 @@ const Home = (props) => {
             </CardContent>
           </Card>
         </Grid>
-      </body>
+      </div>
     </>
   );
 };
