@@ -49,12 +49,7 @@ const Home = (props) => {
           <Grid container direction="row" style={{ height: "400px" }}>
             {Section1.media.map((image) => (
               <Grid item xs={4}>
-                <CardMedia
-                  component="iframe"
-                  title="test"
-                  src={image}
-                  style={{ width: "70%", height: "100%" }}
-                />
+                <img style = {{height:'50%'}} src={image} />
               </Grid>
             ))}
           </Grid>
