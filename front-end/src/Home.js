@@ -1,6 +1,13 @@
 import "./styles/Home.css";
-import { Card, CardContent, Typography, Grid, CardMedia } from "@mui/material";
-
+import {
+  Box,
+  Card,
+  CardContent,
+  Typography,
+  Grid,
+  CardMedia,
+} from "@mui/material";
+import { Section1, Section2, Section3 } from "./components/HomeData";
 /**
  * A React component that represents the Home page of the app.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -11,6 +18,48 @@ const Home = (props) => {
     <>
       <body className="home-body">
         <h1 style={{ margin: "20px" }}>Hello and welcome!</h1>
+
+        <Grid container>
+          <Grid item xs={12}>
+            <Card classname="home-card">
+              <CardContent>
+                <Typography
+                  variant="h5"
+                  component="div"
+                  sx={{ textAlign: "left", margin: 2 }}
+                >
+                  {Section1.section}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Card classname="home-card">
+              <CardContent>
+                <Typography
+                  variant="body2"
+                  component="div"
+                  sx={{ textAlign: "left", margin: 2 }}
+                >
+                  {Section1.text}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid container direction="row" style={{ height: "400px" }}>
+            {Section1.media.map((image) => (
+              <Grid item xs={4}>
+                <CardMedia
+                  component="iframe"
+                  title="test"
+                  src={image}
+                  style={{ width: "70%", height: "100%" }}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+
         <Grid container>
           <Grid item xs={7}>
             <Card className="home-card" sx={{ boxShadow: 1 }}>
@@ -20,7 +69,7 @@ const Home = (props) => {
                   component="div"
                   sx={{ textAlign: "left", margin: 2 }}
                 >
-                  How Blood Donations Help :{" "}
+                  {Section2.section}
                 </Typography>
                 <Typography
                   className="card-item"
@@ -28,35 +77,13 @@ const Home = (props) => {
                   color="text.secondary"
                   sx={{ textAlign: "left", margin: 2 }}
                 >
-                  Safe blood saves lives. Blood is needed by women with
-                  complications during pregnancy and childbirth, children with
-                  severe anaemia, often resulting from malaria or malnutrition,
-                  accident victims and surgical and cancer patients.
-                </Typography>
-                <Typography
-                  className="card-item"
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{ textAlign: "left", margin: 2 }}
-                >
-                  There is a constant need for a regular supply of blood because
-                  it can be stored only for a limited period of time before use.
-                  Regular blood donation by a sufficient number of healthy
-                  people is needed to ensure that blood will always be available
-                  whenever and wherever it is needed.
-                </Typography>
-                <Typography
-                  className="card-item"
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{ textAlign: "left", margin: 2 }}
-                >
-                  Blood is the most precious gift that anyone can give to
-                  another person – the gift of life. A decision to donate your
-                  blood can save a life, or even several if your blood is
-                  separated into its components – red cells, platelets and
-                  plasma – which can be used individually for patients with
-                  specific conditions.
+                  {Section2.text[0]}
+                  <br></br>
+                  <br></br>
+                  {Section2.text[1]}
+                  <br></br>
+                  <br></br>
+                  {Section2.text[2]}
                 </Typography>
               </CardContent>
             </Card>
@@ -66,11 +93,34 @@ const Home = (props) => {
               <CardMedia
                 component="iframe"
                 title="test"
-                src="https://www.youtube.com/embed/gYUcQT6Gxts"
+                src={Section2.media}
                 style={{ height: "100%" }}
               />
             </Card>
           </Grid>
+        </Grid>
+
+        <Grid container>
+          <Card className="home-card" sx={{ boxShadow: 1 }}>
+            <CardContent>
+              <Grid item xs={12}>
+                <Typography
+                  variant="h5"
+                  component="div"
+                  sx={{ textAlign: "left", margin: 2 }}
+                >
+                  {Section3.section}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  component="div"
+                  sx={{ textAlign: "left", margin: 2 }}
+                >
+                  {Section3.text}
+                </Typography>
+              </Grid>
+            </CardContent>
+          </Card>
         </Grid>
       </body>
     </>
