@@ -19,6 +19,7 @@ mongoose
   .catch((err) => console.error(`Failed to connect to MongoDB: ${err}`));
 
 const User = require('./models/User');
+const users = require('./accountData');
 
 // Passport Local Strategy
 passport.use(
@@ -57,27 +58,30 @@ app.post(
   '/login',
   // passport.authenticate('local', { failureRedirect: '/createaccount' }),
   (req, res) => {
-    console.log(req.user);
-    // to do: redirect to unique dashboard / profile page
-    // res.redirect('./dashboard');
-    const user = req.body;
-    res.status(200).json(user);
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(401).json({ success: false, message: `no username or password supplied.` });
+    }
+
+    // usually this would be a database call, but here we look for a matching user in our mock data
+    const user = users.find((o) => o.email === email);
+
+    if (!user) {
+      // no user found with this name... send an error
+      res.status(401).json({ success: false, message: `user not found: ${email}.` });
+    } else if (req.body.password === user.password) {
+      res.status(200).json(user);
+    } else {
+      // the password did not match
+      res.status(401).json({ success: false, message: 'passwords did not match' });
+    }
   }
 );
 
 app.post('/createaccount', (req, res) => {
-  // let firstName = req.body.firstName;
-  // let lastName = req.body.lastName;
-  // let email = req.body.email;
-  // let password = req.body.password;
-
   const user = req.body;
 
   res.status(200).json(user);
 });
 
 module.exports = app;
-
-// module.exports = {
-//   close,
-// };
