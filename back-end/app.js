@@ -4,9 +4,11 @@ require('dotenv').config({ silent: true });
 // load up the web server
 
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
+app.use(cors());
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
 
@@ -18,7 +20,7 @@ mongoose
   .then((data) => console.log(`Connected to MongoDB`))
   .catch((err) => console.error(`Failed to connect to MongoDB: ${err}`));
 
-const User = require('./models/User');
+const { User } = require('./models/User');
 const users = require('./accountData');
 
 // Passport Local Strategy
@@ -78,10 +80,32 @@ app.post(
   }
 );
 
-app.post('/createaccount', (req, res) => {
-  const user = req.body;
+app.post('/createaccount', async (req, res) => {
+  // const user = req.body;
 
-  res.status(200).json(user);
+  // res.status(200).json(user);
+  console.log(req.body);
+
+  try {
+    const user = await User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      age: 0,
+      eligible: [],
+    });
+    return res.json({
+      user, // return the message we just saved
+      status: 'all good',
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
 });
 
 module.exports = app;
