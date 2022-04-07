@@ -55,19 +55,25 @@ app.get('/logout', (req, res) => {
 
 app.post(
   '/login',
-  passport.authenticate('local', { failureRedirect: '/createaccount' }),
+  // passport.authenticate('local', { failureRedirect: '/createaccount' }),
   (req, res) => {
     console.log(req.user);
     // to do: redirect to unique dashboard / profile page
-    res.redirect('./dashboard');
+    // res.redirect('./dashboard');
+    const user = req.body;
+    res.status(200).json(user);
   }
 );
 
 app.post('/createaccount', (req, res) => {
-  let firstName = req.body.firstName;
-  let lastName = req.body.lastName;
-  let email = req.body.email;
-  let password = req.body.password;
+  // let firstName = req.body.firstName;
+  // let lastName = req.body.lastName;
+  // let email = req.body.email;
+  // let password = req.body.password;
+
+  const user = req.body;
+
+  res.status(200).json(user);
 });
 
 module.exports = app;

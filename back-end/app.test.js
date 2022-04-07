@@ -15,7 +15,7 @@ describe('Test user login and registration', () => {
         expect(response.body.email).equal('rmk461@nyu.edu');
       }));
 
-  it('POST /register -----> test user registration', () => {
+  it('POST /createaccount -----> test user registration', () => {
     const user = {
       firstName: 'Rachel',
       lastName: 'Kindagen',
@@ -23,11 +23,10 @@ describe('Test user login and registration', () => {
       password: 'helloworld123',
       age: 21,
       eligible: [],
-      loggedIn: false,
     };
 
     return request(app)
-      .post('/register')
+      .post('/createaccount')
       .send(user)
       .expect(200)
       .then((response) => {
