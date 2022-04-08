@@ -1,10 +1,10 @@
 import "./styles/EligibilityQuestionnaire.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, Input, Stack } from "@mui/material";
 import styled from "styled-components";
-import { EligibilityQuestionnaireData } from "./components/EligibilityQuestionnaireData";
-import { accountData } from "./components/AccountData"; //use for mocking the logged in profile page once quiz done
+// import { EligibilityQuestionnaireData } from "./components/EligibilityQuestionnaireData";
+import axios from "axios";
 
 /**
  * A React component that represents the Home page of the app.
@@ -25,6 +25,41 @@ const EligibilityQuestionnaire = (props) => {
     age: 0,
     types: [],
   });
+
+  const [EligibilityQuestionnaireData, setEligibilityQuestionnaireData] =
+    useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  const fetchEligibilityQuestionnaireData = () => {
+    // setMessages([])
+    // setLoaded(false)
+    axios
+      .get(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount/eligibilityquestionnaire`
+      )
+      .then((response) => {
+        // axios bundles up all response data in response.data property
+        const EligibilityQuestionnaireData =
+          response.data.EligibilityQuestionnaireData;
+        console.log(EligibilityQuestionnaireData);
+        setEligibilityQuestionnaireData(EligibilityQuestionnaireData);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        // the response has been received, so remove the loading icon
+        setLoaded(true);
+      });
+  };
+
+  // set up loading data from server when the component first loads
+  useEffect(() => {
+    // fetch messages this once
+    fetchEligibilityQuestionnaireData();
+  }, []); // p
 
   const navigate = useNavigate();
 
@@ -108,7 +143,6 @@ const EligibilityQuestionnaire = (props) => {
     //console.log(age);
 
     if (answerData.age < 17) {
-      accountData[0].loggedIn = true;
       navigate("/profile");
     }
 
@@ -146,56 +180,58 @@ const EligibilityQuestionnaire = (props) => {
       //setNotEligible(true);
     }
 
-    accountData[0].loggedIn = true;
     navigate("/profile");
   };
 
   return (
     <>
       <h1>Eligibility Questionnaire</h1>
-      <div className="question-section">
-        <div className="question-text">
-          {EligibilityQuestionnaireData[currentQuestion].questionText}
-        </div>
-      </div>
-
-      {currentQuestion === 0 ? (
-        <form onSubmit={handleSubmit}>
-          <Stack alignItems="center" spacing={2}>
-            <TextField
-              sx={{ width: "20%", marginTop: "30px" }}
-              required
-              label="Age"
-              name="age"
-              onChange={(e) => {
-                setAnswerData({ ...answerData, age: e.target.value });
-              }}
-            />
-          </Stack>
-          <Input type="submit" value="next"></Input>
-          <br></br>
-        </form>
-      ) : done ? (
-        <>{scoreCheck()}</>
-      ) : (
-        <div className="answer-section">
-          {EligibilityQuestionnaireData[currentQuestion].answerOptions.map(
-            (answerOption) => (
-              <button
-                onClick={() =>
-                  handleQuizAnswerOptionClick(
-                    answerOption.isCorrect,
-                    currentQuestion,
-                    EligibilityQuestionnaireData
-                  )
-                }
-              >
-                {answerOption.answerText}
-              </button>
-            )
+      {loaded ? (
+        <>
+          <div className="question-section">
+            <div className="question-text">
+              {EligibilityQuestionnaireData[currentQuestion].questionText}
+            </div>
+          </div>
+          {currentQuestion === 0 ? (
+            <form onSubmit={handleSubmit}>
+              <Stack alignItems="center" spacing={2}>
+                <TextField
+                  sx={{ width: "20%", marginTop: "30px" }}
+                  required
+                  label="Age"
+                  name="age"
+                  onChange={(e) => {
+                    setAnswerData({ ...answerData, age: e.target.value });
+                  }}
+                />
+              </Stack>
+              <Input type="submit" value="next"></Input>
+              <br></br>
+            </form>
+          ) : done ? (
+            <>{scoreCheck()}</>
+          ) : (
+            <div className="answer-section">
+              {EligibilityQuestionnaireData[currentQuestion].answerOptions.map(
+                (answerOption) => (
+                  <button
+                    onClick={() =>
+                      handleQuizAnswerOptionClick(
+                        answerOption.isCorrect,
+                        currentQuestion,
+                        EligibilityQuestionnaireData
+                      )
+                    }
+                  >
+                    {answerOption.answerText}
+                  </button>
+                )
+              )}
+            </div>
           )}
-        </div>
-      )}
+        </>
+      ) : null}
     </>
   );
 };

@@ -22,6 +22,12 @@ mongoose
 
 const { User } = require('./models/User');
 const users = require('./accountData');
+const eligibilityQuestionnaire = require('./quizQuestions/EligibilityQuestionnaireData');
+const WholeBloodQuestions = require('./quizQuestions/WholeBloodQuestions');
+const PowerRedQuestions = require('./quizQuestions/PowerRedQuestions');
+const PlateletQuestions = require('./quizQuestions/PlateletQuestions');
+const PlasmaQuestions = require('./quizQuestions/PlasmaQuestions');
+const questions = require('./quizQuestions/questions');
 
 // Passport Local Strategy
 passport.use(
@@ -97,6 +103,73 @@ app.post('/createaccount', async (req, res) => {
     });
     return res.json({
       user, // return the message we just saved
+      status: 'all good',
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
+});
+
+app.get('/profile', async (req, res) => {
+  // const user = req.body;
+
+  // res.status(200).json(user);
+  // console.log(req.body);
+
+  try {
+    const user = users[0];
+    return res.json({
+      user, // return the message we just saved
+      status: 'all good',
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
+});
+
+app.get('/createaccount/eligibilityquestionnaire', async (req, res) => {
+  // const user = req.body;
+
+  // res.status(200).json(user);
+  // console.log(req.body);
+
+  try {
+    const EligibilityQuestionnaireData = eligibilityQuestionnaire;
+    return res.json({
+      EligibilityQuestionnaireData, // return the message we just saved
+      status: 'all good',
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
+});
+
+app.get('/finddonationsite', async (req, res) => {
+  // const user = req.body;
+
+  // res.status(200).json(user);
+  // console.log(req.body);
+
+  try {
+    return res.json({
+      WholeBloodQuestions,
+      PowerRedQuestions,
+      PlateletQuestions,
+      PlasmaQuestions,
+      questions,
+      // return the message we just saved
       status: 'all good',
     });
   } catch (err) {
