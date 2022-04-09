@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { MedicalCondData } from "./MedicalCondData";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { IconContext } from "react-icons";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import axios from "axios";
 
 const AccordionSection = styled.div`
   flex: 0 0 100%;
@@ -148,6 +148,36 @@ const Ul2 = styled.div`
 
 const MedicalCondAccordion = () => {
   const [clicked, setClicked] = useState(false);
+  const [MedicalCondData, setMedicalCondData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  const fetchMedicalCondData = () => {
+    // setMessages([])
+    // setLoaded(false)
+    axios
+      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/FAQ/eligibility`)
+      .then((response) => {
+        // axios bundles up all response data in response.data property
+        const MedicalCondData = response.data.MedicalCondData;
+        console.log(MedicalCondData);
+        setMedicalCondData(MedicalCondData);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        // the response has been received, so remove the loading icon
+        setLoaded(true);
+      });
+  };
+
+  // set up loading data from server when the component first loads
+  useEffect(() => {
+    // fetch messages this once
+    fetchMedicalCondData();
+  }, []); // p
 
   const toggle = (index) => {
     if (clicked === index) {
@@ -159,122 +189,132 @@ const MedicalCondAccordion = () => {
   };
 
   return (
-    <IconContext.Provider value={{ color: "#ff0000", size: "25px" }}>
-      <AccordionSection>
-        <Container>
-          {MedicalCondData.map((item, index) => {
-            return (
-              <>
-                <Wrap onClick={() => toggle(index)} key={index}>
-                  <h1>{item.question}</h1>
-                  <span>{clicked === index ? <FiMinus /> : <FiPlus />}</span>
-                </Wrap>
-                {clicked === index ? (
-                  <Dropdown>
-                    {item.answer.map((answerObj) => {
-                      return (
-                        <>
-                          {item.question === "Bleeding Condition" ? (
+    <>
+      {loaded ? (
+        <IconContext.Provider value={{ color: "#ff0000", size: "25px" }}>
+          <AccordionSection>
+            <Container>
+              {MedicalCondData.map((item, index) => {
+                return (
+                  <>
+                    <Wrap onClick={() => toggle(index)} key={index}>
+                      <h1>{item.question}</h1>
+                      <span>
+                        {clicked === index ? <FiMinus /> : <FiPlus />}
+                      </span>
+                    </Wrap>
+                    {clicked === index ? (
+                      <Dropdown>
+                        {item.answer.map((answerObj) => {
+                          return (
                             <>
-                              <p className="p-info2" key="listHeading1">
-                                If you have a history of bleeding problems, you
-                                will be asked additional questions. If your
-                                blood does not clot normally, you should not
-                                donate since you may have excessive bleeding
-                                where the needle was placed. For the same
-                                reason, you should not donate if you are taking
-                                any "blood thinner" such as:
-                              </p>
-                              {answerObj.points.map((point, index) => {
-                                return (
-                                  <>
-                                    <Ul2>
-                                      <li key={point}>{point + index}</li>
-                                    </Ul2>
-                                  </>
-                                );
-                              })}
-
-                              <p className="p-info2" key="listending">
-                                If you are on aspirin, it is OK to donate whole
-                                blood. However, you must be off of aspirin for
-                                at least 2 full days in order to donate
-                                platelets by apheresis. F or example, if you
-                                take aspirin products on Monday, the soonest you
-                                may donate platelets is Thursday. Donors with
-                                clotting disorder from Factor V who are not on
-                                anticoagulants are eligible to donate; however,
-                                all others must be evaluated by the health
-                                historian at the collection center.
-                              </p>
-                            </>
-                          ) : item.question === "HIV, AIDS" ? (
-                            <>
-                              <p className="p-info2" key="listHeading2">
-                                You should not give blood if you have AIDS or
-                                have ever had a positive HIV test, or if you
-                                have done something that puts you at risk for
-                                becoming infected with HIV. You are at risk for
-                                getting infected if you:
-                              </p>
-                              {answerObj.points.map((point) => {
-                                return (
-                                  <>
-                                    <Ul2>
-                                      <li key={point}>{point}</li>
-                                    </Ul2>
-                                  </>
-                                );
-                              })}
-
-                              <p className="p-info2" key="listHeading3">
-                                You should not give blood if you have any of the
-                                following conditions that can be signs or
-                                symptoms of HIV/AIDS:
-                              </p>
-                              <>
-                                <Ul2>
-                                  <li key="fever">Fever</li>
-                                  <li key="enlarged">Enlarged lymph glands</li>
-                                  <li key="sore">Sore throat</li>
-                                  <li key="rash">Rash</li>
-                                </Ul2>
-                              </>
-                            </>
-                          ) : answerObj.points.length === 1 ? (
-                            <>
-                              {answerObj.points.map((point) => {
-                                return (
-                                  <>
-                                    <p className="p-info" key={point}>
-                                      {point}
-                                    </p>
-                                  </>
-                                );
-                              })}
-                            </>
-                          ) : (
-                            answerObj.points.map((point) => {
-                              return (
+                              {item.question === "Bleeding Condition" ? (
                                 <>
-                                  <Ul>
-                                    <li key={point}>{point}</li>
-                                  </Ul>
+                                  <p className="p-info2" key="listHeading1">
+                                    If you have a history of bleeding problems,
+                                    you will be asked additional questions. If
+                                    your blood does not clot normally, you
+                                    should not donate since you may have
+                                    excessive bleeding where the needle was
+                                    placed. For the same reason, you should not
+                                    donate if you are taking any "blood thinner"
+                                    such as:
+                                  </p>
+                                  {answerObj.points.map((point, index) => {
+                                    return (
+                                      <>
+                                        <Ul2>
+                                          <li key={point}>{point + index}</li>
+                                        </Ul2>
+                                      </>
+                                    );
+                                  })}
+
+                                  <p className="p-info2" key="listending">
+                                    If you are on aspirin, it is OK to donate
+                                    whole blood. However, you must be off of
+                                    aspirin for at least 2 full days in order to
+                                    donate platelets by apheresis. F or example,
+                                    if you take aspirin products on Monday, the
+                                    soonest you may donate platelets is
+                                    Thursday. Donors with clotting disorder from
+                                    Factor V who are not on anticoagulants are
+                                    eligible to donate; however, all others must
+                                    be evaluated by the health historian at the
+                                    collection center.
+                                  </p>
                                 </>
-                              );
-                            })
-                          )}
-                        </>
-                      );
-                    })}
-                  </Dropdown>
-                ) : null}
-              </>
-            );
-          })}
-        </Container>
-      </AccordionSection>
-    </IconContext.Provider>
+                              ) : item.question === "HIV, AIDS" ? (
+                                <>
+                                  <p className="p-info2" key="listHeading2">
+                                    You should not give blood if you have AIDS
+                                    or have ever had a positive HIV test, or if
+                                    you have done something that puts you at
+                                    risk for becoming infected with HIV. You are
+                                    at risk for getting infected if you:
+                                  </p>
+                                  {answerObj.points.map((point) => {
+                                    return (
+                                      <>
+                                        <Ul2>
+                                          <li key={point}>{point}</li>
+                                        </Ul2>
+                                      </>
+                                    );
+                                  })}
+
+                                  <p className="p-info2" key="listHeading3">
+                                    You should not give blood if you have any of
+                                    the following conditions that can be signs
+                                    or symptoms of HIV/AIDS:
+                                  </p>
+                                  <>
+                                    <Ul2>
+                                      <li key="fever">Fever</li>
+                                      <li key="enlarged">
+                                        Enlarged lymph glands
+                                      </li>
+                                      <li key="sore">Sore throat</li>
+                                      <li key="rash">Rash</li>
+                                    </Ul2>
+                                  </>
+                                </>
+                              ) : answerObj.points.length === 1 ? (
+                                <>
+                                  {answerObj.points.map((point) => {
+                                    return (
+                                      <>
+                                        <p className="p-info" key={point}>
+                                          {point}
+                                        </p>
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              ) : (
+                                answerObj.points.map((point) => {
+                                  return (
+                                    <>
+                                      <Ul>
+                                        <li key={point}>{point}</li>
+                                      </Ul>
+                                    </>
+                                  );
+                                })
+                              )}
+                            </>
+                          );
+                        })}
+                      </Dropdown>
+                    ) : null}
+                  </>
+                );
+              })}
+            </Container>
+          </AccordionSection>
+        </IconContext.Provider>
+      ) : null}
+    </>
   );
 };
 

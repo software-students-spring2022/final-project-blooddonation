@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { GeneralHealthData } from "./GeneralHealthData";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { IconContext } from "react-icons";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import axios from "axios";
 
 const AccordionSection = styled.div`
   flex: 0 0 100%;
@@ -117,6 +117,37 @@ const Ul = styled.div`
 const GeneralHealthAccordion = () => {
   const [clicked, setClicked] = useState(false);
 
+  const [GeneralHealthData, setGeneralHealthData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  const fetchGeneralHealthData = () => {
+    // setMessages([])
+    // setLoaded(false)
+    axios
+      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/FAQ/eligibility`)
+      .then((response) => {
+        // axios bundles up all response data in response.data property
+        const GeneralHealthData = response.data.GeneralHealthData;
+        console.log(GeneralHealthData);
+        setGeneralHealthData(GeneralHealthData);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        // the response has been received, so remove the loading icon
+        setLoaded(true);
+      });
+  };
+
+  // set up loading data from server when the component first loads
+  useEffect(() => {
+    // fetch messages this once
+    fetchGeneralHealthData();
+  }, []); // p
+
   const toggle = (index) => {
     if (clicked === index) {
       //if clicked question is already active, then close it
@@ -127,53 +158,61 @@ const GeneralHealthAccordion = () => {
   };
 
   return (
-    <IconContext.Provider value={{ color: "#ff0000", size: "25px" }}>
-      <AccordionSection>
-        <Container>
-          {GeneralHealthData.map((item, index) => {
-            return (
-              <>
-                <Wrap onClick={() => toggle(index)} key={index}>
-                  <h1>{item.question}</h1>
-                  <span>{clicked === index ? <FiMinus /> : <FiPlus />}</span>
-                </Wrap>
-                {clicked === index ? (
-                  <Dropdown>
-                    {item.answer.map((answerObj) => {
-                      return (
-                        <>
-                          {answerObj.points.length === 1 ? (
-                            <>
-                              {answerObj.points.map((point) => {
-                                return (
+    <>
+      {loaded ? (
+        <>
+          <IconContext.Provider value={{ color: "#ff0000", size: "25px" }}>
+            <AccordionSection>
+              <Container>
+                {GeneralHealthData.map((item, index) => {
+                  return (
+                    <>
+                      <Wrap onClick={() => toggle(index)} key={index}>
+                        <h1>{item.question}</h1>
+                        <span>
+                          {clicked === index ? <FiMinus /> : <FiPlus />}
+                        </span>
+                      </Wrap>
+                      {clicked === index ? (
+                        <Dropdown>
+                          {item.answer.map((answerObj) => {
+                            return (
+                              <>
+                                {answerObj.points.length === 1 ? (
                                   <>
-                                    <p className="p-info">{point}</p>
+                                    {answerObj.points.map((point) => {
+                                      return (
+                                        <>
+                                          <p className="p-info">{point}</p>
+                                        </>
+                                      );
+                                    })}
                                   </>
-                                );
-                              })}
-                            </>
-                          ) : (
-                            answerObj.points.map((point) => {
-                              return (
-                                <>
-                                  <Ul>
-                                    <li>{point}</li>
-                                  </Ul>
-                                </>
-                              );
-                            })
-                          )}
-                        </>
-                      );
-                    })}
-                  </Dropdown>
-                ) : null}
-              </>
-            );
-          })}
-        </Container>
-      </AccordionSection>
-    </IconContext.Provider>
+                                ) : (
+                                  answerObj.points.map((point) => {
+                                    return (
+                                      <>
+                                        <Ul>
+                                          <li>{point}</li>
+                                        </Ul>
+                                      </>
+                                    );
+                                  })
+                                )}
+                              </>
+                            );
+                          })}
+                        </Dropdown>
+                      ) : null}
+                    </>
+                  );
+                })}
+              </Container>
+            </AccordionSection>
+          </IconContext.Provider>
+        </>
+      ) : null}
+    </>
   );
 };
 
