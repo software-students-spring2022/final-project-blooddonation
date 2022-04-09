@@ -18,61 +18,42 @@ import { useState, useEffect } from "react";
 
 const Profile = (props) => {
   const [user, setUser] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  const [error, setError] = useState("");
-  const [feedback, setFeedback] = useState("");
+  const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
+  console.log(`JWT token: ${jwtToken}`); // debugging
 
-  const fetchUsers = () => {
-    // setMessages([])
-    // setLoaded(false)
+  const [response, setResponse] = useState({}); // we expect the server to send us a simple object in this case
+  const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true); // if we already have a JWT token in local storage, set this to true, otherwise false
+
+  // try to load the protected data from the server when this component first renders
+  useEffect(() => {
+    // send the request to the server api, including the Authorization header with our JWT token in it
     axios
-      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/profile`)
-      .then((response) => {
-        // axios bundles up all response data in response.data property
-        const user = response.data.user;
-        console.log(user);
-        setUser(user);
-        setLoaded(true);
+      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/profile`, {
+        headers: { Authorization: `JWT ${jwtToken}` }, // pass the token, if any, to the server
+      })
+      .then((res) => {
+        setResponse(res.data); // store the response data
+        setUser(res.data.user);
       })
       .catch((err) => {
-        setError(err);
-      })
-      .finally(() => {
-        // the response has been received, so remove the loading icon
-        setLoaded(true);
+        console.log(
+          "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+        );
+        setIsLoggedIn(false); // update this state variable, so the component re-renders
       });
-  };
-
-  const addUserToList = (user) => {
-    const newMessages = [...user, user]; // make an array with all the old values plus the new one
-    setUser(newMessages); // save the new array
-  };
-
-  // set up loading data from server when the component first loads
-  useEffect(() => {
-    // fetch messages this once
-    fetchUsers();
-
-    // set a timer to load data from server every n seconds
-    const intervalHandle = setInterval(() => {
-      fetchUsers();
-    }, 5000);
-
-    // return a function that will be called when this component unloads
-    return (e) => {
-      // clear the timer, so we don't still load messages when this component is not loaded anymore
-      clearInterval(intervalHandle);
-    };
-  }, []); // p
+  }, []); // es
 
   return (
     <>
       <div className="profilebody">
-        {loaded ? (
+        {isLoggedIn ? (
           <>
+            {console.log(user)}
             <Button>Edit Profile</Button>
+            <Button component={Link} to={"/logout"}>
+              Log Out
+            </Button>
             <ProfileCard
-              title="Hi, Rachel!"
               text={{ Name: user.firstName, Age: user.age }}
               image={ProfileImage}
             />
@@ -81,8 +62,15 @@ const Profile = (props) => {
               text_chip={user.eligible}
             />
             {/* Navigate to another page */}
-            <Button>Donate Now</Button>
-            <Button>Take Quiz Again</Button>
+            <Button component={Link} to={"/finddonationsite"}>
+              Donate Now
+            </Button>
+            <Button
+              component={Link}
+              to={"/createaccount/eligibilityquestionnaire"}
+            >
+              Take Quiz Again
+            </Button>
           </>
         ) : (
           <>
