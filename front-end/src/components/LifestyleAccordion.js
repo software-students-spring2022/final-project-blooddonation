@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { LifestyleData } from "./LifestyleData";
 import styled from "styled-components";
 import { IconContext } from "react-icons";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import axios from "axios";
 
 const AccordionSection = styled.div`
   flex: 0 0 100%;
@@ -124,6 +124,36 @@ const Ul = styled.div`
 
 const LifestyleAccordion = () => {
   const [clicked, setClicked] = useState(false);
+  const [LifestyleData, setLifestyleData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  const fetchLifestyleData = () => {
+    // setMessages([])
+    // setLoaded(false)
+    axios
+      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/FAQ/eligibility`)
+      .then((response) => {
+        // axios bundles up all response data in response.data property
+        const LifestyleData = response.data.LifestyleData;
+        console.log(LifestyleData);
+        setLifestyleData(LifestyleData);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        // the response has been received, so remove the loading icon
+        setLoaded(true);
+      });
+  };
+
+  // set up loading data from server when the component first loads
+  useEffect(() => {
+    // fetch messages this once
+    fetchLifestyleData();
+  }, []); // p
 
   const toggle = (index) => {
     if (clicked === index) {
@@ -135,70 +165,77 @@ const LifestyleAccordion = () => {
   };
 
   return (
-    <IconContext.Provider value={{ color: "#ff0000", size: "25px" }}>
-      <AccordionSection>
-        <Container>
-          {LifestyleData.map((item, index) => {
-            return (
-              <>
-                <Wrap onClick={() => toggle(index)} key={index}>
-                  <h1>{item.question}</h1>
-                  <span>{clicked === index ? <FiMinus /> : <FiPlus />}</span>
-                </Wrap>
-                {clicked === index ? (
-                  <Dropdown>
-                    {item.answer.map((answerObj) => {
-                      return (
-                        <>
-                          {item.question === "Age" ? (
+    <>
+      {loaded ? (
+        <IconContext.Provider value={{ color: "#ff0000", size: "25px" }}>
+          <AccordionSection>
+            <Container>
+              {LifestyleData.map((item, index) => {
+                return (
+                  <>
+                    <Wrap onClick={() => toggle(index)} key={index}>
+                      <h1>{item.question}</h1>
+                      <span>
+                        {clicked === index ? <FiMinus /> : <FiPlus />}
+                      </span>
+                    </Wrap>
+                    {clicked === index ? (
+                      <Dropdown>
+                        {item.answer.map((answerObj) => {
+                          return (
                             <>
-                              <p className="p-info2">
-                                You must be at least 17 years old to donate, or
-                                16 years old with parental/guardian consent, if
-                                allowed by state law. (
-                                <Link
-                                  to="./eligibility/informationforteens"
-                                  className="linkStyle"
-                                >
-                                  Find out more information for teen donors)
-                                </Link>
-                                There is no upper age limit for blood donation
-                                as long as you are well with no restrictions or
-                                limitations to your activities.
-                              </p>
-                            </>
-                          ) : answerObj.points.length === 1 ? (
-                            <>
-                              {answerObj.points.map((point) => {
-                                return (
-                                  <>
-                                    <p className="p-info">{point}</p>
-                                  </>
-                                );
-                              })}
-                            </>
-                          ) : (
-                            answerObj.points.map((point) => {
-                              return (
+                              {item.question === "Age" ? (
                                 <>
-                                  <Ul>
-                                    <li key={point}>{point}</li>
-                                  </Ul>
+                                  <p className="p-info2">
+                                    You must be at least 17 years old to donate,
+                                    or 16 years old with parental/guardian
+                                    consent, if allowed by state law. (
+                                    <Link
+                                      to="./eligibility/informationforteens"
+                                      className="linkStyle"
+                                    >
+                                      Find out more information for teen donors)
+                                    </Link>
+                                    There is no upper age limit for blood
+                                    donation as long as you are well with no
+                                    restrictions or limitations to your
+                                    activities.
+                                  </p>
                                 </>
-                              );
-                            })
-                          )}
-                        </>
-                      );
-                    })}
-                  </Dropdown>
-                ) : null}
-              </>
-            );
-          })}
-        </Container>
-      </AccordionSection>
-    </IconContext.Provider>
+                              ) : answerObj.points.length === 1 ? (
+                                <>
+                                  {answerObj.points.map((point) => {
+                                    return (
+                                      <>
+                                        <p className="p-info">{point}</p>
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              ) : (
+                                answerObj.points.map((point) => {
+                                  return (
+                                    <>
+                                      <Ul>
+                                        <li key={point}>{point}</li>
+                                      </Ul>
+                                    </>
+                                  );
+                                })
+                              )}
+                            </>
+                          );
+                        })}
+                      </Dropdown>
+                    ) : null}
+                  </>
+                );
+              })}
+            </Container>
+          </AccordionSection>
+        </IconContext.Provider>
+      ) : null}
+    </>
   );
 };
 

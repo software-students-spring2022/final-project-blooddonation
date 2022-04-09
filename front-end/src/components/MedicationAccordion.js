@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { MedicationData } from "./MedicationData";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { IconContext } from "react-icons";
 import { FiPlus, FiMinus } from "react-icons/fi";
+import axios from "axios";
 
 const AccordionSection = styled.div`
   flex: 0 0 100%;
@@ -149,6 +149,37 @@ const Ul2 = styled.div`
 const MedicationAccordion = () => {
   const [clicked, setClicked] = useState(false);
 
+  const [MedicationData, setMedicationData] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState("");
+  const [feedback, setFeedback] = useState("");
+
+  const fetchMedicationData = () => {
+    // setMessages([])
+    // setLoaded(false)
+    axios
+      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/FAQ/eligibility`)
+      .then((response) => {
+        // axios bundles up all response data in response.data property
+        const MedicationData = response.data.MedicationData;
+        console.log(MedicationData);
+        setMedicationData(MedicationData);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        // the response has been received, so remove the loading icon
+        setLoaded(true);
+      });
+  };
+
+  // set up loading data from server when the component first loads
+  useEffect(() => {
+    // fetch messages this once
+    fetchMedicationData();
+  }, []); // p
+
   const toggle = (index) => {
     if (clicked === index) {
       //if clicked question is already active, then close it
@@ -159,82 +190,90 @@ const MedicationAccordion = () => {
   };
 
   return (
-    <IconContext.Provider value={{ color: "#ff0000", size: "25px" }}>
-      <AccordionSection>
-        <Container>
-          {MedicationData.map((item, index) => {
-            return (
-              <>
-                <Wrap onClick={() => toggle(index)} key={index}>
-                  <h1>{item.question}</h1>
-                  <span>{clicked === index ? <FiMinus /> : <FiPlus />}</span>
-                </Wrap>
-                {clicked === index ? (
-                  <Dropdown>
-                    {item.answer.map((answerObj) => {
-                      return (
-                        <>
-                          {item.question === "Medications" ? (
+    <>
+      {loaded ? (
+        <IconContext.Provider value={{ color: "#ff0000", size: "25px" }}>
+          <AccordionSection>
+            <Container>
+              {MedicationData.map((item, index) => {
+                return (
+                  <>
+                    <Wrap onClick={() => toggle(index)} key={index}>
+                      <h1>{item.question}</h1>
+                      <span>
+                        {clicked === index ? <FiMinus /> : <FiPlus />}
+                      </span>
+                    </Wrap>
+                    {clicked === index ? (
+                      <Dropdown>
+                        {item.answer.map((answerObj) => {
+                          return (
                             <>
-                              <p className="p-info2">
-                                In almost all cases, medications will not
-                                disqualify you as a blood donor. Your
-                                eligibility will be based on the reason that the
-                                medication was prescribed. As long as the
-                                condition is under control and you are healthy,
-                                blood donation is usually permitted.
-                              </p>
-                              <p className="p-info2">
-                                Over-the-counter oral homeopathic medications,
-                                herbal remedies, and nutritional supplements are
-                                acceptable. There are a handful of drugs that
-                                are of special significance in blood donation.
-                                Persons on these drugs have waiting periods
-                                following their last dose before they can donate
-                                blood:
-                              </p>
-                              {answerObj.points.map((point) => {
-                                return (
-                                  <>
-                                    <Ul2>
-                                      <li>{point}</li>
-                                    </Ul2>
-                                  </>
-                                );
-                              })}
-                            </>
-                          ) : answerObj.points.length === 1 ? (
-                            <>
-                              {answerObj.points.map((point) => {
-                                return (
-                                  <>
-                                    <p className="p-info">{point}</p>
-                                  </>
-                                );
-                              })}
-                            </>
-                          ) : (
-                            answerObj.points.map((point) => {
-                              return (
+                              {item.question === "Medications" ? (
                                 <>
-                                  <Ul>
-                                    <li>{point}</li>
-                                  </Ul>
+                                  <p className="p-info2">
+                                    In almost all cases, medications will not
+                                    disqualify you as a blood donor. Your
+                                    eligibility will be based on the reason that
+                                    the medication was prescribed. As long as
+                                    the condition is under control and you are
+                                    healthy, blood donation is usually
+                                    permitted.
+                                  </p>
+                                  <p className="p-info2">
+                                    Over-the-counter oral homeopathic
+                                    medications, herbal remedies, and
+                                    nutritional supplements are acceptable.
+                                    There are a handful of drugs that are of
+                                    special significance in blood donation.
+                                    Persons on these drugs have waiting periods
+                                    following their last dose before they can
+                                    donate blood:
+                                  </p>
+                                  {answerObj.points.map((point) => {
+                                    return (
+                                      <>
+                                        <Ul2>
+                                          <li>{point}</li>
+                                        </Ul2>
+                                      </>
+                                    );
+                                  })}
                                 </>
-                              );
-                            })
-                          )}
-                        </>
-                      );
-                    })}
-                  </Dropdown>
-                ) : null}
-              </>
-            );
-          })}
-        </Container>
-      </AccordionSection>
-    </IconContext.Provider>
+                              ) : answerObj.points.length === 1 ? (
+                                <>
+                                  {answerObj.points.map((point) => {
+                                    return (
+                                      <>
+                                        <p className="p-info">{point}</p>
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              ) : (
+                                answerObj.points.map((point) => {
+                                  return (
+                                    <>
+                                      <Ul>
+                                        <li>{point}</li>
+                                      </Ul>
+                                    </>
+                                  );
+                                })
+                              )}
+                            </>
+                          );
+                        })}
+                      </Dropdown>
+                    ) : null}
+                  </>
+                );
+              })}
+            </Container>
+          </AccordionSection>
+        </IconContext.Provider>
+      ) : null}
+    </>
   );
 };
 

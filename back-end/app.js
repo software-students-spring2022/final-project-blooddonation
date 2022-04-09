@@ -4,9 +4,11 @@ require('dotenv').config({ silent: true });
 // load up the web server
 
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
+app.use(cors());
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
 
@@ -18,8 +20,22 @@ mongoose
   .then((data) => console.log(`Connected to MongoDB`))
   .catch((err) => console.error(`Failed to connect to MongoDB: ${err}`));
 
-const User = require('./models/User');
+const { User } = require('./models/User');
 const users = require('./accountData');
+const eligibilityQuestionnaire = require('./quizQuestions/EligibilityQuestionnaireData');
+const WholeBloodQuestions = require('./quizQuestions/WholeBloodQuestions');
+const PowerRedQuestions = require('./quizQuestions/PowerRedQuestions');
+const PlateletQuestions = require('./quizQuestions/PlateletQuestions');
+const PlasmaQuestions = require('./quizQuestions/PlasmaQuestions');
+const questions = require('./quizQuestions/questions');
+const FAQData = require('./pageData/FAQData');
+const GeneralHealthData = require('./pageData/GeneralHealthData');
+const LifestyleData = require('./pageData/LifestyleData');
+const MedicalCondData = require('./pageData/MedicalCondData');
+const MedicalTreatData = require('./pageData/MedicalTreatData');
+const MedicationData = require('./pageData/MedicationData');
+const STDData = require('./pageData/STDData');
+const TravelData = require('./pageData/TravelData');
 
 // Passport Local Strategy
 passport.use(
@@ -78,10 +94,149 @@ app.post(
   }
 );
 
-app.post('/createaccount', (req, res) => {
-  const user = req.body;
+app.post('/createaccount', async (req, res) => {
+  // const user = req.body;
 
-  res.status(200).json(user);
+  // res.status(200).json(user);
+  console.log(req.body);
+
+  try {
+    const user = await User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+      age: 0,
+      eligible: [],
+    });
+    return res.json({
+      user, // return the message we just saved
+      status: 'all good',
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
+});
+
+app.get('/profile', async (req, res) => {
+  // const user = req.body;
+
+  // res.status(200).json(user);
+  // console.log(req.body);
+
+  try {
+    const user = users[0];
+    return res.json({
+      user, // return the message we just saved
+      status: 'all good',
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
+});
+
+app.get('/createaccount/eligibilityquestionnaire', async (req, res) => {
+  // const user = req.body;
+
+  // res.status(200).json(user);
+  // console.log(req.body);
+
+  try {
+    const EligibilityQuestionnaireData = eligibilityQuestionnaire;
+    return res.json({
+      EligibilityQuestionnaireData, // return the message we just saved
+      status: 'all good',
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
+});
+
+app.get('/finddonationsite', async (req, res) => {
+  // const user = req.body;
+
+  // res.status(200).json(user);
+  // console.log(req.body);
+
+  try {
+    return res.json({
+      WholeBloodQuestions,
+      PowerRedQuestions,
+      PlateletQuestions,
+      PlasmaQuestions,
+      questions,
+      // return the message we just saved
+      status: 'all good',
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
+});
+
+app.get('/FAQ', async (req, res) => {
+  // const user = req.body;
+
+  // res.status(200).json(user);
+  // console.log(req.body);
+
+  try {
+    return res.json({
+      FAQData,
+
+      // return the message we just saved
+      status: 'all good',
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
+});
+
+app.get('/FAQ/eligibility', async (req, res) => {
+  // const user = req.body;
+
+  // res.status(200).json(user);
+  // console.log(req.body);
+
+  try {
+    return res.json({
+      GeneralHealthData,
+      LifestyleData,
+      MedicalCondData,
+      MedicalTreatData,
+      MedicationData,
+      STDData,
+      TravelData,
+
+      // return the message we just saved
+      status: 'all good',
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
 });
 
 module.exports = app;
