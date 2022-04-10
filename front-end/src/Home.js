@@ -21,7 +21,7 @@ const Home = (props) => {
 
         <Grid container>
           <Grid item xs={12}>
-            <Card classname="home-card">
+            <Card className="home-card">
               <CardContent>
                 <Typography
                   variant="h5"
@@ -34,7 +34,7 @@ const Home = (props) => {
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card classname="home-card">
+            <Card className="home-card">
               <CardContent>
                 <Typography
                   variant="body2"
@@ -49,7 +49,7 @@ const Home = (props) => {
           <Grid container direction="row" style={{ height: "400px" }}>
             {Section1.media.map((image) => (
               <Grid item xs={4}>
-                <img style = {{height:'50%'}} src={image} />
+                <img style={{ height: "50%" }} src={image} />
               </Grid>
             ))}
           </Grid>

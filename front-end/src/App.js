@@ -5,6 +5,7 @@ import Faq from "./Faq";
 import Profile from "./Profile";
 import ContactUs from "./ContactUs";
 import LogIn from "./LogIn";
+import Logout from "./Logout";
 import Home from "./Home";
 import Header from "./Header";
 import Eligibility from "./Eligibility";
@@ -34,6 +35,7 @@ const App = (props) => {
             <Route path="/contactus" element={<ContactUs />}></Route>
             <Route path="/login" element={<LogIn />}></Route>
             <Route path="/createaccount" element={<CreateAccount />}></Route>
+            <Route path="/logout" element={<Logout />}></Route>
             <Route path="FAQ/eligibility" element={<Eligibility />} />
             <Route path="FAQ/otherwaystohelp" element={<OtherWaysToHelp />} />
             <Route

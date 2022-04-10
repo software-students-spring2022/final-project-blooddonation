@@ -1,8 +1,8 @@
 import "./styles/EligibilityQuestionnaire.css";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { TextField, Input, Stack } from "@mui/material";
-import styled from "styled-components";
+import { useNavigate, Link } from "react-router-dom";
+import { Button } from "@mui/material";
+
 // import { EligibilityQuestionnaireData } from "./components/EligibilityQuestionnaireData";
 import axios from "axios";
 
@@ -22,22 +22,28 @@ const EligibilityQuestionnaire = (props) => {
   const [plateletScore, setPlateletScore] = useState(0);
   const [plasmaScore, setPlasmaScore] = useState(0);
   const [answerData, setAnswerData] = useState({
-    age: 0,
     types: [],
   });
+  const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
+  console.log(`JWT token: ${jwtToken}`); // debugging
+  const [response, setResponse] = useState({}); // we expect the server to send us a simple object in this case
+  const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true); // if we already have a JWT token in local storage, set this to true, otherwise false
 
   const [EligibilityQuestionnaireData, setEligibilityQuestionnaireData] =
     useState([]);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [user, setUser] = useState([]);
+  const [scoreDone, setScoreDone] = useState(false);
 
   const fetchEligibilityQuestionnaireData = () => {
     // setMessages([])
     // setLoaded(false)
     axios
       .get(
-        `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount/eligibilityquestionnaire`
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount/eligibilityquestionnaire`,
+        { headers: { Authorization: `JWT ${jwtToken}` } }
       )
       .then((response) => {
         // axios bundles up all response data in response.data property
@@ -45,9 +51,11 @@ const EligibilityQuestionnaire = (props) => {
           response.data.EligibilityQuestionnaireData;
         console.log(EligibilityQuestionnaireData);
         setEligibilityQuestionnaireData(EligibilityQuestionnaireData);
+        setUser(response.data.user);
       })
       .catch((err) => {
         setError(err);
+        setIsLoggedIn(false);
       })
       .finally(() => {
         // the response has been received, so remove the loading icon
@@ -68,7 +76,6 @@ const EligibilityQuestionnaire = (props) => {
 
     e.preventDefault();
     console.log(answerData);
-    handleAgeClick(currentQuestion, EligibilityQuestionnaireData);
   };
 
   const handleQuizAnswerOptionClick = (
@@ -135,22 +142,10 @@ const EligibilityQuestionnaire = (props) => {
     }
   };
 
-  const handleAgeClick = (quizCurrentQuestion, quizQuestions) => {
-    //TODO: add age to new user object you will send to database.
-    //When the user is created, the name and password will automatically be added and the user will be authenticated.
-    // so when adding look for that user and then update the age field
-
-    //console.log(age);
-
-    if (answerData.age < 17) {
-      navigate("/profile");
-    }
-
-    const nextQuestion = quizCurrentQuestion + 1;
-    setCurrentQuestion(nextQuestion);
-  };
-
-  const scoreCheck = () => {
+  const scoreCheck = async () => {
+    setDone(false);
+    setScoreDone(true);
+    console.log("scorecheck");
     const typeArr = [];
     //console.log(wholeBloodScore, powerRedScore, plasmaScore, plateletScore);
     if (wholeBloodScore === 3) {
@@ -170,47 +165,80 @@ const EligibilityQuestionnaire = (props) => {
     }
 
     console.log(typeArr);
+    console.log("score", score);
 
-    if (score === 25 && typeArr.length > 0) {
+    if (score === 24 && typeArr.length > 0) {
       //setEligible(true);
       //Also add to backend
-      setAnswerData({ ...answerData, types: typeArr });
-    } else {
-      //don't add to backend
-      //setNotEligible(true);
-    }
 
-    navigate("/profile");
+      setAnswerData({ ...answerData, types: typeArr });
+      try {
+        // create an object with the data we want to send to the server
+        // console.log(user.id);
+        const requestData = {
+          eligible: typeArr,
+          userID: user.id,
+        };
+        console.log(requestData);
+        // send a POST request with the data to the server api to authenticate
+        const response = await axios.post(
+          `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount/eligibilityquestionnaire`,
+          requestData
+        );
+        // store the response data into the data state variable
+        console.log(done, scoreDone);
+        console.log(
+          `Server response: ${JSON.stringify(response.data, null, 0)}`
+        );
+      } catch (err) {
+        // request failed... user entered invalid credentials
+        console.log(err);
+      }
+    } else {
+      setAnswerData({ ...answerData, types: typeArr });
+      try {
+        // create an object with the data we want to send to the server
+        // console.log(user.id);
+        const requestData = {
+          eligible: typeArr,
+          userID: user.id,
+        };
+        console.log(requestData);
+        // send a POST request with the data to the server api to authenticate
+        const response = await axios.post(
+          `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount/eligibilityquestionnaire`,
+          requestData
+        );
+        // store the response data into the data state variable
+        console.log(done, scoreDone);
+        console.log(
+          `Server response: ${JSON.stringify(response.data, null, 0)}`
+        );
+      } catch (err) {
+        // request failed... user entered invalid credentials
+        console.log(err);
+      }
+    }
   };
 
   return (
     <>
       <h1>Eligibility Questionnaire</h1>
-      {loaded ? (
+      {loaded && isLoggedIn ? (
         <>
           <div className="question-section">
             <div className="question-text">
               {EligibilityQuestionnaireData[currentQuestion].questionText}
             </div>
           </div>
-          {currentQuestion === 0 ? (
-            <form onSubmit={handleSubmit}>
-              <Stack alignItems="center" spacing={2}>
-                <TextField
-                  sx={{ width: "20%", marginTop: "30px" }}
-                  required
-                  label="Age"
-                  name="age"
-                  onChange={(e) => {
-                    setAnswerData({ ...answerData, age: e.target.value });
-                  }}
-                />
-              </Stack>
-              <Input type="submit" value="next"></Input>
-              <br></br>
-            </form>
-          ) : done ? (
-            <>{scoreCheck()}</>
+          {done ? (
+            <>
+              {console.log("done")} {scoreCheck()}{" "}
+            </>
+          ) : scoreDone ? (
+            <>
+              {console.log("here")} {navigate("/profile")}
+            </>
           ) : (
             <div className="answer-section">
               {EligibilityQuestionnaireData[currentQuestion].answerOptions.map(
@@ -231,7 +259,17 @@ const EligibilityQuestionnaire = (props) => {
             </div>
           )}
         </>
-      ) : null}
+      ) : (
+        <>
+          <h2>Create an account or login to access the questionnaire</h2>
+          <Button component={Link} to={"/login"}>
+            Login
+          </Button>
+          <Button component={Link} to={"/createaccount"}>
+            Sign Up
+          </Button>
+        </>
+      )}
     </>
   );
 };

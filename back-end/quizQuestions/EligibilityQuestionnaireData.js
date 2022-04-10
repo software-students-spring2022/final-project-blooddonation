@@ -1,10 +1,5 @@
 const EligibilityQuestionnaireData = [
   {
-    questionText: 'How old are you?',
-    answerOptions: [],
-  },
-
-  {
     questionText: 'Do you weigh at least 110 lbs?',
     answerOptions: [
       { answerText: 'Yes', isCorrect: true },
