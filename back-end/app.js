@@ -116,18 +116,48 @@ app.post('/createaccount', async (req, res) => {
   }
 });
 
-app.get('/createaccount/eligibilityquestionnaire', async (req, res) => {
-  // const user = req.body;
+app.get(
+  '/createaccount/eligibilityquestionnaire',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    // const user = req.body;
 
-  // res.status(200).json(user);
-  // console.log(req.body);
+    // res.status(200).json(user);
+    // console.log(req.body);
 
+    try {
+      const EligibilityQuestionnaireData = eligibilityQuestionnaire;
+      return res.json({
+        EligibilityQuestionnaireData,
+        user: {
+          id: req.user.id,
+          email: req.user.email,
+          firstName: req.user.firstName,
+          lastName: req.user.lastName,
+          age: req.user.age,
+          eligible: req.user.eligible,
+        },
+        status: 'all good',
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(400).json({
+        error: err,
+        status: 'failed to save user to the database',
+      });
+    }
+  }
+);
+
+// TODO
+app.post('/createaccount/eligibilityquestionnaire', async (req, res) => {
   try {
-    const EligibilityQuestionnaireData = eligibilityQuestionnaire;
-    return res.json({
-      EligibilityQuestionnaireData, // return the message we just saved
-      status: 'all good',
-    });
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.body.userID },
+      { eligible: req.body.eligible }
+    ).exec();
+
+    return res.json({ success: true, updated: updatedUser });
   } catch (err) {
     console.error(err);
     return res.status(400).json({
@@ -136,29 +166,6 @@ app.get('/createaccount/eligibilityquestionnaire', async (req, res) => {
     });
   }
 });
-
-// TODO
-app.post(
-  '/createaccount/eligibilityquestionnaire',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    // our jwt passport config will send error responses to unauthenticated users will
-    // so we only need to worry about sending data to properly authenticated users!
-
-    res.json({
-      success: true,
-      user: {
-        id: req.user.id,
-        email: req.user.email,
-        firstName: req.user.firstName,
-        lastName: req.user.lastName,
-        age: req.user.age,
-        eligible: req.user.eligible,
-      },
-      message: 'Congratulations: you have accessed this route because you have a valid JWT token!',
-    });
-  }
-);
 
 app.get('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
   // our jwt passport config will send error responses to unauthenticated users will
