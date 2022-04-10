@@ -98,7 +98,7 @@ app.post('/createaccount', async (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
-        age: 0,
+        age: req.body.age,
         eligible: [],
       });
       const payload = { id: user.id }; // some data we'll encode into the token
@@ -136,6 +136,29 @@ app.get('/createaccount/eligibilityquestionnaire', async (req, res) => {
     });
   }
 });
+
+// TODO
+app.post(
+  '/createaccount/eligibilityquestionnaire',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    // our jwt passport config will send error responses to unauthenticated users will
+    // so we only need to worry about sending data to properly authenticated users!
+
+    res.json({
+      success: true,
+      user: {
+        id: req.user.id,
+        email: req.user.email,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
+        age: req.user.age,
+        eligible: req.user.eligible,
+      },
+      message: 'Congratulations: you have accessed this route because you have a valid JWT token!',
+    });
+  }
+);
 
 app.get('/profile', passport.authenticate('jwt', { session: false }), (req, res) => {
   // our jwt passport config will send error responses to unauthenticated users will

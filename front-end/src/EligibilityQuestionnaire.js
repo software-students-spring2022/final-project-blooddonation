@@ -22,7 +22,6 @@ const EligibilityQuestionnaire = (props) => {
   const [plateletScore, setPlateletScore] = useState(0);
   const [plasmaScore, setPlasmaScore] = useState(0);
   const [answerData, setAnswerData] = useState({
-    age: 0,
     types: [],
   });
 
@@ -68,7 +67,6 @@ const EligibilityQuestionnaire = (props) => {
 
     e.preventDefault();
     console.log(answerData);
-    handleAgeClick(currentQuestion, EligibilityQuestionnaireData);
   };
 
   const handleQuizAnswerOptionClick = (
@@ -135,21 +133,6 @@ const EligibilityQuestionnaire = (props) => {
     }
   };
 
-  const handleAgeClick = (quizCurrentQuestion, quizQuestions) => {
-    //TODO: add age to new user object you will send to database.
-    //When the user is created, the name and password will automatically be added and the user will be authenticated.
-    // so when adding look for that user and then update the age field
-
-    //console.log(age);
-
-    if (answerData.age < 17) {
-      navigate("/profile");
-    }
-
-    const nextQuestion = quizCurrentQuestion + 1;
-    setCurrentQuestion(nextQuestion);
-  };
-
   const scoreCheck = () => {
     const typeArr = [];
     //console.log(wholeBloodScore, powerRedScore, plasmaScore, plateletScore);
@@ -193,23 +176,7 @@ const EligibilityQuestionnaire = (props) => {
               {EligibilityQuestionnaireData[currentQuestion].questionText}
             </div>
           </div>
-          {currentQuestion === 0 ? (
-            <form onSubmit={handleSubmit}>
-              <Stack alignItems="center" spacing={2}>
-                <TextField
-                  sx={{ width: "20%", marginTop: "30px" }}
-                  required
-                  label="Age"
-                  name="age"
-                  onChange={(e) => {
-                    setAnswerData({ ...answerData, age: e.target.value });
-                  }}
-                />
-              </Stack>
-              <Input type="submit" value="next"></Input>
-              <br></br>
-            </form>
-          ) : done ? (
+          {done ? (
             <>{scoreCheck()}</>
           ) : (
             <div className="answer-section">
