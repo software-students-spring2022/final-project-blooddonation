@@ -56,7 +56,6 @@ app.post(
   async (req, res) => {
     // grab the name and password that were submitted as POST body data
     const { email, password } = req.body;
-    console.log('here');
     // console.log(`${username}, ${password}`)
     if (!email || !password) {
       // no username or password received in the POST body... send an error
@@ -104,35 +103,10 @@ app.post('/createaccount', async (req, res) => {
       });
       const payload = { id: user.id }; // some data we'll encode into the token
       const token = jwt.sign(payload, jwtOptions.secretOrKey);
-      return res.json({
-        user, // return the message we just saved
-        status: 'all good',
-        token,
-      });
+      return res.json({ success: true, email: user.email, token });
     }
 
     return res.status(401).json({ success: false, message: 'That email already has an account' });
-  } catch (err) {
-    console.error(err);
-    return res.status(400).json({
-      error: err,
-      status: 'failed to save user to the database',
-    });
-  }
-});
-
-app.get('/profile', async (req, res) => {
-  // const user = req.body;
-
-  // res.status(200).json(user);
-  // console.log(req.body);
-
-  try {
-    const user = users[0];
-    return res.json({
-      user, // return the message we just saved
-      status: 'all good',
-    });
   } catch (err) {
     console.error(err);
     return res.status(400).json({

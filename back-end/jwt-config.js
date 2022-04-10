@@ -1,5 +1,5 @@
 require('dotenv').config({ silent: true }); // load environmental variables from a hidden file named .env
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const passportJWT = require('passport-jwt');
 
 const { ExtractJwt } = passportJWT;
@@ -23,7 +23,9 @@ const jwtStrategy = new JwtStrategy(jwtOptions, async (jwt_payload, next) => {
   // eslint-disable-next-line camelcase
   // const user = users[_.findIndex(users, { id: jwt_payload.id })]; // find a matching user using a convenient lodash function... we would normally look this user up in a real database
   // eslint-disable-next-line camelcase
-  const user = await User.findOne({ id: jwt_payload.id }).exec();
+
+  // eslint-disable-next-line camelcase
+  const user = await User.findOne({ _id: jwt_payload.id }).exec();
   if (user) {
     // we found the user... keep going
     next(null, user);
