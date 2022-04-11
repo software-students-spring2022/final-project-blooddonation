@@ -37,6 +37,7 @@ const MedicationData = require('./pageData/MedicationData');
 const STDData = require('./pageData/STDData');
 const TravelData = require('./pageData/TravelData');
 
+
 // Passport Local Strategy
 passport.use(
   new LocalStrategy(
@@ -85,7 +86,8 @@ app.post(
     if (!user) {
       // no user found with this name... send an error
       res.status(401).json({ success: false, message: `user not found: ${email}.` });
-    } else if (req.body.password === user.password) {
+      // Need to get password from database for hashed version
+    } else if (bcrypt.compareSync(req.body.password, user.password)) { 
       res.status(200).json(user);
     } else {
       // the password did not match
