@@ -8,6 +8,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const mongoose = require('mongoose');
+const bycrpt = require('bcrypt');
 
 const app = express();
 app.use(cors());
@@ -24,7 +25,6 @@ mongoose
   .catch((err) => console.error(`Failed to connect to MongoDB: ${err}`));
 
 const { User } = require('./models/User');
-const users = require('./accountData');
 const eligibilityQuestionnaire = require('./quizQuestions/EligibilityQuestionnaireData');
 const WholeBloodQuestions = require('./quizQuestions/WholeBloodQuestions');
 const PowerRedQuestions = require('./quizQuestions/PowerRedQuestions');
@@ -75,8 +75,8 @@ app.post(
 
     // assuming we found the user, check the password is correct
     // we would normally encrypt the password the user submitted to check it against an encrypted copy of the user's password we keep in the database... but here we just compare two plain text versions for simplicity
-    // else if (bcrypt.compareSync(req.body.password, user.password)) { 
-    else if (req.body.password === user.password) {
+    else if (bycrpt.compareSync(req.body.password, user.password)) {
+      // else if (req.body.password === user.password) {
       // the password the user entered matches the password in our "database" (mock data in this case)
       // from now on we'll identify the user by the id and the id is the only personalized value that goes into our token
       const payload = { id: user.id }; // some data we'll encode into the token

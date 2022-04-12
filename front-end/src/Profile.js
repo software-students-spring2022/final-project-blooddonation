@@ -34,6 +34,7 @@ const Profile = (props) => {
       .then((res) => {
         setResponse(res.data); // store the response data
         setUser(res.data.user);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(

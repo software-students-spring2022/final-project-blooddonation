@@ -37,15 +37,16 @@ const userSchema = new Schema(
 );
 
 // Save encrypted password to database
-userSchema.pre('save', function(next){
-    if(!this.isModified('password'))
-      return next();
-    bycrpt.hash(this.password,10,(err,passwordHash)=>{
-      if(err)
-        return next(err);
-      this.password = passwordHash;
-      next();
-    });
+// eslint-disable-next-line func-names
+// eslint-disable-next-line consistent-return
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password')) return next();
+  // eslint-disable-next-line consistent-return
+  bycrpt.hash(this.password, 10, (err, passwordHash) => {
+    if (err) return next(err);
+    this.password = passwordHash;
+    next();
+  });
 });
 
 // create mongoose Model
