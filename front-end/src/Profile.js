@@ -17,7 +17,7 @@ import { useState, useEffect } from "react";
 //if their age is below 17 tell them that they are too young on the profile page
 
 const Profile = (props) => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState();
   const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
   console.log(`JWT token: ${jwtToken}`); // debugging
 
@@ -46,7 +46,7 @@ const Profile = (props) => {
   return (
     <>
       <div className="profilebody">
-        {isLoggedIn ? (
+        {user ? (
           <>
             {console.log(user)}
             <Button>Edit Profile</Button>
@@ -57,10 +57,21 @@ const Profile = (props) => {
               text={{ Name: user.firstName, Age: user.age }}
               image={ProfileImage}
             />
-            <ProfileCard
+            {user.eligible.length ? (
+              <ProfileCard
               title="You are eligible for these blood donations"
-              text_chip={user.eligible}
-            />
+              text_chip={user.eligible} />
+            ): 
+            <>
+              <ProfileCard
+              title="You are not eligible for any blood donations"
+              />
+              <Button component={Link} to={"/finddonationsite"}>
+              Other Ways to Help
+             </Button>
+            </>
+            }
+
             {/* Navigate to another page */}
             <Button component={Link} to={"/finddonationsite"}>
               Donate Now
@@ -84,7 +95,6 @@ const Profile = (props) => {
         )}
       </div>
 
-      {/* to do add button */}
     </>
   );
 };
