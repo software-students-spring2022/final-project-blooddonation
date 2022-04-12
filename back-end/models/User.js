@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bycrpt = require('bcrypt');
 
 const { Schema } = mongoose;
 const passportLocalMongoose = require('passport-local-mongoose');
@@ -34,6 +35,18 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+// Save encrypted password to database
+userSchema.pre('save', function(next){
+    if(!this.isModified('password'))
+      return next();
+    bycrpt.hash(this.password,10,(err,passwordHash)=>{
+      if(err)
+        return next(err);
+      this.password = passwordHash;
+      next();
+    });
+});
 
 // create mongoose Model
 userSchema.plugin(passportLocalMongoose);
