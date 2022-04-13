@@ -19,18 +19,23 @@
 
  const EditProfileForm = (props) => {
    const [user, setUser] = useState(inital_data);
-//    useEffect(() => {
-//     (async () => {
-//       try {
-//         const user = await axios.get(
-//           "https://jsonplaceholder.typicode.com/users/1"
-//         );
-//         setUser(user.data);
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     })();
-//   }, []);
+   const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
+
+   useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/profile`, {
+        headers: { Authorization: `JWT ${jwtToken}` }, // pass the token, if any, to the server
+      })
+      .then((res) => {
+        setUser({...res.data.user});
+        console.log(res.data.user);
+      })
+      .catch((err) => {
+        console.log(
+          "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+        );
+      });
+  }, []); 
   
   const handleInput = (e) => {
     console.log(e.target.name, " : ", e.target.value);
@@ -48,8 +53,7 @@
   };
 
   const { id } = useParams();
-  console.log(id)
-  
+
    return (
      <>
        <form onSubmit={handleSubmit}>
@@ -57,26 +61,26 @@
            required
            value={user.firstName}
            name="firstName"
-           handleInput = {handleInput}
+           onChange = {handleInput}
          />
  
          <TextField
            required
            value={user.lastName}
            name="lastName"
-           handleInput = {handleInput}
+           onChange = {handleInput}
          />
          <TextField
            required
            value={user.email}
            name="email"
-           handleInput = {handleInput}
+           onChange = {handleInput}
          />
          <TextField
            required
            value={user.password}
            name="password"
-           handleInput = {handleInput}
+           onChange = {handleInput}
          />
  
          <Input type="submit" value="Submit">

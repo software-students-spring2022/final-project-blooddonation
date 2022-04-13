@@ -50,7 +50,7 @@ const Profile = (props) => {
         {user ? (
           <>
             {console.log(user)}
-            <Button component = {Link} to = {`/editprofile/${user.firstName}`}>Edit Profile</Button>
+            <Button component = {Link} to = {`/editprofile/${user.id}`}>Edit Profile</Button>
             <Button component={Link} to={"/logout"}>
               Log Out
             </Button>
@@ -73,7 +73,6 @@ const Profile = (props) => {
             </>
             }
 
-            {/* Navigate to another page */}
             <Button component={Link} to={"/finddonationsite"}>
               Donate Now
             </Button>
