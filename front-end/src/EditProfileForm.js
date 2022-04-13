@@ -7,6 +7,7 @@
  import { TextField, Input } from "@mui/material";
  import { useState, useEffect } from "react";
  import axios from "axios";
+ import { useParams } from 'react-router-dom';
 
  const inital_data = {
     firstName: '',
@@ -18,19 +19,19 @@
 
  const EditProfileForm = (props) => {
    const [user, setUser] = useState(inital_data);
-   useEffect(() => {
-    (async () => {
-      try {
-        const user = await axios.get(
-          "https://jsonplaceholder.typicode.com/users/1"
-        );
-        setUser(user.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
-
+//    useEffect(() => {
+//     (async () => {
+//       try {
+//         const user = await axios.get(
+//           "https://jsonplaceholder.typicode.com/users/1"
+//         );
+//         setUser(user.data);
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     })();
+//   }, []);
+  
   const handleInput = (e) => {
     console.log(e.target.name, " : ", e.target.value);
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -46,12 +47,14 @@
     }
   };
 
+  const { id } = useParams();
+  console.log(id)
+  
    return (
      <>
        <form onSubmit={handleSubmit}>
          <TextField
            required
-           label="First Name"
            value={user.firstName}
            name="firstName"
            handleInput = {handleInput}
@@ -59,21 +62,18 @@
  
          <TextField
            required
-           label="Last Name"
            value={user.lastName}
            name="lastName"
            handleInput = {handleInput}
          />
          <TextField
            required
-           label="Email"
            value={user.email}
            name="email"
            handleInput = {handleInput}
          />
          <TextField
            required
-           label="Password"
            value={user.password}
            name="password"
            handleInput = {handleInput}
