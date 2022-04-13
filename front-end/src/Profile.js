@@ -49,7 +49,7 @@ const Profile = (props) => {
         {user ? (
           <>
             {console.log(user)}
-            <Button>Edit Profile</Button>
+            <Button component = {Link} to = {`/editprofile/${user.firstName}`}>Edit Profile</Button>
             <Button component={Link} to={"/logout"}>
               Log Out
             </Button>
@@ -66,7 +66,7 @@ const Profile = (props) => {
               <ProfileCard
               title="You are not eligible for any blood donations"
               />
-              <Button component={Link} to={"/finddonationsite"}>
+              <Button component={Link} to={"/FAQ/otherwaystohelp"}>
               Other Ways to Help
              </Button>
             </>
