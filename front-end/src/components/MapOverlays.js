@@ -449,6 +449,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
         setUser(res.data.user);
 
         console.log("created User", res.data.user);
+        setCreated(false);
       })
       .catch((err) => {
         console.log(
@@ -1456,36 +1457,35 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           </Button>
                         </ModalContentQuizRes>
                       ) : (
-                        <ModalContentNotification>
-                          <h1>Congratulations, You're Eligible!</h1>
-                          <p>
-                            Make sure you are feeling well before your
-                            appointment! Also if you are a teen donor please
-                            check out{" "}
-                            <NavLink
-                              to="FAQ/eligibility/informationforteens"
-                              className="paragraph-link"
-                            >
-                              our information for teens page!
-                            </NavLink>{" "}
-                          </p>
-                          <Button>
-                            <a
-                              href="http://example.com/"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="redirect-link"
-                            >
-                              Click Here to make an appointment!
-                            </a>
-                          </Button>
-                        </ModalContentNotification>
+                        <>
+                          {<> {created ? getCreatedUser() : null}</>}
+                          {console.log(user.id)}
+                          <ModalContentNotification>
+                            <h1>Congratulations, You're Eligible!</h1>
+                            <p>
+                              Make sure you are feeling well before your
+                              appointment! Also if you are a teen donor please
+                              check out{" "}
+                              <NavLink
+                                to="FAQ/eligibility/informationforteens"
+                                className="paragraph-link"
+                              >
+                                our information for teens page!
+                              </NavLink>{" "}
+                            </p>
+                            <Button>
+                              <a
+                                href="http://example.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="redirect-link"
+                              >
+                                Click Here to make an appointment!
+                              </a>
+                            </Button>
+                          </ModalContentNotification>
+                        </>
                       )}
-                      {created && !user ? (
-                        <>{getCreatedUser()}</>
-                      ) : created && user ? (
-                        <>{addType()}</>
-                      ) : null}
                       ]
                     </>
                   ) : showNotEligible ? (
