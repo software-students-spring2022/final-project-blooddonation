@@ -63,27 +63,6 @@ describe('Test user login and registration', () => {
     });
   });
 
-  describe('POST /createaccount -----> test user registration user already has account', () => {
-    it('it should return a 401 HTTP response code', () => {
-      const user = {
-        firstName: 'testRegister',
-        lastName: 'account',
-        email: 'testRegister@gmail.com',
-        password: 'helloworld123',
-        age: 21,
-        eligible: [],
-      };
-
-      request(app)
-        .post('/createaccount')
-        .send(user)
-        .expect(200)
-        .then((response) => {
-          expect(response.body.email).equal('testRegister@gmail.com');
-        });
-    });
-  });
-
   describe('GET /logout', () => {
     it('it should return a 200 HTTP response code', (done) => {
       request(app)
