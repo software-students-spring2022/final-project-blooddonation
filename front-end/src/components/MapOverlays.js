@@ -4,7 +4,6 @@ import { TextField, Button, Input, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
-import { accountData } from "./AccountData";
 import axios from "axios";
 
 const Background = styled.div`
@@ -321,6 +320,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
   const [showCreate, setCreate] = useState(false);
   const [showEligible, setEligible] = useState(false);
   const [showNotEligible, setNotEligible] = useState(false);
+  const [showNotEligibleAge, setNotEligibleAge] = useState(false);
   const [score, setScore] = useState(0);
   const [showPassword, setShow] = useState(false);
   const [wholeBloodQuiz, setWholeBlood] = useState(false);
@@ -330,17 +330,8 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
   const [bleedingCondition, setBleedingCondition] = useState(false);
   const [cancer, setCancer] = useState(false);
   const [heartDisease, setHeartDisease] = useState(false);
-  const [goHandleStorage, setgoHandleStorage] = useState(false);
-  const [LoginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
-  const [createAccountData, setCreateAccountData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
+
+  const [created, setCreated] = useState(false);
 
   const [allQuestions, setAllQuestions] = useState({
     questions: [],
@@ -352,8 +343,12 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
 
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");
+  const [young, setYoung] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [user, setUser] = useState([]);
+  console.log("user at top", user);
 
   const [response, setResponse] = useState({}); // we expect the server to send us a simple object in this case
 
@@ -424,8 +419,43 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
     }
     setCurrentQuestion(0);
     setLogin(false);
+    setCreate(false);
     setIsLoggedIn(true);
     // setgoHandleStorage(false);
+  };
+
+  const handleStorageCreate = (incomingResonse) => {
+    if (incomingResonse.success && incomingResonse.token) {
+      console.log(`User successfully logged in: ${incomingResonse.email}`);
+      localStorage.setItem("token", incomingResonse.token); // store the token into localStorage
+    }
+    setCurrentQuestion(2);
+    setLogin(false);
+    setCreate(false);
+    // setIsLoggedIn(true);
+    // setgoHandleStorage(false);
+  };
+
+  const getCreatedUser = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount/eligibilityquestionnaire`,
+        {
+          headers: { Authorization: `JWT ${jwtToken}` }, // pass the token, if any, to the server
+        }
+      )
+      .then((res) => {
+        // setResponse(res.data); // store the response data
+        setUser(res.data.user);
+
+        console.log("created User", res.data.user);
+      })
+      .catch((err) => {
+        console.log(
+          "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+        );
+        // update this state variable, so the component re-renders
+      });
   };
 
   //Handling Button Pushes
@@ -451,15 +481,88 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err);
+      setErrorMessage("You entered invalid credentials.");
       // setErrorMessage("You entered invalid credentials.");
     }
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     // Send user data to backend here
     e.preventDefault();
-    setCreate(false);
-    setCurrentQuestion(2);
+    // prevent the HTML form from actually submitting... we use React's javascript code instead
+    e.preventDefault();
+    console.log("here");
+
+    try {
+      // create an object with the data we want to send to the server
+      if (isNaN(e.target.age.value)) {
+        setErrorMessage("Please enter a valid age");
+      } else {
+        if (e.target.age.value < 17) {
+          setCreate(false);
+          setNotEligibleAge(true);
+        } else {
+          const requestData = {
+            firstName: e.target.firstName.value,
+            lastName: e.target.lastName.value,
+            email: e.target.email.value,
+            password: e.target.password.value,
+            age: e.target.age.value,
+            // gets the value of the field in the submitted form with name='password',
+          };
+          // send a POST request with the data to the server api to authenticate
+          const response = await axios.post(
+            `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount`,
+            requestData
+          );
+          // store the response data into the data state variable
+          console.log(
+            `Server response: ${JSON.stringify(response.data, null, 0)}`
+          );
+          setResponse(response.data);
+          setCreated(true);
+        }
+      }
+    } catch (err) {
+      // request failed... user entered invalid credentials
+      console.log(err);
+      console.log(response.data);
+      setErrorMessage("An account with that email already exists");
+    }
+  };
+
+  const addType = async () => {
+    try {
+      // create an object with the data we want to send to the server
+      // console.log(user.id);
+      console.log("add type", user);
+      const type = [];
+      if (wholeBloodQuiz) {
+        type.push("Whole Blood");
+      } else if (powerRedQuiz) {
+        type.push("Power Red");
+      } else if (plateletQuiz) {
+        type.push("Platelet");
+      } else if (plasmaQuiz) {
+        type.push("Power Red");
+      }
+      const requestData = {
+        eligible: type,
+        userID: user.id,
+      };
+      console.log(requestData);
+      // send a POST request with the data to the server api to authenticate
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount/eligibilityquestionnaire`,
+        requestData
+      );
+      // store the response data into the data state variable
+      console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`);
+      setCreated(false);
+    } catch (err) {
+      // request failed... user entered invalid credentials
+      console.log(err);
+    }
   };
 
   const handleAnswerOptionClick = (isCorrect, currentQuestion) => {
@@ -619,6 +722,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
       setCreate(false);
       setEligible(false);
       setNotEligible(false);
+      setNotEligibleAge(false);
       setWholeBlood(false);
       setPowerRed(false);
       setPlatelet(false);
@@ -661,6 +765,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
       setCreate(false);
       setEligible(false);
       setNotEligible(false);
+      setNotEligibleAge(false);
       setWholeBlood(false);
       setPowerRed(false);
       setPlatelet(false);
@@ -684,6 +789,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
         setCreate(false);
         setEligible(false);
         setNotEligible(false);
+        setNotEligibleAge(false);
         setWholeBlood(false);
         setPowerRed(false);
         setPlatelet(false);
@@ -721,10 +827,17 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                   ) : Object.keys(response).length !== 0 &&
                     currentQuestion === 1 ? (
                     <>{handleStorage(response)}</>
+                  ) : Object.keys(response).length !== 0 && showCreate ? (
+                    <>{handleStorageCreate(response)}</>
                   ) : showLogin ? (
                     <>
                       <ModalContent>
                         <h1>Login</h1>
+                        {errorMessage ? (
+                          <p className="error">{errorMessage}</p>
+                        ) : (
+                          ""
+                        )}
                         <form onSubmit={handleLoginSubmit}>
                           <Stack alignItems="center" spacing={2}>
                             <TextField
@@ -769,6 +882,11 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                     <>
                       <ModalContentCreate>
                         <h1>Create Account</h1>
+                        {errorMessage ? (
+                          <p className="error">{errorMessage}</p>
+                        ) : (
+                          ""
+                        )}
 
                         <form onSubmit={handleRegister}>
                           <Stack alignItems="center" spacing={2}>
@@ -776,58 +894,35 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                               sx={{ width: "100%" }}
                               required
                               label="First Name"
-                              value={createAccountData.firstName}
                               name="firstName"
-                              onChange={(e) =>
-                                setCreateAccountData({
-                                  ...createAccountData,
-                                  email: e.target.value,
-                                })
-                              }
                             />
 
                             <TextField
                               sx={{ width: "100%" }}
                               required
                               label="Last Name"
-                              value={createAccountData.lastName}
                               name="lastName"
-                              onChange={(e) =>
-                                setCreateAccountData({
-                                  ...createAccountData,
-                                  email: e.target.value,
-                                })
-                              }
                             />
-
+                            <TextField
+                              sx={{ width: "100%" }}
+                              required
+                              label="Age"
+                              name="age"
+                            />
                             <TextField
                               sx={{ width: "100%" }}
                               required
                               label="Email"
-                              value={LoginData.email}
                               name="email"
-                              onChange={(e) =>
-                                setCreateAccountData({
-                                  ...createAccountData,
-                                  email: e.target.value,
-                                })
-                              }
                             />
                             <TextField
                               sx={{ width: "100%" }}
+                              type={showPassword ? "text" : "password"}
                               required
                               label="Password"
-                              value={LoginData.password}
                               name="password"
-                              onChange={(e) =>
-                                setCreateAccountData({
-                                  ...createAccountData,
-                                  password: e.target.value,
-                                })
-                              }
                             />
                           </Stack>
-
                           <Input type="submit" value="Submit">
                             Register
                           </Input>
@@ -1386,10 +1481,32 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           </Button>
                         </ModalContentNotification>
                       )}
+                      {created && !user ? (
+                        <>{getCreatedUser()}</>
+                      ) : created && user ? (
+                        <>{addType()}</>
+                      ) : null}
+                      ]
                     </>
                   ) : showNotEligible ? (
                     <ModalContentNotification>
                       <h1>Sorry, You're Not Eligible</h1>
+                      <h3> There are still other ways that you can help!</h3>
+                      <Button>
+                        <NavLink
+                          to="/FAQ/otherwaystohelp"
+                          className="redirect-link"
+                        >
+                          Check out our Other Ways To Help page for more info!
+                        </NavLink>
+                      </Button>
+                    </ModalContentNotification>
+                  ) : showNotEligibleAge ? (
+                    <ModalContentNotification>
+                      <h1>
+                        Sorry, You are not old enought to create account, and
+                        you are too young to donate blood
+                      </h1>
                       <h3> There are still other ways that you can help!</h3>
                       <Button>
                         <NavLink
@@ -1613,6 +1730,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                       setCreate(false);
                       setEligible(false);
                       setNotEligible(false);
+                      setNotEligibleAge(false);
                       setCurrentQuestion(0);
                       setQuizCurrentQuestion(0);
                       setScore(0);
