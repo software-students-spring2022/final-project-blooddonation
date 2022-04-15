@@ -312,7 +312,7 @@ const Ul = styled.div`
 export const MapOverlays = ({ showModal, setShowModal }) => {
   // important data
   // setting states
-  console.log("at top");
+
   const [done, setDone] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [quizCurrentQuestion, setQuizCurrentQuestion] = useState(0);
@@ -348,7 +348,6 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [user, setUser] = useState([]);
-  console.log("user at top", user);
 
   const [response, setResponse] = useState({}); // we expect the server to send us a simple object in this case
 
@@ -356,20 +355,15 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
     Object.keys(response).length !== 0
       ? response.token
       : localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
-  console.log(`JWT token: ${jwtToken}`); // debugging
-
-  console.log("is the token null", jwtToken !== null);
-  const responseFound = Object.keys(response).length !== 0;
-  console.log(responseFound);
-  console.log("jwtToken type", typeof jwtToken);
+  // console.log(`JWT token: ${jwtToken}`); // debugging
 
   const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true); // if we already have a JWT token in local storage, set this to true, otherwise false
-  console.log(isLoggedIn);
-  console.log(response);
+  // console.log(isLoggedIn);
+  // console.log(response);
 
   const fetchData = () => {
     // setMessages([])
-    console.log("fetch data");
+    // console.log("fetch data");
     // setLoaded(false)
 
     axios
@@ -402,7 +396,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
         setUser(res.data.user);
         setCurrentQuestion(2);
         setLogin(false);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(
@@ -449,6 +443,8 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
         setUser(res.data.user);
 
         console.log("created User", res.data.user);
+
+        addType(res.data.user);
         setCreated(false);
       })
       .catch((err) => {
@@ -463,7 +459,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
   const handleLoginSubmit = async (e) => {
     // Send user data to backend here
     e.preventDefault();
-    console.log("here");
+
     try {
       // create an object with the data we want to send to the server
       const requestData = {
@@ -492,7 +488,6 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
     e.preventDefault();
     // prevent the HTML form from actually submitting... we use React's javascript code instead
     e.preventDefault();
-    console.log("here");
 
     try {
       // create an object with the data we want to send to the server
@@ -527,16 +522,16 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err);
-      console.log(response.data);
+
       setErrorMessage("An account with that email already exists");
     }
   };
 
-  const addType = async () => {
+  const addType = async (incomingResonse) => {
     try {
       // create an object with the data we want to send to the server
       // console.log(user.id);
-      console.log("add type", user);
+
       const type = [];
       if (wholeBloodQuiz) {
         type.push("Whole Blood");
@@ -549,9 +544,9 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
       }
       const requestData = {
         eligible: type,
-        userID: user.id,
+        userID: incomingResonse.id,
       };
-      console.log(requestData);
+
       // send a POST request with the data to the server api to authenticate
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount/eligibilityquestionnaire`,
@@ -559,7 +554,6 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
       );
       // store the response data into the data state variable
       console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`);
-      setCreated(false);
     } catch (err) {
       // request failed... user entered invalid credentials
       console.log(err);
@@ -715,8 +709,10 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
     const backQuestion = currentQuestion - 1;
     if (backQuestion > 0) {
       setCurrentQuestion(backQuestion);
+      setErrorMessage("");
     } else if (backQuestion === 0) {
       setCurrentQuestion(0);
+      setErrorMessage("");
     } else {
       setShowModal(false);
       setLogin(false);
@@ -735,16 +731,19 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
       setCancer(false);
       setHeartDisease(false);
       setDone(false);
+      setErrorMessage("");
     }
   };
 
   const handleLoginBackClick = (currentQuestion) => {
     setCurrentQuestion(0);
+    setErrorMessage("");
     setLogin(false);
   };
 
   const handleCreateBackClick = (currentQuestion) => {
     setCurrentQuestion(1);
+    setErrorMessage("");
     setCreate(false);
   };
 
@@ -771,6 +770,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
       setPowerRed(false);
       setPlatelet(false);
       setPlasma(false);
+      setErrorMessage("");
 
       setCurrentQuestion(0);
       setQuizCurrentQuestion(0);
@@ -795,6 +795,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
         setPowerRed(false);
         setPlatelet(false);
         setPlasma(false);
+        setErrorMessage("");
 
         setCurrentQuestion(0);
         setScore(0);
@@ -815,8 +816,6 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
   //overlay content
   return (
     <>
-      {console.log("IsLoggedIn", isLoggedIn)}
-      {console.log("current Question", currentQuestion)}
       {loaded ? (
         <>
           {showModal ? (
@@ -830,6 +829,8 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                     <>{handleStorage(response)}</>
                   ) : Object.keys(response).length !== 0 && showCreate ? (
                     <>{handleStorageCreate(response)}</>
+                  ) : created && showEligible ? (
+                    <>{getCreatedUser()}</>
                   ) : showLogin ? (
                     <>
                       <ModalContent>
@@ -1458,8 +1459,6 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                         </ModalContentQuizRes>
                       ) : (
                         <>
-                          {<> {created ? getCreatedUser() : null}</>}
-                          {console.log(user.id)}
                           <ModalContentNotification>
                             <h1>Congratulations, You're Eligible!</h1>
                             <p>
@@ -1729,6 +1728,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                       setLogin(false);
                       setCreate(false);
                       setEligible(false);
+                      setErrorMessage("");
                       setNotEligible(false);
                       setNotEligibleAge(false);
                       setCurrentQuestion(0);
