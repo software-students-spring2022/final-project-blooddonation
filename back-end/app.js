@@ -136,6 +136,7 @@ app.post('/editprofile/:id', async (req, res) => {
         age: req.body.age,
       }
     );
+    
 
     return res.json({ success: true, updated: updatedUser });
   } catch (err) {

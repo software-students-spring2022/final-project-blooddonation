@@ -3,8 +3,7 @@
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
- import { useForm } from "react-hook-form";
- import { TextField, Input } from "@mui/material";
+ import { TextField, Input, Stack } from "@mui/material";
  import { useState, useEffect } from "react";
  import axios from "axios";
  import { useParams } from 'react-router-dom';
@@ -45,6 +44,7 @@
   const { id } = useParams();
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
 
     try {
@@ -62,6 +62,8 @@
         requestData
       );
 
+      alert("Profile successfully saved!")
+
       console.log(
         `Server response: ${JSON.stringify(response.data, null, 0)}`
       );
@@ -75,37 +77,56 @@
 
    return (
      <>
-       <form onSubmit={handleSubmit}>
+     
+     <form onSubmit={handleSubmit}>
+     <Stack alignItems="center" spacing={2}>
+     <h1>Edit Profile</h1>
          <TextField
            required
+           label="First Name"
            value={user.firstName}
            name="firstName"
            onChange = {handleInput}
+          //  variant = "standard"
          />
  
          <TextField
            required
+           label = "Last Name"
            value={user.lastName}
            name="lastName"
            onChange = {handleInput}
          />
          <TextField
            required
+           label = "Email"
            value={user.email}
            name="email"
            onChange = {handleInput}
          />
          <TextField
            required
+           label = "Age"
            value={user.age}
            name="age"
            onChange = {handleInput}
          />
- 
-         <Input type="submit" value="Submit">
+
+          {/* <TextField
+           required
+           label = "Password"
+           value={user.age}
+           name="age"
+           onChange = {handleInput}
+         />
+  */}
+         <Input type="submit" value="Save">
            Confirm
          </Input>
+         </Stack>
        </form>
+
+    
      </>
    );
  };
