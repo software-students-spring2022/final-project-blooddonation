@@ -25,13 +25,14 @@ mongoose
   .catch((err) => console.error(`Failed to connect to MongoDB: ${err}`));
 
 const { User } = require('./models/User');
+const { faqData } = require('./models/FAQData');
 const eligibilityQuestionnaire = require('./quizQuestions/EligibilityQuestionnaireData');
 const WholeBloodQuestions = require('./quizQuestions/WholeBloodQuestions');
 const PowerRedQuestions = require('./quizQuestions/PowerRedQuestions');
 const PlateletQuestions = require('./quizQuestions/PlateletQuestions');
 const PlasmaQuestions = require('./quizQuestions/PlasmaQuestions');
 const questions = require('./quizQuestions/questions');
-const FAQData = require('./pageData/FAQData');
+// const FAQData = require('./pageData/FAQData');
 const GeneralHealthData = require('./pageData/GeneralHealthData');
 const LifestyleData = require('./pageData/LifestyleData');
 const MedicalCondData = require('./pageData/MedicalCondData');
@@ -235,6 +236,8 @@ app.get('/FAQ', async (req, res) => {
   // console.log(req.body);
 
   try {
+    const FAQData = await faqData.findOne({}).exec();
+    console.log(FAQData);
     return res.json({
       FAQData,
 
