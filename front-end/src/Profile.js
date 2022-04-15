@@ -50,7 +50,9 @@ const Profile = (props) => {
         {user ? (
           <>
             {console.log(user)}
-            <Button component = {Link} to = {`/editprofile/${user.id}`}>Edit Profile</Button>
+            <Button component={Link} to={`/editprofile/${user.id}`}>
+              Edit Profile
+            </Button>
             <Button component={Link} to={"/logout"}>
               Log Out
             </Button>
@@ -59,23 +61,24 @@ const Profile = (props) => {
               image={ProfileImage}
             />
             {user.eligible.length ? (
-              <ProfileCard
-              title="You are eligible for these blood donations"
-              text_chip={user.eligible} />
-            ): 
-            <>
-              <ProfileCard
-              title="You are not eligible for any blood donations"
-              />
-              <Button component={Link} to={"/FAQ/otherwaystohelp"}>
-              Other Ways to Help
-             </Button>
-            </>
-            }
+              <>
+                <ProfileCard
+                  title="You are eligible for these blood donations"
+                  text_chip={user.eligible}
+                />
+                <Button component={Link} to={"/finddonationsite"}>
+                  Donate Now
+                </Button>
+              </>
+            ) : (
+              <>
+                <h3>You are not eligible for any blood donations</h3>
+                <Button component={Link} to={"/FAQ/otherwaystohelp"}>
+                  Other Ways to Help
+                </Button>
+              </>
+            )}
 
-            <Button component={Link} to={"/finddonationsite"}>
-              Donate Now
-            </Button>
             <Button
               component={Link}
               to={"/createaccount/eligibilityquestionnaire"}
@@ -94,7 +97,6 @@ const Profile = (props) => {
           </>
         )}
       </div>
-
     </>
   );
 };
