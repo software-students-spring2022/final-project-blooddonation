@@ -42,17 +42,36 @@
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const { id } = useParams();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      console.log("Data for update : ", user);
-      const response = await axios.put(`https://yourendpoint/${user.id}`, user);
-    } catch (error) {
-      console.log(error);
+      const requestData = {
+        userId: id, 
+        firstName: e.target.firstName.value, 
+        lastName: e.target.lastName.value,
+        email: e.target.email.value,
+        age: e.target.age.value
+      };
+
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/editprofile/:id`,
+        requestData
+      );
+
+      console.log(
+        `Server response: ${JSON.stringify(response.data, null, 0)}`
+      );
+
+    } catch (err) {
+      console.log(err);
     }
+
   };
 
-  const { id } = useParams();
 
    return (
      <>
@@ -78,8 +97,8 @@
          />
          <TextField
            required
-           value={user.password}
-           name="password"
+           value={user.age}
+           name="age"
            onChange = {handleInput}
          />
  
