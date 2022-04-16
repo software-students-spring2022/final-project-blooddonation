@@ -236,8 +236,10 @@ app.get('/FAQ', async (req, res) => {
   // console.log(req.body);
 
   try {
-    const FAQData = await faqData.findOne({}).exec();
-    console.log(FAQData);
+    const getFAQ = await faqData.find({}, { _id: 0, data: 1 }).exec();
+    const temp = getFAQ[0];
+    console.log(temp.data);
+    const FAQData = temp.data;
     return res.json({
       FAQData,
 
