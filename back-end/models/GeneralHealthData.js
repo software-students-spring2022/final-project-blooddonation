@@ -9,7 +9,7 @@ const generalhealthSchema = new Schema({
   },
 });
 
-const generalhealthData = mongoose.model('FAQData', generalhealthSchema);
+const generalhealthData = mongoose.model('GeneralHealthData', generalhealthSchema);
 
 // export the model so other modules can import it
 module.exports = {

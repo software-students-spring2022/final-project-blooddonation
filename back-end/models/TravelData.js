@@ -9,7 +9,7 @@ const travelSchema = new Schema({
   },
 });
 
-const travelData = mongoose.model('FAQData', travelSchema);
+const travelData = mongoose.model('TravelData', travelSchema);
 
 // export the model so other modules can import it
 module.exports = {

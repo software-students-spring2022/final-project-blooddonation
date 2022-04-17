@@ -9,7 +9,7 @@ const lifestyleSchema = new Schema({
   },
 });
 
-const lifestyleData = mongoose.model('FAQData', lifestyleSchema);
+const lifestyleData = mongoose.model('LifestyleData', lifestyleSchema);
 
 // export the model so other modules can import it
 module.exports = {

@@ -26,20 +26,20 @@ mongoose
 
 const { User } = require('./models/User');
 const { faqData } = require('./models/FAQData');
+const { generalhealthData } = require('./models/GeneralHealthData');
+const { lifestyleData } = require('./models/LifestyleData');
+const { medicalcondData } = require('./models/MedicalCondData');
+const { medicaltreatData } = require('./models/MedicalTreatData');
+const { medicationData } = require('./models/MedicationData');
+const { travelData } = require('./models/TravelData');
+const { stdData } = require('./models/STDData');
+
 const eligibilityQuestionnaire = require('./quizQuestions/EligibilityQuestionnaireData');
 const WholeBloodQuestions = require('./quizQuestions/WholeBloodQuestions');
 const PowerRedQuestions = require('./quizQuestions/PowerRedQuestions');
 const PlateletQuestions = require('./quizQuestions/PlateletQuestions');
 const PlasmaQuestions = require('./quizQuestions/PlasmaQuestions');
 const questions = require('./quizQuestions/questions');
-// const FAQData = require('./pageData/FAQData');
-const GeneralHealthData = require('./pageData/GeneralHealthData');
-const LifestyleData = require('./pageData/LifestyleData');
-const MedicalCondData = require('./pageData/MedicalCondData');
-const MedicalTreatData = require('./pageData/MedicalTreatData');
-const MedicationData = require('./pageData/MedicationData');
-const STDData = require('./pageData/STDData');
-const TravelData = require('./pageData/TravelData');
 
 // a route to handle logging out users
 app.get('/logout', (req, res) => {
@@ -238,7 +238,7 @@ app.get('/FAQ', async (req, res) => {
   try {
     const getFAQ = await faqData.find({}, { _id: 0, data: 1 }).exec();
     const temp = getFAQ[0];
-    console.log(temp.data);
+    // console.log(temp.data);
     const FAQData = temp.data;
     return res.json({
       FAQData,
@@ -256,10 +256,39 @@ app.get('/FAQ', async (req, res) => {
 });
 
 app.get('/FAQ/eligibility', async (req, res) => {
-  // const user = req.body;
+  let getData = await generalhealthData.find({}, { _id: 0, data: 1 }).exec();
+  let temp = getData[0];
+  const GeneralHealthData = temp.data;
 
-  // res.status(200).json(user);
-  // console.log(req.body);
+  getData = await medicalcondData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const MedicalCondData = temp.data;
+
+  getData = await lifestyleData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const LifestyleData = temp.data;
+
+  getData = await medicaltreatData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const MedicalTreatData = temp.data;
+
+  getData = await medicationData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const MedicationData = temp.data;
+
+  getData = await stdData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const STDData = temp.data;
+
+  getData = await travelData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const TravelData = temp.data;
 
   try {
     return res.json({

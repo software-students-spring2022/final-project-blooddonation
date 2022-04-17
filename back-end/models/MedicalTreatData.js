@@ -9,7 +9,7 @@ const medicaltreatSchema = new Schema({
   },
 });
 
-const medicaltreatData = mongoose.model('FAQData', medicaltreatSchema);
+const medicaltreatData = mongoose.model('MedicalTreatData', medicaltreatSchema);
 
 // export the model so other modules can import it
 module.exports = {

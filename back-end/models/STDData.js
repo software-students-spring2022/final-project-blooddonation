@@ -9,7 +9,7 @@ const STDSchema = new Schema({
   },
 });
 
-const stdData = mongoose.model('FAQData', STDSchema);
+const stdData = mongoose.model('STDData', STDSchema);
 
 // export the model so other modules can import it
 module.exports = {
