@@ -242,6 +242,23 @@ app.get('/finddonationsite', async (req, res) => {
   }
 });
 
+app.post('/createaccount/finddonationsite', async (req, res) => {
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.body.userID },
+      { eligible: req.body.eligible }
+    ).exec();
+
+    return res.json({ success: true, updated: updatedUser });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to the database',
+    });
+  }
+});
+
 app.get('/FAQ', async (req, res) => {
   // const user = req.body;
 

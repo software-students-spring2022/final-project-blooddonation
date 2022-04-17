@@ -4,7 +4,6 @@ import { TextField, Button, Input, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { MdClose } from "react-icons/md";
-import { accountData } from "./AccountData";
 import axios from "axios";
 
 const Background = styled.div`
@@ -311,9 +310,9 @@ const Ul = styled.div`
 `;
 
 export const MapOverlays = ({ showModal, setShowModal }) => {
-  //important data
+  // important data
+  // setting states
 
-  //setting states
   const [done, setDone] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [quizCurrentQuestion, setQuizCurrentQuestion] = useState(0);
@@ -321,6 +320,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
   const [showCreate, setCreate] = useState(false);
   const [showEligible, setEligible] = useState(false);
   const [showNotEligible, setNotEligible] = useState(false);
+  const [showNotEligibleAge, setNotEligibleAge] = useState(false);
   const [score, setScore] = useState(0);
   const [showPassword, setShow] = useState(false);
   const [wholeBloodQuiz, setWholeBlood] = useState(false);
@@ -330,53 +330,52 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
   const [bleedingCondition, setBleedingCondition] = useState(false);
   const [cancer, setCancer] = useState(false);
   const [heartDisease, setHeartDisease] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [LoginData, setLoginData] = useState({
-    email: "",
-    password: "",
+
+  const [created, setCreated] = useState(false);
+
+  const [allQuestions, setAllQuestions] = useState({
+    questions: [],
+    WholeBloodQuestions: [],
+    PowerRedQuestions: [],
+    PlateletQuestions: [],
+    PlasmaQuestions: [],
   });
-  const [createAccountData, setCreateAccountData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
-
-  const [WholeBloodQuestions, setWholeBloodQuestions] = useState([]);
-
-  const [PowerRedQuestions, setPowerRedQuestions] = useState([]);
-
-  const [PlateletQuestions, setPlateletQuestions] = useState([]);
-
-  const [PlasmaQuestions, setPlasmaQuestions] = useState([]);
-  const [questions, setquestions] = useState([]);
 
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");
-  const [feedback, setFeedback] = useState("");
+  const [young, setYoung] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const [user, setUser] = useState([]);
+
+  const [response, setResponse] = useState({}); // we expect the server to send us a simple object in this case
+
+  const jwtToken =
+    Object.keys(response).length !== 0
+      ? response.token
+      : localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
+  // console.log(`JWT token: ${jwtToken}`); // debugging
+
+  const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true); // if we already have a JWT token in local storage, set this to true, otherwise false
+  // console.log(isLoggedIn);
+  // console.log(response);
 
   const fetchData = () => {
     // setMessages([])
+    // console.log("fetch data");
     // setLoaded(false)
+
     axios
       .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/finddonationsite`)
       .then((response) => {
-        // axios bundles up all response data in response.data property
-
-        const questions = response.data.questions;
-        setquestions(questions);
-
-        const WholeBloodQuestions = response.data.WholeBloodQuestions;
-        setWholeBloodQuestions(WholeBloodQuestions);
-
-        const PowerRedQuestions = response.data.PowerRedQuestions;
-        setPowerRedQuestions(PowerRedQuestions);
-
-        const PlateletQuestions = response.data.PlateletQuestions;
-        setPlateletQuestions(PlateletQuestions);
-
-        const PlasmaQuestions = response.data.PlasmaQuestions;
-        setPlateletQuestions(PlasmaQuestions);
+        setAllQuestions({
+          questions: response.data.questions,
+          WholeBloodQuestions: response.data.WholeBloodQuestions,
+          PowerRedQuestions: response.data.PowerRedQuestion,
+          PlateletQuestions: response.data.PlateletQuestions,
+          PlasmaQuestions: response.data.PlasmaQuestions,
+        });
       })
       .catch((err) => {
         setError(err);
@@ -387,132 +386,265 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
       });
   };
 
-  // set up loading data from server when the component first loads
-  useEffect(() => {
-    // fetch messages this once
-    fetchData();
-  }, []); // p
-
-  //Handling Button Pushes
-  const handleLoginSubmit = (e) => {
-    // Send user data to backend here
-    e.preventDefault();
-    setLogin(false);
-    setLoggedIn(true);
-    setCurrentQuestion(2);
+  const getLoggedInUser = () => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/profile`, {
+        headers: { Authorization: `JWT ${jwtToken}` }, // pass the token, if any, to the server
+      })
+      .then((res) => {
+        // setResponse(res.data); // store the response data
+        setUser(res.data.user);
+        setCurrentQuestion(2);
+        setLogin(false);
+        // console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(
+          "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+        );
+        // update this state variable, so the component re-renders
+      });
   };
 
-  const handleRegister = (e) => {
+  const handleStorage = (incomingResonse) => {
+    if (incomingResonse.success && incomingResonse.token) {
+      console.log(`User successfully logged in: ${incomingResonse.email}`);
+      localStorage.setItem("token", incomingResonse.token); // store the token into localStorage
+    }
+    setCurrentQuestion(0);
+    setLogin(false);
+    setCreate(false);
+    setIsLoggedIn(true);
+    // setgoHandleStorage(false);
+  };
+
+  const handleStorageCreate = (incomingResonse) => {
+    if (incomingResonse.success && incomingResonse.token) {
+      console.log(`User successfully logged in: ${incomingResonse.email}`);
+      localStorage.setItem("token", incomingResonse.token); // store the token into localStorage
+    }
+    setCurrentQuestion(2);
+    setLogin(false);
+    setCreate(false);
+    // setIsLoggedIn(true);
+    // setgoHandleStorage(false);
+  };
+
+  const getCreatedUser = () => {
+    axios
+      .get(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount/eligibilityquestionnaire`,
+        {
+          headers: { Authorization: `JWT ${jwtToken}` }, // pass the token, if any, to the server
+        }
+      )
+      .then((res) => {
+        // setResponse(res.data); // store the response data
+        setUser(res.data.user);
+
+        console.log("created User", res.data.user);
+
+        addType(res.data.user);
+        setCreated(false);
+      })
+      .catch((err) => {
+        console.log(
+          "The server rejected the request for this protected resource... we probably do not have a valid JWT token."
+        );
+        // update this state variable, so the component re-renders
+      });
+  };
+
+  //Handling Button Pushes
+  const handleLoginSubmit = async (e) => {
     // Send user data to backend here
     e.preventDefault();
-    setCreate(false);
-    setCurrentQuestion(2);
+
+    try {
+      // create an object with the data we want to send to the server
+      const requestData = {
+        email: e.target.email.value, // gets the value of the field in the submitted form with name='username'
+        password: e.target.password.value, // gets the value of the field in the submitted form with name='password',
+      };
+      // send a POST request with the data to the server api to authenticate
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/login`,
+        requestData
+      );
+      // store the response data into the data state variable
+      console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`);
+      setResponse(response.data);
+      // setgoHandleStorage(true);
+    } catch (err) {
+      // request failed... user entered invalid credentials
+      console.log(err);
+      setErrorMessage("You entered invalid credentials.");
+      // setErrorMessage("You entered invalid credentials.");
+    }
+  };
+
+  const handleRegister = async (e) => {
+    // Send user data to backend here
+    e.preventDefault();
+    // prevent the HTML form from actually submitting... we use React's javascript code instead
+    e.preventDefault();
+
+    try {
+      // create an object with the data we want to send to the server
+      if (isNaN(e.target.age.value)) {
+        setErrorMessage("Please enter a valid age");
+      } else {
+        if (e.target.age.value < 17) {
+          setCreate(false);
+          setNotEligibleAge(true);
+        } else {
+          const requestData = {
+            firstName: e.target.firstName.value,
+            lastName: e.target.lastName.value,
+            email: e.target.email.value,
+            password: e.target.password.value,
+            age: e.target.age.value,
+            // gets the value of the field in the submitted form with name='password',
+          };
+          // send a POST request with the data to the server api to authenticate
+          const response = await axios.post(
+            `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount`,
+            requestData
+          );
+          // store the response data into the data state variable
+          console.log(
+            `Server response: ${JSON.stringify(response.data, null, 0)}`
+          );
+          setResponse(response.data);
+          setCreated(true);
+        }
+      }
+    } catch (err) {
+      // request failed... user entered invalid credentials
+      console.log(err);
+
+      setErrorMessage("An account with that email already exists");
+    }
+  };
+
+  const addType = async (incomingResonse) => {
+    try {
+      // create an object with the data we want to send to the server
+      // console.log(user.id);
+
+      const type = [];
+      if (wholeBloodQuiz) {
+        type.push("Whole Blood");
+      } else if (powerRedQuiz) {
+        type.push("Power Red");
+      } else if (plateletQuiz) {
+        type.push("Platelet");
+      } else if (plasmaQuiz) {
+        type.push("Power Red");
+      }
+      const requestData = {
+        eligible: type,
+        userID: incomingResonse.id,
+      };
+
+      // send a POST request with the data to the server api to authenticate
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_HOSTNAME}/createaccount/eligibilityquestionnaire`,
+        requestData
+      );
+      // store the response data into the data state variable
+      console.log(`Server response: ${JSON.stringify(response.data, null, 0)}`);
+    } catch (err) {
+      // request failed... user entered invalid credentials
+      console.log(err);
+    }
   };
 
   const handleAnswerOptionClick = (isCorrect, currentQuestion) => {
     if (
       isCorrect === "t" &&
-      questions[currentQuestion].questionText === "Do you have an Account?"
+      allQuestions.questions[currentQuestion].questionText ===
+        "Do you have an Account?"
     ) {
       setLogin(true);
     } else if (
       isCorrect === "t" &&
-      questions[currentQuestion].questionText ===
+      allQuestions.questions[currentQuestion].questionText ===
         "Would you like to create an account?"
     ) {
       setCreate(true);
     } else if (
       isCorrect === "Whole" &&
-      questions[currentQuestion].questionText ===
+      allQuestions.questions[currentQuestion].questionText ===
         "What type of donation would you like to make?" &&
-      questions[currentQuestion].answerOptions.filter(
+      allQuestions.questions[currentQuestion].answerOptions.filter(
         (textObj) => textObj.answerText === "Whole Blood"
       )
     ) {
-      if (loggedIn) {
-        const user = accountData.filter(
-          (accountObj) => accountObj.email === LoginData.email
-        );
-        user.map((userObj) => {
-          if (userObj.eligible.includes("Whole Blood")) {
-            return setEligible(true);
-          } else {
-            return setNotEligible(true);
-          }
-        });
+      if (isLoggedIn) {
+        if (user.eligible.includes("Whole Blood")) {
+          return setEligible(true);
+        } else {
+          return setNotEligible(true);
+        }
       } else {
         setWholeBlood(true);
       }
     } else if (
       isCorrect === "Power" &&
-      questions[currentQuestion].questionText ===
+      allQuestions.questions[currentQuestion].questionText ===
         "What type of donation would you like to make?" &&
-      questions[currentQuestion].answerOptions.filter(
+      allQuestions.questions[currentQuestion].answerOptions.filter(
         (textObj) => textObj.answerText === "Power Red (Double Red Cell)"
       )
     ) {
-      if (loggedIn) {
-        const user = accountData.filter(
-          (accountObj) => accountObj.email === LoginData.email
-        );
-        user.map((userObj) => {
-          if (userObj.eligible.includes("Power Red")) {
-            return setEligible(true);
-          } else {
-            return setNotEligible(true);
-          }
-        });
+      if (isLoggedIn) {
+        if (user.eligible.includes("Power Red")) {
+          return setEligible(true);
+        } else {
+          return setNotEligible(true);
+        }
       } else {
         setPowerRed(true);
       }
     } else if (
       isCorrect === "Platelet" &&
-      questions[currentQuestion].questionText ===
+      allQuestions.questions[currentQuestion].questionText ===
         "What type of donation would you like to make?" &&
-      questions[currentQuestion].answerOptions.filter(
+      allQuestions.questions[currentQuestion].answerOptions.filter(
         (textObj) => textObj.answerText === "Platelet"
       )
     ) {
-      if (loggedIn) {
-        const user = accountData.filter(
-          (accountObj) => accountObj.email === LoginData.email
-        );
-        user.map((userObj) => {
-          if (userObj.eligible.includes("Platelet")) {
-            return setEligible(true);
-          } else {
-            return setNotEligible(true);
-          }
-        });
+      if (isLoggedIn) {
+        if (user.eligible.includes("Platelet")) {
+          return setEligible(true);
+        } else {
+          return setNotEligible(true);
+        }
       } else {
         setPlatelet(true);
       }
     } else if (
       isCorrect === "Plasma" &&
-      questions[currentQuestion].questionText ===
+      allQuestions.questions[currentQuestion].questionText ===
         "What type of donation would you like to make?" &&
-      questions[currentQuestion].answerOptions.filter(
+      allQuestions.questions[currentQuestion].answerOptions.filter(
         (textObj) => textObj.answerText === "Plasma"
       )
     ) {
-      if (loggedIn) {
-        const user = accountData.filter(
-          (accountObj) => accountObj.email === LoginData.email
-        );
-        user.map((userObj) => {
-          if (userObj.eligible.includes("Plasma")) {
-            return setEligible(true);
-          } else {
-            return setNotEligible(true);
-          }
-        });
+      if (isLoggedIn) {
+        if (user.eligible.includes("Plasma")) {
+          return setEligible(true);
+        } else {
+          return setNotEligible(true);
+        }
       } else {
         setPlasma(true);
       }
     }
 
     const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < questions.length) {
+    if (nextQuestion < allQuestions.questions.length) {
       if (showLogin === false && showCreate === false) {
         setCurrentQuestion(nextQuestion);
       } else if (showLogin === true) {
@@ -577,19 +709,21 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
     const backQuestion = currentQuestion - 1;
     if (backQuestion > 0) {
       setCurrentQuestion(backQuestion);
+      setErrorMessage("");
     } else if (backQuestion === 0) {
       setCurrentQuestion(0);
+      setErrorMessage("");
     } else {
       setShowModal(false);
       setLogin(false);
       setCreate(false);
       setEligible(false);
       setNotEligible(false);
+      setNotEligibleAge(false);
       setWholeBlood(false);
       setPowerRed(false);
       setPlatelet(false);
       setPlasma(false);
-      setLoggedIn(false);
       setCurrentQuestion(0);
       setQuizCurrentQuestion(0);
       setScore(0);
@@ -597,16 +731,19 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
       setCancer(false);
       setHeartDisease(false);
       setDone(false);
+      setErrorMessage("");
     }
   };
 
   const handleLoginBackClick = (currentQuestion) => {
     setCurrentQuestion(0);
+    setErrorMessage("");
     setLogin(false);
   };
 
   const handleCreateBackClick = (currentQuestion) => {
     setCurrentQuestion(1);
+    setErrorMessage("");
     setCreate(false);
   };
 
@@ -628,11 +765,13 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
       setCreate(false);
       setEligible(false);
       setNotEligible(false);
+      setNotEligibleAge(false);
       setWholeBlood(false);
       setPowerRed(false);
       setPlatelet(false);
       setPlasma(false);
-      setLoggedIn(false);
+      setErrorMessage("");
+
       setCurrentQuestion(0);
       setQuizCurrentQuestion(0);
       setScore(0);
@@ -651,11 +790,13 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
         setCreate(false);
         setEligible(false);
         setNotEligible(false);
+        setNotEligibleAge(false);
         setWholeBlood(false);
         setPowerRed(false);
         setPlatelet(false);
         setPlasma(false);
-        setLoggedIn(false);
+        setErrorMessage("");
+
         setCurrentQuestion(0);
         setScore(0);
         setBleedingCondition(false);
@@ -681,41 +822,40 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
             <Background onClick={closeModal} ref={modalRef}>
               <animated.div style={animation}>
                 <ModalWrapper showModal={showModal}>
-                  {showLogin ? (
+                  {isLoggedIn && currentQuestion === 0 ? (
+                    <>{getLoggedInUser()}</>
+                  ) : Object.keys(response).length !== 0 &&
+                    currentQuestion === 1 ? (
+                    <>{handleStorage(response)}</>
+                  ) : Object.keys(response).length !== 0 && showCreate ? (
+                    <>{handleStorageCreate(response)}</>
+                  ) : created && showEligible ? (
+                    <>{getCreatedUser()}</>
+                  ) : showLogin ? (
                     <>
                       <ModalContent>
                         <h1>Login</h1>
+                        {errorMessage ? (
+                          <p className="error">{errorMessage}</p>
+                        ) : (
+                          ""
+                        )}
                         <form onSubmit={handleLoginSubmit}>
                           <Stack alignItems="center" spacing={2}>
                             <TextField
                               sx={{ width: "100%" }}
                               required
                               label="Email"
-                              value={LoginData.email}
                               name="email"
-                              onChange={(e) =>
-                                setLoginData({
-                                  ...LoginData,
-                                  email: e.target.value,
-                                })
-                              }
                             />
                             <TextField
                               sx={{ width: "100%" }}
                               type={showPassword ? "text" : "password"}
                               required
                               label="Password"
-                              value={LoginData.password}
                               name="password"
-                              onChange={(e) =>
-                                setLoginData({
-                                  ...LoginData,
-                                  password: e.target.value,
-                                })
-                              }
                             />
                           </Stack>
-
                           <Input type="submit" value="Submit">
                             LogIn
                           </Input>
@@ -744,6 +884,11 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                     <>
                       <ModalContentCreate>
                         <h1>Create Account</h1>
+                        {errorMessage ? (
+                          <p className="error">{errorMessage}</p>
+                        ) : (
+                          ""
+                        )}
 
                         <form onSubmit={handleRegister}>
                           <Stack alignItems="center" spacing={2}>
@@ -751,58 +896,35 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                               sx={{ width: "100%" }}
                               required
                               label="First Name"
-                              value={createAccountData.firstName}
                               name="firstName"
-                              onChange={(e) =>
-                                setCreateAccountData({
-                                  ...createAccountData,
-                                  email: e.target.value,
-                                })
-                              }
                             />
 
                             <TextField
                               sx={{ width: "100%" }}
                               required
                               label="Last Name"
-                              value={createAccountData.lastName}
                               name="lastName"
-                              onChange={(e) =>
-                                setCreateAccountData({
-                                  ...createAccountData,
-                                  email: e.target.value,
-                                })
-                              }
                             />
-
+                            <TextField
+                              sx={{ width: "100%" }}
+                              required
+                              label="Age"
+                              name="age"
+                            />
                             <TextField
                               sx={{ width: "100%" }}
                               required
                               label="Email"
-                              value={LoginData.email}
                               name="email"
-                              onChange={(e) =>
-                                setCreateAccountData({
-                                  ...createAccountData,
-                                  email: e.target.value,
-                                })
-                              }
                             />
                             <TextField
                               sx={{ width: "100%" }}
+                              type={showPassword ? "text" : "password"}
                               required
                               label="Password"
-                              value={LoginData.password}
                               name="password"
-                              onChange={(e) =>
-                                setCreateAccountData({
-                                  ...createAccountData,
-                                  password: e.target.value,
-                                })
-                              }
                             />
                           </Stack>
-
                           <Input type="submit" value="Submit">
                             Register
                           </Input>
@@ -1336,31 +1458,34 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           </Button>
                         </ModalContentQuizRes>
                       ) : (
-                        <ModalContentNotification>
-                          <h1>Congratulations, You're Eligible!</h1>
-                          <p>
-                            Make sure you are feeling well before your
-                            appointment! Also if you are a teen donor please
-                            check out{" "}
-                            <NavLink
-                              to="FAQ/eligibility/informationforteens"
-                              className="paragraph-link"
-                            >
-                              our information for teens page!
-                            </NavLink>{" "}
-                          </p>
-                          <Button>
-                            <a
-                              href="http://example.com/"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="redirect-link"
-                            >
-                              Click Here to make an appointment!
-                            </a>
-                          </Button>
-                        </ModalContentNotification>
+                        <>
+                          <ModalContentNotification>
+                            <h1>Congratulations, You're Eligible!</h1>
+                            <p>
+                              Make sure you are feeling well before your
+                              appointment! Also if you are a teen donor please
+                              check out{" "}
+                              <NavLink
+                                to="FAQ/eligibility/informationforteens"
+                                className="paragraph-link"
+                              >
+                                our information for teens page!
+                              </NavLink>{" "}
+                            </p>
+                            <Button>
+                              <a
+                                href="http://example.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="redirect-link"
+                              >
+                                Click Here to make an appointment!
+                              </a>
+                            </Button>
+                          </ModalContentNotification>
+                        </>
                       )}
+                      ]
                     </>
                   ) : showNotEligible ? (
                     <ModalContentNotification>
@@ -1375,11 +1500,27 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                         </NavLink>
                       </Button>
                     </ModalContentNotification>
+                  ) : showNotEligibleAge ? (
+                    <ModalContentNotification>
+                      <h1>
+                        Sorry, You are not old enought to create account, and
+                        you are too young to donate blood
+                      </h1>
+                      <h3> There are still other ways that you can help!</h3>
+                      <Button>
+                        <NavLink
+                          to="/FAQ/otherwaystohelp"
+                          className="redirect-link"
+                        >
+                          Check out our Other Ways To Help page for more info!
+                        </NavLink>
+                      </Button>
+                    </ModalContentNotification>
                   ) : wholeBloodQuiz ? (
                     <>
                       {done ? (
                         <>
-                          {score === WholeBloodQuestions.length
+                          {score === allQuestions.WholeBloodQuestions.length
                             ? setEligible(true)
                             : setNotEligible(true)}
                         </>
@@ -1390,13 +1531,14 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                             <div className="question-section">
                               <div className="question-text">
                                 {
-                                  WholeBloodQuestions[quizCurrentQuestion]
-                                    .questionText
+                                  allQuestions.WholeBloodQuestions[
+                                    quizCurrentQuestion
+                                  ].questionText
                                 }
                               </div>
                             </div>
                             <div className="answer-section">
-                              {WholeBloodQuestions[
+                              {allQuestions.WholeBloodQuestions[
                                 quizCurrentQuestion
                               ].answerOptions.map((answerOption) => (
                                 <button
@@ -1404,7 +1546,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                                     handleQuizAnswerOptionClick(
                                       answerOption.isCorrect,
                                       quizCurrentQuestion,
-                                      WholeBloodQuestions
+                                      allQuestions.WholeBloodQuestions
                                     );
                                   }}
                                 >
@@ -1420,7 +1562,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                     <>
                       {done ? (
                         <>
-                          {score === PowerRedQuestions.length
+                          {score === allQuestions.PowerRedQuestions.length
                             ? setEligible(true)
                             : setNotEligible(true)}
                         </>
@@ -1431,13 +1573,14 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                             <div className="question-section">
                               <div className="question-text">
                                 {
-                                  PowerRedQuestions[quizCurrentQuestion]
-                                    .questionText
+                                  allQuestions.PowerRedQuestions[
+                                    quizCurrentQuestion
+                                  ].questionText
                                 }
                               </div>
                             </div>
                             <div className="answer-section">
-                              {PowerRedQuestions[
+                              {allQuestions.PowerRedQuestions[
                                 quizCurrentQuestion
                               ].answerOptions.map((answerOption) => (
                                 <button
@@ -1445,7 +1588,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                                     handleQuizAnswerOptionClick(
                                       answerOption.isCorrect,
                                       quizCurrentQuestion,
-                                      PowerRedQuestions
+                                      allQuestions.PowerRedQuestions
                                     )
                                   }
                                 >
@@ -1461,7 +1604,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                     <>
                       {done ? (
                         <>
-                          {score === PlateletQuestions.length
+                          {score === allQuestions.PlateletQuestions.length
                             ? setEligible(true)
                             : setNotEligible(true)}
                         </>
@@ -1472,13 +1615,14 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                             <div className="question-section">
                               <div className="question-text">
                                 {
-                                  PlateletQuestions[quizCurrentQuestion]
-                                    .questionText
+                                  allQuestions.PlateletQuestions[
+                                    quizCurrentQuestion
+                                  ].questionText
                                 }
                               </div>
                             </div>
                             <div className="answer-section">
-                              {PlateletQuestions[
+                              {allQuestions.PlateletQuestions[
                                 quizCurrentQuestion
                               ].answerOptions.map((answerOption) => (
                                 <button
@@ -1486,7 +1630,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                                     handleQuizAnswerOptionClick(
                                       answerOption.isCorrect,
                                       quizCurrentQuestion,
-                                      PlateletQuestions
+                                      allQuestions.PlateletQuestions
                                     )
                                   }
                                 >
@@ -1502,7 +1646,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                     <>
                       {done ? (
                         <>
-                          {score === PlasmaQuestions.length
+                          {score === allQuestions.PlasmaQuestions.length
                             ? setEligible(true)
                             : setNotEligible(true)}
                         </>
@@ -1513,13 +1657,14 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                             <div className="question-section">
                               <div className="question-text">
                                 {
-                                  PlasmaQuestions[quizCurrentQuestion]
-                                    .questionText
+                                  allQuestions.PlasmaQuestions[
+                                    quizCurrentQuestion
+                                  ].questionText
                                 }
                               </div>
                             </div>
                             <div className="answer-section">
-                              {PlasmaQuestions[
+                              {allQuestions.PlasmaQuestions[
                                 quizCurrentQuestion
                               ].answerOptions.map((answerOption) => (
                                 <button
@@ -1527,7 +1672,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                                     handleQuizAnswerOptionClick(
                                       answerOption.isCorrect,
                                       quizCurrentQuestion,
-                                      PlasmaQuestions
+                                      allQuestions.PlasmaQuestions
                                     )
                                   }
                                 >
@@ -1545,24 +1690,27 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                         <h1>Eligibility Quiz</h1>
                         <div className="question-section">
                           <div className="question-text">
-                            {questions[currentQuestion].questionText}
+                            {
+                              allQuestions.questions[currentQuestion]
+                                .questionText
+                            }
                           </div>
                         </div>
                         <div className="answer-section">
-                          {questions[currentQuestion].answerOptions.map(
-                            (answerOption) => (
-                              <button
-                                onClick={() =>
-                                  handleAnswerOptionClick(
-                                    answerOption.isCorrect,
-                                    currentQuestion
-                                  )
-                                }
-                              >
-                                {answerOption.answerText}
-                              </button>
-                            )
-                          )}
+                          {allQuestions.questions[
+                            currentQuestion
+                          ].answerOptions.map((answerOption) => (
+                            <button
+                              onClick={() =>
+                                handleAnswerOptionClick(
+                                  answerOption.isCorrect,
+                                  currentQuestion
+                                )
+                              }
+                            >
+                              {answerOption.answerText}
+                            </button>
+                          ))}
                         </div>
                       </ModalContent>
                       <BackButton
@@ -1580,7 +1728,9 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                       setLogin(false);
                       setCreate(false);
                       setEligible(false);
+                      setErrorMessage("");
                       setNotEligible(false);
+                      setNotEligibleAge(false);
                       setCurrentQuestion(0);
                       setQuizCurrentQuestion(0);
                       setScore(0);
@@ -1592,7 +1742,6 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                       setBleedingCondition(false);
                       setCancer(false);
                       setHeartDisease(false);
-                      setLoggedIn(false);
                     }}
                   />
                 </ModalWrapper>
@@ -1600,7 +1749,9 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
             </Background>
           ) : null}
         </>
-      ) : null}
+      ) : (
+        <>{fetchData()}</>
+      )}
     </>
   );
 };
