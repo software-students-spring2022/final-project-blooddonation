@@ -33,12 +33,11 @@ const { medicaltreatData } = require('./models/MedicalTreatData');
 const { medicationData } = require('./models/MedicationData');
 const { travelData } = require('./models/TravelData');
 const { stdData } = require('./models/STDData');
-
-const { eligibilityQuestionnaire } = require('./models/EligibilityQuestionnaireData');
-const { wholebloodQuestions } = require('./models/WholeBloodQuestions');
-const { powerredQuestions } = require('./models/PowerRedQuestions');
-const { plateletQuestions } = require('./models/PlateletQuestions');
-const { plasmaQuestions } = require('./models/PlasmaQuestions');
+const { eligibilityquestionnaireData } = require('./models/EligibilityQuestionnaireData');
+const { wholebloodquestions } = require('./models/WholeBloodQuestions');
+const { powerredquestions } = require('./models/PowerRedQuestions');
+const { plateletquestions } = require('./models/PlateletQuestions');
+const { plasmaquestions } = require('./models/PlasmaQuestions');
 const { Questions } = require('./models/questions');
 
 // a route to handle logging out users
@@ -123,7 +122,9 @@ app.get(
   passport.authenticate('jwt', { session: false }),
   async (req, res) => {
     try {
-      const getQuestionnaire = await eligibilityQuestionnaire.find({}, { _id: 0, data: 1 }).exec();
+      const getQuestionnaire = await eligibilityquestionnaireData
+        .find({}, { _id: 0, data: 1 })
+        .exec();
       const temp = getQuestionnaire[0];
       const EligibilityQuestionnaireData = temp.data;
 
@@ -186,21 +187,22 @@ app.get('/profile', passport.authenticate('jwt', { session: false }), (req, res)
 });
 
 app.get('/finddonationsite', async (req, res) => {
-  let getData = await wholebloodQuestions.find({}, { _id: 0, data: 1 }).exec();
+  let getData = await wholebloodquestions.find({}, { _id: 0, data: 1 }).exec();
   let temp = getData[0];
   const WholeBloodQuestions = temp.data;
 
-  getData = await powerredQuestions.find({}, { _id: 0, data: 1 }).exec();
+  getData = await powerredquestions.find({}, { _id: 0, data: 1 }).exec();
+  console.log(getData[0]);
   // eslint-disable-next-line prefer-destructuring
   temp = getData[0];
   const PowerRedQuestions = temp.data;
 
-  getData = await plateletQuestions.find({}, { _id: 0, data: 1 }).exec();
+  getData = await plateletquestions.find({}, { _id: 0, data: 1 }).exec();
   // eslint-disable-next-line prefer-destructuring
   temp = getData[0];
   const PlateletQuestions = temp.data;
 
-  getData = await plasmaQuestions.find({}, { _id: 0, data: 1 }).exec();
+  getData = await plasmaquestions.find({}, { _id: 0, data: 1 }).exec();
   // eslint-disable-next-line prefer-destructuring
   temp = getData[0];
   const PlasmaQuestions = temp.data;

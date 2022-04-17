@@ -9,9 +9,9 @@ const questionsSchema = new Schema({
   },
 });
 
-const questions = mongoose.model('questions', questionsSchema);
+const Questions = mongoose.model('Questions', questionsSchema);
 
 // export the model so other modules can import it
 module.exports = {
-  questions,
+  Questions,
 };
