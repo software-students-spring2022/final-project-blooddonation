@@ -17,6 +17,7 @@ import PowerRedDonation from "./PowerRedDonation";
 import InformationForTeens from "./InformationForTeens";
 import CreateAccount from "./CreateAccount";
 import EligibilityQuestionnaire from "./EligibilityQuestionnaire";
+import EditProfileForm from "./EditProfileForm";
 
 const App = (props) => {
   return (
@@ -62,6 +63,7 @@ const App = (props) => {
               path="/createaccount/eligibilityquestionnaire"
               element={<EligibilityQuestionnaire />}
             ></Route>
+            <Route exact path="/editprofile/:id" element={<EditProfileForm/>} component={EditProfileForm} />
           </Routes>
         </main>
       </Router>

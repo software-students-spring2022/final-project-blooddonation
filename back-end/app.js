@@ -117,6 +117,37 @@ app.post('/createaccount', async (req, res) => {
   }
 });
 
+const inital_data = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  age: 0,
+};
+
+app.post('/editprofile/:id', async (req, res) => {
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.body.userId },
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        age: req.body.age,
+      }
+    );
+    
+
+    return res.json({ success: true, updated: updatedUser });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user to database',
+    });
+  }
+});
+
 app.get(
   '/createaccount/eligibilityquestionnaire',
   passport.authenticate('jwt', { session: false }),
