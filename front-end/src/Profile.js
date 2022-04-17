@@ -17,7 +17,7 @@ import { useState, useEffect } from "react";
 //if their age is below 17 tell them that they are too young on the profile page
 
 const Profile = (props) => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState();
   const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
   console.log(`JWT token: ${jwtToken}`); // debugging
 
@@ -47,10 +47,12 @@ const Profile = (props) => {
   return (
     <>
       <div className="profilebody">
-        {isLoggedIn ? (
+        {user ? (
           <>
             {console.log(user)}
-            <Button>Edit Profile</Button>
+            <Button component={Link} to={`/editprofile/${user.id}`}>
+              Edit Profile
+            </Button>
             <Button component={Link} to={"/logout"}>
               Log Out
             </Button>
@@ -58,14 +60,25 @@ const Profile = (props) => {
               text={{ Name: user.firstName, Age: user.age }}
               image={ProfileImage}
             />
-            <ProfileCard
-              title="You are eligible for these blood donations"
-              text_chip={user.eligible}
-            />
-            {/* Navigate to another page */}
-            <Button component={Link} to={"/finddonationsite"}>
-              Donate Now
-            </Button>
+            {user.eligible.length ? (
+              <>
+                <ProfileCard
+                  title="You are eligible for these blood donations"
+                  text_chip={user.eligible}
+                />
+                <Button component={Link} to={"/finddonationsite"}>
+                  Donate Now
+                </Button>
+              </>
+            ) : (
+              <>
+                <h3>You are not eligible for any blood donations</h3>
+                <Button component={Link} to={"/FAQ/otherwaystohelp"}>
+                  Other Ways to Help
+                </Button>
+              </>
+            )}
+
             <Button
               component={Link}
               to={"/createaccount/eligibilityquestionnaire"}
@@ -84,8 +97,6 @@ const Profile = (props) => {
           </>
         )}
       </div>
-
-      {/* to do add button */}
     </>
   );
 };

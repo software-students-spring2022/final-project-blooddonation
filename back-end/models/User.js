@@ -24,7 +24,7 @@ const userSchema = new Schema(
     },
     age: {
       type: Number,
-      required: false,
+      required: true,
     },
     eligible: {
       type: Array,
