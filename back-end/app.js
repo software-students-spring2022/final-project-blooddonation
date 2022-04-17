@@ -34,12 +34,12 @@ const { medicationData } = require('./models/MedicationData');
 const { travelData } = require('./models/TravelData');
 const { stdData } = require('./models/STDData');
 
-const eligibilityQuestionnaire = require('./quizQuestions/EligibilityQuestionnaireData');
-const WholeBloodQuestions = require('./quizQuestions/WholeBloodQuestions');
-const PowerRedQuestions = require('./quizQuestions/PowerRedQuestions');
-const PlateletQuestions = require('./quizQuestions/PlateletQuestions');
-const PlasmaQuestions = require('./quizQuestions/PlasmaQuestions');
-const questions = require('./quizQuestions/questions');
+const { eligibilityQuestionnaire } = require('./models/EligibilityQuestionnaireData');
+const { wholebloodQuestions } = require('./models/WholeBloodQuestions');
+const { powerredQuestions } = require('./models/PowerRedQuestions');
+const { plateletQuestions } = require('./models/PlateletQuestions');
+const { plasmaQuestions } = require('./models/PlasmaQuestions');
+const { Questions } = require('./models/questions');
 
 // a route to handle logging out users
 app.get('/logout', (req, res) => {
@@ -121,14 +121,12 @@ app.post('/createaccount', async (req, res) => {
 app.get(
   '/createaccount/eligibilityquestionnaire',
   passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    // const user = req.body;
-
-    // res.status(200).json(user);
-    // console.log(req.body);
-
+  async (req, res) => {
     try {
-      const EligibilityQuestionnaireData = eligibilityQuestionnaire;
+      const getQuestionnaire = await eligibilityQuestionnaire.find({}, { _id: 0, data: 1 }).exec();
+      const temp = getQuestionnaire[0];
+      const EligibilityQuestionnaireData = temp.data;
+
       return res.json({
         EligibilityQuestionnaireData,
         user: {
@@ -188,10 +186,29 @@ app.get('/profile', passport.authenticate('jwt', { session: false }), (req, res)
 });
 
 app.get('/finddonationsite', async (req, res) => {
-  // const user = req.body;
+  let getData = await wholebloodQuestions.find({}, { _id: 0, data: 1 }).exec();
+  let temp = getData[0];
+  const WholeBloodQuestions = temp.data;
 
-  // res.status(200).json(user);
-  // console.log(req.body);
+  getData = await powerredQuestions.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const PowerRedQuestions = temp.data;
+
+  getData = await plateletQuestions.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const PlateletQuestions = temp.data;
+
+  getData = await plasmaQuestions.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const PlasmaQuestions = temp.data;
+
+  getData = await Questions.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const questions = temp.data;
 
   try {
     return res.json({
