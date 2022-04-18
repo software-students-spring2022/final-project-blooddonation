@@ -70,7 +70,7 @@ describe('Test user login and registration', () => {
       request(app)
         .post('/createaccount')
         .send(user)
-        .then(() => {
+        .end(() => {
           done();
         });
     });
