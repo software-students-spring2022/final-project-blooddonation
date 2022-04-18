@@ -1,7 +1,10 @@
+
 const { expect } = require('chai');
 const request = require('supertest');
 const jwt = require("jsonwebtoken");
+const mongoose = require('mongoose');
 const app = require('../app');
+
 
 
 
@@ -24,7 +27,14 @@ const { jwtOptions, jwtStrategy } = require("../jwt-config") // import setup opt
 const token = jwt.sign({ _id: "6254c1a80156ae71c43b51a3" }, jwtOptions.secretOrKey)
 
 
+
+
+
+
 describe('Test user login and registration', () => {
+
+
+  
   const formData = { username: 'bla', password: 'wrong' }; // mock form data with incorrect credentials
 
 
@@ -39,6 +49,7 @@ describe('Test user login and registration', () => {
           done();
         });
     });
+    
   });
 
   it('POST /login ------> test user login', (done) =>
@@ -111,4 +122,9 @@ describe('Test user login and registration', () => {
         });
     });
   });
+
+  after (() => {
+    console.log(`Close`)
+    process.exit(0)
+  })
 });
