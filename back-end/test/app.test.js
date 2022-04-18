@@ -56,26 +56,7 @@ describe('Test user login and registration', () => {
 
       }).then(done()));
 
-  describe('POST /createaccount -----> test user registration user already has account', () => {
-    it('it should return a 401 HTTP response code', (done) => {
-      const user = {
-        firstName: 'Rachel',
-        lastName: 'Kindagen',
-        email: 'rmk461@nyu.edu',
-        password: 'helloworld123',
-        age: 21,
-        eligible: [],
-      };
-
-      request(app)
-        .post('/createaccount')
-        .send(user)
-        .then(() => {
-          done();
-        }).catch(done);
-    });
-  });
-
+  
   describe('GET /logout', () => {
     it('it should return a 200 HTTP response code', (done) => {
       request(app)
