@@ -76,7 +76,6 @@ describe('Test user login and registration', () => {
         .then(() => {
           done();
         })
-        .catch(done);
     });
   });
 
