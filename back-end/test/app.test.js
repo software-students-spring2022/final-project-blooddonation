@@ -21,8 +21,6 @@ const { plasmaquestions } = require('../models/PlasmaQuestions');
 
 const { jwtOptions, jwtStrategy } = require("../jwt-config") // import setup options for using JWT in passport
 
-console.log(jwtOptions.secretOrKey)
-
 const token = jwt.sign({ _id: "6254c1a80156ae71c43b51a3" }, jwtOptions.secretOrKey)
 
 
@@ -72,10 +70,9 @@ describe('Test user login and registration', () => {
       request(app)
         .post('/createaccount')
         .send(user)
-        .expect(401)
         .then(() => {
           done();
-        })
+        });
     });
   });
 
