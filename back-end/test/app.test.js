@@ -43,7 +43,7 @@ describe('Test user login and registration', () => {
     });
   });
 
-  it('POST /login ------> test user login', () =>
+  it('POST /login ------> test user login', (done) =>
 
     request(app)
       .post('/login')
@@ -54,8 +54,9 @@ describe('Test user login and registration', () => {
       .expect(200)
       .then((response) => {
         expect(response.body.email).equal('rmk461@nyu.edu');
+ 
 
-      }));
+      }).then(done()));
 
   describe('POST /createaccount -----> test user registration user already has account', () => {
     it('it should return a 401 HTTP response code', (done) => {
