@@ -1,5 +1,6 @@
 const { expect } = require('chai');
 const request = require('supertest');
+const jwt = require("jsonwebtoken");
 const app = require('../app');
 
 
@@ -18,9 +19,15 @@ const { powerredquestions } = require('../models/PowerRedQuestions');
 const { plateletquestions } = require('../models/PlateletQuestions');
 const { plasmaquestions } = require('../models/PlasmaQuestions');
 
+const { jwtOptions, jwtStrategy } = require("../jwt-config") // import setup options for using JWT in passport
+
 
 describe('Test user login and registration', () => {
   const formData = { username: 'bla', password: 'wrong' }; // mock form data with incorrect credentials
+
+
+  const token = jwt.sign({ _id: "6254c1a80156ae71c43b51a3" }, jwtOptions.secretOrKey) // create a signed token simulating user #1
+
   describe('POST /login with incorrect username/password', () => {
     it('it should return a 401 HTTP response code', (done) => {
       request(app)
@@ -34,6 +41,8 @@ describe('Test user login and registration', () => {
   });
 
   it('POST /login ------> test user login', () =>
+  // let's first create a valid JWT token to use in the requests where we want to be logged in
+
     request(app)
       .post('/login')
       .send({
@@ -41,6 +50,7 @@ describe('Test user login and registration', () => {
         password: 'helloworld123',
       })
       .expect(200)
+      .set("Authorization", `JWT ${token}`)
       .then((response) => {
         expect(response.body.email).equal('rmk461@nyu.edu');
       }));
