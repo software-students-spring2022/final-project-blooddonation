@@ -21,7 +21,9 @@ const { plasmaquestions } = require('../models/PlasmaQuestions');
 
 const { jwtOptions, jwtStrategy } = require("../jwt-config") // import setup options for using JWT in passport
 
-const token = jwt.sign({ _id: "6254c1a80156ae71c43b51a3" }, jwtOptions.secretOrKey)
+console.log(jwtOptions.secretOrKey)
+
+const token = jwt.sign({ _id: "6254c1a80156ae71c43b51a3" }, "they_sailed_away_in_a_sieve")
 
 
 describe('Test user login and registration', () => {
@@ -116,5 +118,18 @@ describe('Test user login and registration', () => {
     });
   });
 
-
+  describe('GET /finddonationsite ----->get donation site map overlay questions', () => {
+    it('it should return a 200 HTTP response code', () => {
+      request(app)
+        .get('/FAQ/eligibility')
+        .expect(200)
+        .set("Authorization", `JWT ${token}`) 
+        .then((response) => {
+          expect(response.body.WholeBloodQuestions).equal(wholebloodquestions);
+          expect(response.body.PowerRedQuestions).equal(powerredquestions);
+          expect(response.body.PlateletQuestions).equal(plateletquestions);
+          expect(response.body.PlasmaQuestions).equal(plasmaquestions);
+        });
+    });
+  });
 });
