@@ -54,6 +54,7 @@ describe('Test user login and registration', () => {
       .expect(200)
       .then((response) => {
         expect(response.body.email).equal('rmk461@nyu.edu');
+
       }));
 
   describe('POST /createaccount -----> test user registration user already has account', () => {
