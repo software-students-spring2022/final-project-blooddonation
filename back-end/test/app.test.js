@@ -50,7 +50,6 @@ describe('Test user login and registration', () => {
         password: 'helloworld123',
       })
       .expect(200)
-      .set("Authorization", `JWT ${token}`)
       .then((response) => {
         expect(response.body.email).equal('rmk461@nyu.edu');
       }));
@@ -117,17 +116,5 @@ describe('Test user login and registration', () => {
     });
   });
 
-  describe('GET /finddonationsite ----->get donation site map overlay questions', () => {
-    it('it should return a 200 HTTP response code', () => {
-      request(app)
-        .get('/FAQ/eligibility')
-        .expect(200)
-        .then((response) => {
-          expect(response.body.WholeBloodQuestions).equal(wholebloodquestions);
-          expect(response.body.PowerRedQuestions).equal(powerredquestions);
-          expect(response.body.PlateletQuestions).equal(plateletquestions);
-          expect(response.body.PlasmaQuestions).equal(plasmaquestions);
-        });
-    });
-  });
+
 });
