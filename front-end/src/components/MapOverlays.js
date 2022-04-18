@@ -372,7 +372,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
         setAllQuestions({
           questions: response.data.questions,
           WholeBloodQuestions: response.data.WholeBloodQuestions,
-          PowerRedQuestions: response.data.PowerRedQuestion,
+          PowerRedQuestions: response.data.PowerRedQuestions,
           PlateletQuestions: response.data.PlateletQuestions,
           PlasmaQuestions: response.data.PlasmaQuestions,
         });
