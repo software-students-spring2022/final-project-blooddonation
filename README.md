@@ -1,5 +1,9 @@
 # Blood Donation (name is a Work in Progress)
 
+# CircleCI
+
+[![CircleCI](https://circleci.com/gh/software-assignments-spring2022/final-project-blooddonation/tree/master.svg?style=shield)](https://circleci.com/gh/software-assignments-spring2022/final-project-blooddonation/tree/master)
+
 ### Contributors
 
 - [Keyanee Alexandre](https://github.com/keyaneealexandre)
