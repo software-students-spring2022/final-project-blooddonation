@@ -5,7 +5,6 @@ import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Logout from "./Logout";
 /**
  * A React component that represents the Home page of the app.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -45,22 +44,28 @@ const Profile = (props) => {
       });
   }, []); // es
 
+
   return (
     <>
       <div className="profilebody">
         {user ? (
           <>
-            {console.log(user)}
-            <Button component={Link} to={`/editprofile/${user.id}`}>
-              Edit Profile
-            </Button>
             <Button component={Link} to={"/logout"}>
               Log Out
             </Button>
             <ProfileCard
+              title = "Profile"
               text={{ Name: user.firstName, Age: user.age }}
               image={ProfileImage}
-            />
+              button = {<Button component={Link} to={"/logout"}>
+              Log Out
+            </Button>}
+            >
+            
+            </ProfileCard>
+            <Button component={Link} to={`/editprofile/${user.id}`}>
+              Edit Profile
+            </Button>
             {user.eligible.length ? (
               <>
                 <ProfileCard
@@ -101,6 +106,9 @@ const Profile = (props) => {
     </>
   );
 };
+//change hierarchy of information 
+//add photo upload 
+//donate now, take quiz again, logout diff button stylings 
 
 // make this component available to be imported into any other file
 export default Profile;

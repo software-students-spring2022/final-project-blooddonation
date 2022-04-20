@@ -1,12 +1,10 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Box, Chip } from "@mui/material";
+import { Card, CardContent, CardMedia, Box, Chip, Button } from "@mui/material";
 
 const ProfileCard = (props) => {
   return (
     <Card>
-      <Card>
-        <t component="div">{props.title}</t>
-      </Card>
+      <h3>{props.title}</h3>
       <Card sx={{ display: "flex", pl: 3, pb: 3, pt: 3 }}>
         {props.image && (
           <Box sx={{ alignItems: "center" }}>
@@ -16,7 +14,7 @@ const ProfileCard = (props) => {
               image={props.image}
             />
           </Box>
-        )}
+          )}
         <Box>
           <CardContent>
             {props.text &&
@@ -30,6 +28,7 @@ const ProfileCard = (props) => {
               props.text_chip.map((value) => (
                 <Chip sx={{ mr: 2 }} label={value} variant="outlined" />
               ))}
+            {props.button}
           </CardContent>
         </Box>
       </Card>
