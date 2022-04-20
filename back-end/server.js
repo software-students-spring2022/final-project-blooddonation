@@ -17,7 +17,8 @@ const close = () => {
   listener.close();
 };
 
+
 // export the close function
 module.exports = {
-  close,
+  close
 };

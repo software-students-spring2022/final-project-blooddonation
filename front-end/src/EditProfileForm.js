@@ -19,6 +19,7 @@
  const EditProfileForm = (props) => {
    const [user, setUser] = useState(inital_data);
    const jwtToken = localStorage.getItem("token"); // the JWT token, if we have already received one and stored it in localStorage
+   const [photo, setPhoto] = useState({profile: null});
 
    useEffect(() => {
     axios
@@ -74,10 +75,27 @@
 
   };
 
+  const uploadPhoto = (e) => {
+    const data = new FormData();
+    data.append('file', e.target.files[0]);
+    data.append('userId', id);
+
+    axios
+      .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/upload`, data)
+      .then((res) => {
+        setPhoto({profile: res.data});
+      });
+    
+  }
+
 
    return (
      <>
-     
+     <input type="file" name="file" onChange = {uploadPhoto}/>
+     {photo.profile != null ? (
+          <img src={`http://localhost:3000/${photo.profile.filename}`}/>
+        ): <h1>no photo</h1> }
+
      <form onSubmit={handleSubmit}>
      <Stack alignItems="center" spacing={2}>
      <h1>Edit Profile</h1>

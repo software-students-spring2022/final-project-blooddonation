@@ -15,6 +15,7 @@ app.use(cors());
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
 app.use(passport.initialize());
+app.use(express.static('public'));
 const { jwtOptions, jwtStrategy } = require('./jwt-config');
 // import setup options for using JWT in passport
 passport.use(jwtStrategy);
@@ -39,6 +40,48 @@ const MedicalTreatData = require('./pageData/MedicalTreatData');
 const MedicationData = require('./pageData/MedicationData');
 const STDData = require('./pageData/STDData');
 const TravelData = require('./pageData/TravelData');
+
+const multer = require('multer')
+const storage = multer.diskStorage({
+  destination: function(req,file,cb) {
+    cb(null, 'public')
+  },
+  filename: (req,file,cb) => {
+    cb(null, file.originalname)
+  }
+})
+
+const upload = multer({storage: storage}).single('file')
+
+
+app.post('/upload', async (req, res) => {
+  try {
+    console.log(req.file)
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.body.userId },
+      {
+        profileImg: req.body.file.originalname
+      }
+    );
+    upload(req, res, (err) => {
+      if (err) {
+        console.error(err);
+        res.sendStatus(500);
+      }
+      res.send(req.file);
+    });
+    return res.json({ success: true, updated: updatedUser });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save user profile image',
+    });
+  }
+
+});
+
+app.post('/upload')
 
 // a route to handle logging out users
 app.get('/logout', (req, res) => {
@@ -308,5 +351,7 @@ app.get('/FAQ/eligibility', async (req, res) => {
     });
   }
 });
+
+
 
 module.exports = app;
