@@ -1,22 +1,44 @@
+
 const { expect } = require('chai');
 const request = require('supertest');
-const app = require('./app');
+const jwt = require("jsonwebtoken");
+const mongoose = require('mongoose');
+const app = require('../app');
 
-const FAQData = require('./pageData/FAQData');
-const GeneralHealthData = require('./pageData/GeneralHealthData');
-const LifestyleData = require('./pageData/LifestyleData');
-const MedicalCondData = require('./pageData/MedicalCondData');
-const MedicalTreatData = require('./pageData/MedicalTreatData');
-const MedicationData = require('./pageData/MedicationData');
-const STDData = require('./pageData/STDData');
-const TravelData = require('./pageData/TravelData');
-const WholeBloodQuestions = require('./quizQuestions/WholeBloodQuestions');
-const PowerRedQuestions = require('./quizQuestions/PowerRedQuestions');
-const PlateletQuestions = require('./quizQuestions/PlateletQuestions');
-const PlasmaQuestions = require('./quizQuestions/PlasmaQuestions');
+
+
+
+const { faqData } = require('../models/FAQData');
+const { generalhealthData } = require('../models/GeneralHealthData');
+const { lifestyleData } = require('../models/LifestyleData');
+const { medicalcondData } = require('../models/MedicalCondData');
+const { medicaltreatData } = require('../models/MedicalTreatData');
+const { medicationData } = require('../models/MedicationData');
+const { travelData } = require('../models/TravelData');
+const { stdData } = require('../models/STDData');
+
+const { wholebloodquestions } = require('../models/WholeBloodQuestions');
+const { powerredquestions } = require('../models/PowerRedQuestions');
+const { plateletquestions } = require('../models/PlateletQuestions');
+const { plasmaquestions } = require('../models/PlasmaQuestions');
+
+const { jwtOptions, jwtStrategy } = require("../jwt-config") // import setup options for using JWT in passport
+
+const token = jwt.sign({ _id: "6254c1a80156ae71c43b51a3" }, jwtOptions.secretOrKey)
+
+
+
+
+
 
 describe('Test user login and registration', () => {
+
+
+  
   const formData = { username: 'bla', password: 'wrong' }; // mock form data with incorrect credentials
+
+
+ 
   describe('POST /login with incorrect username/password', () => {
     it('it should return a 401 HTTP response code', (done) => {
       request(app)
@@ -27,9 +49,11 @@ describe('Test user login and registration', () => {
           done();
         });
     });
+    
   });
 
-  it('POST /login ------> test user login', () =>
+  it('POST /login ------> test user login', (done) =>
+
     request(app)
       .post('/login')
       .send({
@@ -39,30 +63,11 @@ describe('Test user login and registration', () => {
       .expect(200)
       .then((response) => {
         expect(response.body.email).equal('rmk461@nyu.edu');
-      }));
+ 
 
-  describe('POST /createaccount -----> test user registration user already has account', () => {
-    it('it should return a 401 HTTP response code', (done) => {
-      const user = {
-        firstName: 'Rachel',
-        lastName: 'Kindagen',
-        email: 'rmk461@nyu.edu',
-        password: 'helloworld123',
-        age: 21,
-        eligible: [],
-      };
+      }).then(done()));
 
-      request(app)
-        .post('/createaccount')
-        .send(user)
-        .expect(401)
-        .then(() => {
-          done();
-        })
-        .catch(done);
-    });
-  });
-
+  
   describe('GET /logout', () => {
     it('it should return a 200 HTTP response code', (done) => {
       request(app)
@@ -81,7 +86,7 @@ describe('Test user login and registration', () => {
         .get('/FAQ')
         .expect(200)
         .then((response) => {
-          expect(response.body.FAQData).equal(FAQData);
+          expect(response.body.FAQData).equal(faqData);
         });
     });
   });
@@ -92,13 +97,13 @@ describe('Test user login and registration', () => {
         .get('/FAQ/eligibility')
         .expect(200)
         .then((response) => {
-          expect(response.body.GeneralHealthData).equal(GeneralHealthData);
-          expect(response.body.LifestyleData).equal(LifestyleData);
-          expect(response.body.MedicalCondData).equal(MedicalCondData);
-          expect(response.body.MedicalTreatData).equal(MedicalTreatData);
-          expect(response.body.MedicationData).equal(MedicationData);
-          expect(response.body.STDData).equal(STDData);
-          expect(response.body.TravelData).equal(TravelData);
+          expect(response.body.GeneralHealthData).equal(generalhealthData);
+          expect(response.body.LifestyleData).equal(lifestyleData);
+          expect(response.body.MedicalCondData).equal(medicalcondData);
+          expect(response.body.MedicalTreatData).equal(medicaltreatData);
+          expect(response.body.MedicationData).equal(medicationData);
+          expect(response.body.STDData).equal(stdData);
+          expect(response.body.TravelData).equal(travelData);
         });
     });
   });
@@ -108,12 +113,18 @@ describe('Test user login and registration', () => {
       request(app)
         .get('/FAQ/eligibility')
         .expect(200)
+        .set("Authorization", `JWT ${token}`) 
         .then((response) => {
-          expect(response.body.WholeBloodQuestions).equal(WholeBloodQuestions);
-          expect(response.body.PowerRedQuestions).equal(PowerRedQuestions);
-          expect(response.body.PlateletQuestions).equal(PlateletQuestions);
-          expect(response.body.PlasmaQuestions).equal(PlasmaQuestions);
+          expect(response.body.WholeBloodQuestions).equal(wholebloodquestions);
+          expect(response.body.PowerRedQuestions).equal(powerredquestions);
+          expect(response.body.PlateletQuestions).equal(plateletquestions);
+          expect(response.body.PlasmaQuestions).equal(plasmaquestions);
         });
     });
   });
+
+  after (() => {
+    console.log(`Close`)
+    process.exit(0)
+  })
 });
