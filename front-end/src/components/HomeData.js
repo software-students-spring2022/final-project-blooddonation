@@ -6,7 +6,7 @@ import BloodShortage3 from "../assets/BloodShortage3.jpeg";
 
 export const Section1 = {
     section: 'National Blood Crisis',
-    text: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.",
+    text: "Currently, the American Red Cross is facing its worst blood shortage in over a decade. The pandemic as well as other illness, weather-related closures, and staffing limitations have contributed greatly towards the overall blood donation decline. The Red Cross, which supplies 40% of the nation’s blood supply, has had to limit blood product distributions to hospitals as a result of the shortage. In fact, some hospitals may not receive 1 in 4 blood products they need. Blood cannot be manufactured or stockpiled and can only be made available through the kindness of volunteer donors. Find out if you are eligible to give blood or find a donation site near you today!",
     media: [BloodShortage1, BloodShortage2, BloodShortage3]
 }
 export const Section2 = 
@@ -20,5 +20,5 @@ export const Section2 =
 export const Section3 = 
 {
     section: 'Why Host a Blood Drive:', 
-    text: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.'
+    text: "As a blood drive coordinator, you can save hundreds of lives. By taking leadership, you will be promoting a cause saves millions of lives each year. When you choose to host a blood drives, patients are able to receive the lifesaving blood they urgently need, your organization builds goodwill and improves team spirit by working together to help others, and you show leadership in bringing volunteers and donors together for a good cause."
 }
