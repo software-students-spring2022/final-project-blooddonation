@@ -9,9 +9,13 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const bycrpt = require('bcrypt');
+const morgan = require('morgan')
 
 const app = express();
 app.use(cors());
+app.options('*', cors());
+app.use(morgan('tiny'));
+
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
 app.use(passport.initialize());
