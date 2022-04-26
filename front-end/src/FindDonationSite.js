@@ -92,7 +92,7 @@ function Map(){
                 }}
                 icon = {{
                   url: {logo},
-                  scaledSize: new window.google.maps.size(25,25)
+                  scaledSize: new window.google.maps.Size(25,25)
                 }}>
                   <div>
                     <h2>{selectedCenter.name}</h2>
@@ -123,7 +123,7 @@ function FindDonationSite() {
   return (
     <>
    <div style={{width: '100vw', height: '100vh'}}>
-      <WrappedMap googleMapURL={'https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCqmWLEHRIAQXVBgKV56dq5Vvv4n8Ao_MM'} loadingElement={<div style={{height: "100%"}}/>} containerElement={<div style={{height: "100%"}}/>} mapElement={<div style={{height: "100%"}}/>}/>
+      <WrappedMap googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`} loadingElement={<div style={{height: "100%"}}/>} containerElement={<div style={{height: "100%"}}/>} mapElement={<div style={{height: "100%"}}/>}/>
     </div>
    
     </>
