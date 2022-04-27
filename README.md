@@ -37,4 +37,4 @@ Will update with that information once the project reaches that stage.
 
 
 ### Testing
-Will update with that information once the project reaches that stage.
+To view how to run unit test on backend please go to the [TESTING.md](./TESTING.md)
