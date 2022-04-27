@@ -200,7 +200,8 @@ const Accordion = () => {
                                 <>
                                   <Ul>
                                     <li>Make an Appointment! Select a donation type and find a convenient time that works best for you. 
-                                    <Link to="/finddonationsite" className='linkStyle'>Find a donation site!</Link></li>
+                                    {/* <Link to="/finddonationsite" className='linkStyle'>Find a donation site!</Link> */}
+                                    </li>
                                     <li>Have iron-rich foods, such as red meat, fish, poultry, beans, spinach, iron-fortified cereals or raisins.</li>
                                     <li>Get a good night's rest the night before your donation, eat healthy foods and drink plenty of liquids.</li>
                                     <li>If you are donating platelets Don't take aspirin for 2 days before your appointment.</li>
