@@ -1,23 +1,12 @@
-import './styles/InformationForTeens.css';{
+import './styles/InformationForTeens.css';
 
-  function informationforteens(props) {
-  }
-  return (
-      <>
-        <body className = 'InformationforTeens'>
-          <h1> This is the information on how teenagers can be eligible to donate Blood!</h1>
-          link{'>'}
-          href = 'https://www.redcrossblood.org/donate-blood/how-to-donate/info-for-student-donors.html';
-          rel ='stylesheet';
-        </body>
-      </>
-    )
-    function className ()
-    return link
-  
-    
-     }
-  }
-  
+const InformationForTeens = (props) => {
+    return (
+        <div className = 'InformationforTeens'>
+            <h1> This is the information on how teenagers can be eligible to donate Blood!</h1>
+            <a href = 'https://www.redcrossblood.org/donate-blood/how-to-donate/info-for-student-donors.html'> Click For Information For Teenagers</a>
+          </div>
+      )
+}
   // make this component available to be imported into any other file
-export default informationforteens
+export default InformationForTeens
