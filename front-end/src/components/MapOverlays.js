@@ -309,9 +309,11 @@ const Ul = styled.div`
   }
 `;
 
-export const MapOverlays = ({ showModal, setShowModal }) => {
+export const MapOverlays = ({ showModal, setShowModal, link }) => {
   // important data
   // setting states
+
+  console.log(link);
 
   const [done, setDone] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -994,7 +996,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1036,7 +1038,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1091,7 +1093,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1169,7 +1171,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1241,7 +1243,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1332,7 +1334,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1439,7 +1441,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1474,7 +1476,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                             </p>
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"

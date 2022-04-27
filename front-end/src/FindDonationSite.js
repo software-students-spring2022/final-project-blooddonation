@@ -45,6 +45,7 @@ function Map(){
   const [selectedCenter, setSelectedCenter] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState("");
+  const [link, setLink] = useState("");
 
 
   const openModal = () => {
@@ -92,7 +93,7 @@ function Map(){
               <Marker
                 key = {center.name}
                 position ={{lat: center.coordinates[0], lng:center.coordinates[1]}}
-                onClick={()=>{setSelectedCenter(center);}}
+                onClick={()=>{setSelectedCenter(center); setLink(center.link);}}
               
 
               />
@@ -116,7 +117,7 @@ function Map(){
                   </div>
                 </InfoWindow>)}
                 <div className="find-body">
-                     <MapOverlays showModal={showModal} setShowModal={setShowModal} />
+                     <MapOverlays showModal={showModal} setShowModal={setShowModal} link = {link}/>
                 </div>
         </GoogleMap>
       </>
@@ -161,6 +162,7 @@ function Search(mapData) {
     if (unit==="N") { dist = dist * 0.8684 }
     console.log(dist);
     distances.push(dist);
+    return dist;
 }
 
 
@@ -180,15 +182,18 @@ function Search(mapData) {
       const { lat, lng } = await getLatLng(results[0]);
       console.log("lat: ", lat, "lng: ", lng);
       console.log(typeof mapData.mapData);
+      const distObjs = [];
       mapData.mapData.map(center => {
         console.log(center.name);
-        distance(lat, lng, center.coordinates[0], center.coordinates[1], 'K');
+        const dist = distance(lat, lng, center.coordinates[0], center.coordinates[1], 'K');
+        distObjs.push({name: center.name, dist: dist, link: center.link})
       });
-      console.log("unsorted: ", distances);
-      distances.sort(function(a, b) {
-        return a - b;
+      console.log("distObjs: ", distObjs);
+      console.log("unsorted: ", distObjs);
+      distObjs.sort(function(a, b) {
+        return a.dist - b.dist;
       });
-      console.log("sorted: ", distances);
+      console.log("sorted: ", distObjs);
     } catch (error) {
       console.log("😱 Error: ", error);
     }
@@ -216,7 +221,9 @@ function Search(mapData) {
           </Combobox>
         </div>
 
-        <h2 className="searchResults">The Closest Sites to You!</h2>
+        <h2 className="searchResults">The Closest Sites to You:</h2>
+        <p className="results"></p>
+       
     </div>
     
   );
