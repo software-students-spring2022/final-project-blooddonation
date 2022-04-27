@@ -1,6 +1,5 @@
 # Blood Donation (name is a Work in Progress)
 
-
 ### Contributors
 * [Keyanee Alexandre](https://github.com/keyaneealexandre)
 * [Rachel Kindangen](https://github.com/rkindangen)
@@ -11,6 +10,9 @@
 
 ### Product Vision Statement
 People use apps and websites to connect with others, find furniture, restaurants, clothes, and other things that they need. The same technology can be used to create a centralized place to find blood donation centers and drives to help stop the shortage.
+
+### About
+Our App will be able to help collect and donate blood easily. Users who have any mobile devices or pc with an active internet connection can contact and start searching for a donor, donation sites, information about anything related to donating blood easily through this website. 
 
 ### What and why?
 Since the pandemic started blood donations have decreased by 10% and as of December 2021 the US blood supply is at its lowest level in a decade. The inventory of some blood types has dropped below one day’s supply in recent weeks, which is a dangerously low level. Despite the consistent demand for blood in healthcare, only about 3% of age-eligible people donate blood yearly. Additionally, many people aren't aware of whether or not they're even eligible to donate in the first place. Having a centralized app to not only fine blood donation centers, but also answer FAQs and find out about donation eligibility could increase the percentage of people who donate blood yearly.
@@ -31,6 +33,7 @@ To view the site map, wireframe, and prototype please check out the [UX-DESIGN.m
 
 ### Building 
 Will update with that information once the project reaches that stage.
+
 
 
 ### Testing

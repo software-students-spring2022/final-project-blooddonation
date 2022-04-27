@@ -5,7 +5,7 @@ import './styles/InformationForTeens.css'
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
-const InformationForTeens = props => {
+const InformationForTeens = _() => {
   return (
     <>
       <body className='teeninfo-body'>
