@@ -1,82 +1,67 @@
 export const mapStyle = [
     {
-        "featureType": "landscape.man_made",
-        "elementType": "geometry",
+        "featureType": "all",
+        "elementType": "labels.text.fill",
         "stylers": [
             {
-                "color": "#f7f1df"
+                "color": "#ffffff"
             }
         ]
     },
     {
-        "featureType": "landscape.natural",
-        "elementType": "geometry",
+        "featureType": "all",
+        "elementType": "labels.text.stroke",
         "stylers": [
             {
-                "color": "#d0e3b4"
+                "color": "#000000"
+            },
+            {
+                "lightness": 13
             }
         ]
     },
     {
-        "featureType": "landscape.natural.terrain",
-        "elementType": "geometry",
+        "featureType": "administrative",
+        "elementType": "geometry.fill",
         "stylers": [
             {
-                "visibility": "off"
+                "color": "#000000"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#144b53"
+            },
+            {
+                "lightness": 14
+            },
+            {
+                "weight": 1.4
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#08304b"
             }
         ]
     },
     {
         "featureType": "poi",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.business",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.medical",
         "elementType": "geometry",
         "stylers": [
             {
-                "color": "#fbd3da"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [
+                "color": "#0c4152"
+            },
             {
-                "color": "#bde6ab"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
+                "lightness": 5
             }
         ]
     },
@@ -85,7 +70,7 @@ export const mapStyle = [
         "elementType": "geometry.fill",
         "stylers": [
             {
-                "color": "#ffe15f"
+                "color": "#000000"
             }
         ]
     },
@@ -94,7 +79,10 @@ export const mapStyle = [
         "elementType": "geometry.stroke",
         "stylers": [
             {
-                "color": "#efd151"
+                "color": "#0b434f"
+            },
+            {
+                "lightness": 25
             }
         ]
     },
@@ -103,34 +91,46 @@ export const mapStyle = [
         "elementType": "geometry.fill",
         "stylers": [
             {
-                "color": "#ffffff"
+                "color": "#000000"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#0b3d51"
+            },
+            {
+                "lightness": 16
             }
         ]
     },
     {
         "featureType": "road.local",
-        "elementType": "geometry.fill",
+        "elementType": "geometry",
         "stylers": [
             {
-                "color": "black"
+                "color": "#000000"
             }
         ]
     },
     {
-        "featureType": "transit.station.airport",
-        "elementType": "geometry.fill",
+        "featureType": "transit",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#cfb2db"
+                "color": "#146474"
             }
         ]
     },
     {
         "featureType": "water",
-        "elementType": "geometry",
+        "elementType": "all",
         "stylers": [
             {
-                "color": "#a2daf2"
+                "color": "#021019"
             }
         ]
     }

@@ -3,3 +3,46 @@
   margin-top: 80px;
   padding: 0px;
 }
+
+.search { 
+  margin-top: 2rem; 
+  margin-left: 172px; 
+  transform: translateX(-50%); 
+  width: 100%; 
+  max-width: 300px; 
+} 
+  
+  
+.search input { 
+  padding: 0.5rem; 
+  font-size: 1.5rem; 
+  width: 100%; 
+}
+
+.searchHeading{
+  color: white;
+  margin-top: 2rem; 
+  margin-left: 0px; 
+}
+
+.searchResults{
+  color: white;
+  margin-top: 2rem; 
+  margin-left: 0px; 
+}
+
+
+.controls {
+  position: absolute; 
+  top: 11rem; 
+  left: 1.5%; 
+  width: 350px; 
+  height: 90vh;
+  z-index: 0; 
+  background-color: black;
+}
+
+.controls input {
+  border: none;
+}
+
