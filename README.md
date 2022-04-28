@@ -1,3 +1,7 @@
+# CircleCI
+
+[![CircleCI](https://circleci.com/gh/software-assignments-spring2022/final-project-blooddonation/tree/master.svg?style=shield)](https://circleci.com/gh/software-assignments-spring2022/final-project-blooddonation/tree/master)
+
 # Blood Donation (name is a Work in Progress)
 
 ### Contributors
@@ -26,9 +30,6 @@ Since the pandemic started blood donations have decreased by 10% and as of Decem
 - The public will be able to determine their eligibility and can find the nearest blood bank or blood drive.
 - We can treat blood banks/drives as users as well, depending on what the final form of the app looks like and aims to achieve.
 
-# CircleCI
-
-[![CircleCI](https://circleci.com/gh/software-assignments-spring2022/final-project-blooddonation/tree/master.svg?style=shield)](https://circleci.com/gh/software-assignments-spring2022/final-project-blooddonation/tree/master)
 
 ### Contribute
 
