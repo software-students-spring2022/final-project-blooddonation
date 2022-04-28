@@ -107,18 +107,18 @@ function Map(){
                 onCloseClick = {() => {
                   setSelectedCenter(null);
                 }}
-                icon = {{
-                  url: {logo},
-                  scaledSize: new window.google.maps.Size(25,25)
-                }}>
-                  <div>
+                >
+                  <>
                     <h2 onClick={openModal}>{selectedCenter.name}</h2>
                     <p>{selectedCenter.Address}</p>
-                  </div>
+                  </>
                 </InfoWindow>)}
-                <div className="find-body">
-                     <MapOverlays showModal={showModal} setShowModal={setShowModal} link = {link}/>
-                </div>
+                {selectedCenter && (
+                  <div className="find-body">
+                    <MapOverlays showModal={showModal} setShowModal={setShowModal} link = {link}/>
+                  </div>
+                )}
+                
         </GoogleMap>
       </>
     ): null}
@@ -130,7 +130,11 @@ function Map(){
 
 function Search(mapData) {
   console.warn = () => {}
-  console.log(mapData);
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
   const {
     ready,
     value,
@@ -145,6 +149,10 @@ function Search(mapData) {
   });
 
   let distances = [];
+  const [link, setLink] = useState("");
+  const [distObjs, setDistObjs] = useState([]);
+  const [results, setResults] = useState(false);
+  console.log(results);
 
   function distance(lat1, lon1, lat2, lon2, unit) {
     let radlat1 = Math.PI * lat1/180
@@ -181,27 +189,46 @@ function Search(mapData) {
       const results = await getGeocode({ address });
       const { lat, lng } = await getLatLng(results[0]);
       console.log("lat: ", lat, "lng: ", lng);
-      console.log(typeof mapData.mapData);
-      const distObjs = [];
+      const temp = [];
       mapData.mapData.map(center => {
-        console.log(center.name);
         const dist = distance(lat, lng, center.coordinates[0], center.coordinates[1], 'K');
-        distObjs.push({name: center.name, dist: dist, link: center.link})
+        temp.push({name: center.name, dist: dist, link: center.link, address: center.Address})
       });
-      console.log("distObjs: ", distObjs);
-      console.log("unsorted: ", distObjs);
-      distObjs.sort(function(a, b) {
+      console.log("distObjs: ", temp);
+      console.log("unsorted: ", temp);
+      temp.sort(function(a, b) {
         return a.dist - b.dist;
       });
-      console.log("sorted: ", distObjs);
+      console.log("sorted: ", temp);
+      setResults(true);
+      setDistObjs(temp);
     } catch (error) {
       console.log("😱 Error: ", error);
     }
   };
 
+  const handleCurrent = (lat, lng) =>{
+    console.log("here")
+    try {
+      const temp = [];
+      mapData.mapData.map(center => {
+        const dist = distance(lat, lng, center.coordinates[0], center.coordinates[1], 'K');
+        temp.push({name: center.name, dist: dist, link: center.link, address: center.Address})
+      });
+      temp.sort(function(a, b) {
+        return a.dist - b.dist;
+      });
+      setResults(true);
+      setDistObjs(temp);
+    } catch (error) {
+      console.log("😱 Error: ", error);
+    }
+
+  }
+
   return (
     <div className="controls">
-      <h1 className="searchHeading"> Find a Donation Center Near You!</h1>
+      <h1 className="searchHeading"> Find a Donation Center in the NYC area!</h1>
         <div className="search">
           <Combobox onSelect={handleSelect}>
             <ComboboxInput
@@ -221,8 +248,30 @@ function Search(mapData) {
           </Combobox>
         </div>
 
+        <h3 className="currentLoc" onClick={() => {navigator.geolocation.getCurrentPosition((position) => {
+          handleCurrent(position.coords.latitude, position.coords.longitude);},() => null);}}>Use Current location</h3>
+
         <h2 className="searchResults">The Closest Sites to You:</h2>
-        <p className="results"></p>
+        {results ?(
+          <>
+            {console.log("got results", distObjs)}
+            <div className="results">
+              {distObjs.map((center) => (
+                <p key={center.name} className="listingSites" onClick={()=>{setLink(center.link)}}> <div className="centerName" onClick={openModal}>{center.name}</div> {Math.round(center.dist * 10) / 10}km away 
+                <br/><br/>
+                {center.address}
+                </p>
+                
+              ))}
+            </div>
+            <div className="find-body">
+                    <MapOverlays showModal={showModal} setShowModal={setShowModal} link = {link}/>
+            </div>
+          </>
+             
+          ):
+          <> {console.log("here")} <p className="noResults"> Type in your location or select "Use Current Location" to see donation centers close to you! You can also click the markers on the map to choose a site!</p></>
+          }
        
     </div>
     

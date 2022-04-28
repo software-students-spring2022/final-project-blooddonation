@@ -6,7 +6,7 @@
 
 .search { 
   margin-top: 2rem; 
-  margin-left: 172px; 
+  margin-left: 200px; 
   transform: translateX(-50%); 
   width: 100%; 
   max-width: 300px; 
@@ -31,12 +31,71 @@
   margin-left: 0px; 
 }
 
+.currentLoc{
+  color: white;
+  margin-top: 0.5rem; 
+  margin-left: 0px; 
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.currentLoc:hover{
+  color: gray;
+  margin-top: 0.5rem; 
+  margin-left: 0px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.results{
+  color: white;
+  margin-top: 2rem; 
+  margin-left: 0px;
+  overflow-y: auto;
+  max-height: 400px;
+  padding-bottom: 10px;
+  text-align: left;
+  
+}
+
+.listingSites{
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  border-top: 1px solid red;
+}
+
+
+.noResults{
+  color: white;
+  margin-top: 2rem; 
+  margin-left: 0px;
+  
+}
+
+.centerName{
+  font-weight: bolder;
+  font-size: 20px;
+  text-decoration: underline;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.centerName:hover{
+  font-weight: bolder;
+  font-size: 20px;
+  text-decoration: underline;
+  margin-bottom: 5px;
+  cursor: pointer;
+  color: gray;
+}
+
 
 .controls {
   position: absolute; 
   top: 11rem; 
   left: 1.5%; 
-  width: 350px; 
+  width: 400px; 
   height: 90vh;
   z-index: 0; 
   background-color: black;
