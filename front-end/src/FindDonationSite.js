@@ -60,7 +60,6 @@ function Map(){
       .then((response) => {
         // axios bundles up all response data in response.data property
         const MapData = response.data.donationCenters;
-        console.log(MapData);
         setMapData(MapData);
       })
       .catch((err) => {
@@ -89,7 +88,6 @@ function Map(){
 
             {mapData.map(center => (
               <>
-              {console.log("here")}
               <Marker
                 key = {center.name}
                 position ={{lat: center.coordinates[0], lng:center.coordinates[1]}}
@@ -152,7 +150,6 @@ function Search(mapData) {
   const [link, setLink] = useState("");
   const [distObjs, setDistObjs] = useState([]);
   const [results, setResults] = useState(false);
-  console.log(results);
 
   function distance(lat1, lon1, lat2, lon2, unit) {
     let radlat1 = Math.PI * lat1/180
@@ -168,7 +165,6 @@ function Search(mapData) {
     dist = dist * 60 * 1.1515
     if (unit==="K") { dist = dist * 1.609344 }
     if (unit==="N") { dist = dist * 0.8684 }
-    console.log(dist);
     distances.push(dist);
     return dist;
 }
@@ -188,18 +184,14 @@ function Search(mapData) {
     try {
       const results = await getGeocode({ address });
       const { lat, lng } = await getLatLng(results[0]);
-      console.log("lat: ", lat, "lng: ", lng);
       const temp = [];
       mapData.mapData.map(center => {
         const dist = distance(lat, lng, center.coordinates[0], center.coordinates[1], 'K');
         temp.push({name: center.name, dist: dist, link: center.link, address: center.Address})
       });
-      console.log("distObjs: ", temp);
-      console.log("unsorted: ", temp);
       temp.sort(function(a, b) {
         return a.dist - b.dist;
       });
-      console.log("sorted: ", temp);
       setResults(true);
       setDistObjs(temp);
     } catch (error) {
@@ -208,7 +200,6 @@ function Search(mapData) {
   };
 
   const handleCurrent = (lat, lng) =>{
-    console.log("here")
     try {
       const temp = [];
       mapData.mapData.map(center => {
@@ -254,7 +245,6 @@ function Search(mapData) {
         <h2 className="searchResults">The Closest Sites to You:</h2>
         {results ?(
           <>
-            {console.log("got results", distObjs)}
             <div className="results">
               {distObjs.map((center) => (
                 <p key={center.name} className="listingSites" onClick={()=>{setLink(center.link)}}> <div className="centerName" onClick={openModal}>{center.name}</div> {Math.round(center.dist * 10) / 10}km away 
@@ -270,7 +260,7 @@ function Search(mapData) {
           </>
              
           ):
-          <> {console.log("here")} <p className="noResults"> Type in your location or select "Use Current Location" to see donation centers close to you! You can also click the markers on the map to choose a site!</p></>
+          <><p className="noResults"> Type in your location or select "Use Current Location" to see donation centers close to you! You can also click the markers on the map to choose a site!</p></>
           }
        
     </div>
@@ -294,7 +284,7 @@ function FindDonationSite() {
   return (
     <>
    <div style={{width: '97vw', height: '100vh', left: '-20%'}}>
-      <WrappedMap googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`} loadingElement={<div style={{height: "100%"}}/>} containerElement={<div style={{height: "100%"}}/>} mapElement={<div style={{height: "100%"}}/>}/>
+      <WrappedMap googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`} loadingElement={<div style={{height: "100%"}}/>} containerElement={<div style={{height: "100%"}}/>} mapElement={<div style={{height: "100%"}}/>}/>
     </div>
    
     </>
