@@ -1,6 +1,7 @@
 import "./styles/Header.css";
 import logo from "./images/logo.svg";
 import { NavLink } from "react-router-dom";
+import { useState} from "react";
 
 /**
  * A React component that is used for the header displayed at the top of every page of the site.
@@ -8,6 +9,10 @@ import { NavLink } from "react-router-dom";
  * @returns The contents of this component, in JSX form.
  */
 const Header = (props) => {
+  const jwtToken = localStorage.getItem("token")
+  console.log( "token state "+localStorage.getItem("token")===null)
+  console.warn("loading "+Math.random())
+  const [tokenPresent, setTokenPresent] = useState(localStorage.getItem("token")!==null); //
   return (
     <header className="Header-header">
       <nav className="Header-navbar">
@@ -50,7 +55,40 @@ const Header = (props) => {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink
+            {tokenPresent ?
+            (
+              <>
+              <NavLink
+              to="/logout"
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      color: "#fff",
+                      background: "#000000",
+                      borderRadius: 30,
+                      paddingTop: 5,
+                      paddingBottom: 5,
+                      paddingLeft: 20,
+                      paddingRight: 20,
+                    }
+                  : {
+                      color: "#000000",
+                      background: "#fff",
+                      borderRadius: 30,
+                      paddingTop: 5,
+                      paddingBottom: 5,
+                      paddingLeft: 20,
+                      paddingRight: 20,
+                    }
+              }
+            >
+              Logout
+            </NavLink>
+            </>
+            ):
+            (
+              <>
+              <NavLink
               to="/login"
               style={({ isActive }) =>
                 isActive
@@ -76,6 +114,7 @@ const Header = (props) => {
             >
               Login
             </NavLink>
+
             <NavLink
               to="/createaccount"
               style={({ isActive }) =>
@@ -102,6 +141,9 @@ const Header = (props) => {
             >
               Sign Up
             </NavLink>
+            </>
+            )  
+          }
           </li>
         </ul>
       </nav>
