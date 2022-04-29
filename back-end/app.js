@@ -25,20 +25,20 @@ mongoose
   .catch((err) => console.error(`Failed to connect to MongoDB: ${err}`));
 
 const { User } = require('./models/User');
-const eligibilityQuestionnaire = require('./quizQuestions/EligibilityQuestionnaireData');
-const WholeBloodQuestions = require('./quizQuestions/WholeBloodQuestions');
-const PowerRedQuestions = require('./quizQuestions/PowerRedQuestions');
-const PlateletQuestions = require('./quizQuestions/PlateletQuestions');
-const PlasmaQuestions = require('./quizQuestions/PlasmaQuestions');
-const questions = require('./quizQuestions/questions');
-const FAQData = require('./pageData/FAQData');
-const GeneralHealthData = require('./pageData/GeneralHealthData');
-const LifestyleData = require('./pageData/LifestyleData');
-const MedicalCondData = require('./pageData/MedicalCondData');
-const MedicalTreatData = require('./pageData/MedicalTreatData');
-const MedicationData = require('./pageData/MedicationData');
-const STDData = require('./pageData/STDData');
-const TravelData = require('./pageData/TravelData');
+const { faqData } = require('./models/FAQData');
+const { generalhealthData } = require('./models/GeneralHealthData');
+const { lifestyleData } = require('./models/LifestyleData');
+const { medicalcondData } = require('./models/MedicalCondData');
+const { medicaltreatData } = require('./models/MedicalTreatData');
+const { medicationData } = require('./models/MedicationData');
+const { travelData } = require('./models/TravelData');
+const { stdData } = require('./models/STDData');
+const { eligibilityquestionnaireData } = require('./models/EligibilityQuestionnaireData');
+const { wholebloodquestions } = require('./models/WholeBloodQuestions');
+const { powerredquestions } = require('./models/PowerRedQuestions');
+const { plateletquestions } = require('./models/PlateletQuestions');
+const { plasmaquestions } = require('./models/PlasmaQuestions');
+const { Questions } = require('./models/questions');
 
 // a route to handle logging out users
 app.get('/logout', (req, res) => {
@@ -151,14 +151,14 @@ app.post('/editprofile/:id', async (req, res) => {
 app.get(
   '/createaccount/eligibilityquestionnaire',
   passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    // const user = req.body;
-
-    // res.status(200).json(user);
-    // console.log(req.body);
-
+  async (req, res) => {
     try {
-      const EligibilityQuestionnaireData = eligibilityQuestionnaire;
+      const getQuestionnaire = await eligibilityquestionnaireData
+        .find({}, { _id: 0, data: 1 })
+        .exec();
+      const temp = getQuestionnaire[0];
+      const EligibilityQuestionnaireData = temp.data;
+
       return res.json({
         EligibilityQuestionnaireData,
         user: {
@@ -218,10 +218,30 @@ app.get('/profile', passport.authenticate('jwt', { session: false }), (req, res)
 });
 
 app.get('/finddonationsite', async (req, res) => {
-  // const user = req.body;
+  let getData = await wholebloodquestions.find({}, { _id: 0, data: 1 }).exec();
+  let temp = getData[0];
+  const WholeBloodQuestions = temp.data;
 
-  // res.status(200).json(user);
-  // console.log(req.body);
+  getData = await powerredquestions.find({}, { _id: 0, data: 1 }).exec();
+  console.log(getData[0]);
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const PowerRedQuestions = temp.data;
+
+  getData = await plateletquestions.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const PlateletQuestions = temp.data;
+
+  getData = await plasmaquestions.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const PlasmaQuestions = temp.data;
+
+  getData = await Questions.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const questions = temp.data;
 
   try {
     return res.json({
@@ -266,6 +286,10 @@ app.get('/FAQ', async (req, res) => {
   // console.log(req.body);
 
   try {
+    const getFAQ = await faqData.find({}, { _id: 0, data: 1 }).exec();
+    const temp = getFAQ[0];
+    // console.log(temp.data);
+    const FAQData = temp.data;
     return res.json({
       FAQData,
 
@@ -282,10 +306,39 @@ app.get('/FAQ', async (req, res) => {
 });
 
 app.get('/FAQ/eligibility', async (req, res) => {
-  // const user = req.body;
+  let getData = await generalhealthData.find({}, { _id: 0, data: 1 }).exec();
+  let temp = getData[0];
+  const GeneralHealthData = temp.data;
 
-  // res.status(200).json(user);
-  // console.log(req.body);
+  getData = await medicalcondData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const MedicalCondData = temp.data;
+
+  getData = await lifestyleData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const LifestyleData = temp.data;
+
+  getData = await medicaltreatData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const MedicalTreatData = temp.data;
+
+  getData = await medicationData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const MedicationData = temp.data;
+
+  getData = await stdData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const STDData = temp.data;
+
+  getData = await travelData.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const TravelData = temp.data;
 
   try {
     return res.json({

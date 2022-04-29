@@ -3,11 +3,13 @@ import {
   Box,
   Card,
   CardContent,
+  CardActionArea,
   Typography,
   Grid,
   CardMedia,
 } from "@mui/material";
 import { Section1, Section2, Section3 } from "./components/HomeData";
+import { Link } from "react-router-dom";
 /**
  * A React component that represents the Home page of the app.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -30,15 +32,10 @@ const Home = (props) => {
                 >
                   {Section1.section}
                 </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12}>
-            <Card className="home-card">
-              <CardContent>
                 <Typography
-                  variant="body2"
-                  component="div"
+                  className="card-item"
+                  variant="body1"
+                  color="text.secondary"
                   sx={{ textAlign: "left", margin: 2 }}
                 >
                   {Section1.text}
@@ -68,7 +65,7 @@ const Home = (props) => {
                 </Typography>
                 <Typography
                   className="card-item"
-                  variant="body2"
+                  variant="body1"
                   color="text.secondary"
                   sx={{ textAlign: "left", margin: 2 }}
                 >
@@ -97,24 +94,27 @@ const Home = (props) => {
 
         <Grid container>
           <Card className="home-card" sx={{ boxShadow: 1 }}>
-            <CardContent>
-              <Grid item xs={12}>
-                <Typography
-                  variant="h5"
-                  component="div"
-                  sx={{ textAlign: "left", margin: 2 }}
-                >
-                  {Section3.section}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  component="div"
-                  sx={{ textAlign: "left", margin: 2 }}
-                >
-                  {Section3.text}
-                </Typography>
-              </Grid>
-            </CardContent>
+            <CardActionArea component={Link} to="/FAQ/OtherWaysToHelp">
+              <CardContent>
+                <Grid item xs={12}>
+                  <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{ textAlign: "left", margin: 2 }}
+                  >
+                    {Section3.section}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    component="div"
+                    color="text.secondary"
+                    sx={{ textAlign: "left", margin: 2 }}
+                  >
+                    {Section3.text}
+                  </Typography>
+                </Grid>
+              </CardContent>
+            </CardActionArea>
           </Card>
         </Grid>
       </div>

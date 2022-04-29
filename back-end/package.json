@@ -4,8 +4,8 @@
   "description": "The back-end of your project will live in this directory.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "test": "mocha ",
+    "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
