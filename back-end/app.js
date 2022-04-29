@@ -9,9 +9,13 @@ const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const bycrpt = require('bcrypt');
+// const morgan = require('morgan')
 
 const app = express();
 app.use(cors());
+// app.options('*', cors());
+// app.use(morgan('tiny'));
+
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
 app.use(passport.initialize());
@@ -38,6 +42,7 @@ const { wholebloodquestions } = require('./models/WholeBloodQuestions');
 const { powerredquestions } = require('./models/PowerRedQuestions');
 const { plateletquestions } = require('./models/PlateletQuestions');
 const { plasmaquestions } = require('./models/PlasmaQuestions');
+const { donationcenter } = require('./models/DonationCenters');
 const { Questions } = require('./models/questions');
 
 // a route to handle logging out users
@@ -223,7 +228,6 @@ app.get('/finddonationsite', async (req, res) => {
   const WholeBloodQuestions = temp.data;
 
   getData = await powerredquestions.find({}, { _id: 0, data: 1 }).exec();
-  console.log(getData[0]);
   // eslint-disable-next-line prefer-destructuring
   temp = getData[0];
   const PowerRedQuestions = temp.data;
@@ -243,6 +247,11 @@ app.get('/finddonationsite', async (req, res) => {
   temp = getData[0];
   const questions = temp.data;
 
+  getData = await donationcenter.find({}, { _id: 0, data: 1 }).exec();
+  // eslint-disable-next-line prefer-destructuring
+  temp = getData[0];
+  const donationCenters = temp.data;
+
   try {
     return res.json({
       WholeBloodQuestions,
@@ -250,6 +259,7 @@ app.get('/finddonationsite', async (req, res) => {
       PlateletQuestions,
       PlasmaQuestions,
       questions,
+      donationCenters,
       // return the message we just saved
       status: 'all good',
     });

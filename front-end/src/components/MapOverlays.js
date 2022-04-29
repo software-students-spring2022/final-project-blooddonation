@@ -21,7 +21,7 @@ const Background = styled.div`
 
 const ModalWrapper = styled.div`
   width: 800px;
-  height: 600px;
+  height: 620px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
@@ -309,7 +309,7 @@ const Ul = styled.div`
   }
 `;
 
-export const MapOverlays = ({ showModal, setShowModal }) => {
+export const MapOverlays = ({ showModal, setShowModal, link }) => {
   // important data
   // setting states
 
@@ -994,7 +994,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1036,7 +1036,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1091,7 +1091,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1169,7 +1169,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1241,7 +1241,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1332,7 +1332,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1439,7 +1439,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                           <div className="spacing">
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
@@ -1474,7 +1474,7 @@ export const MapOverlays = ({ showModal, setShowModal }) => {
                             </p>
                             <Button>
                               <a
-                                href="http://example.com/"
+                                href={link}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="redirect-link"
