@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useSearchParams, Navigate } from "react-router-dom";
 // import { accountData } from "./components/AccountData";
 import axios from "axios";
+
 /**
  * A React component that represents the Home page of the app.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -29,6 +30,7 @@ const LogIn = (props) => {
   const handleSubmit = async (e) => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
     e.preventDefault();
+    console.log("here");
 
     try {
       // create an object with the data we want to send to the server
