@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 
-const CreateAccount = (props) => {
+const CreateAccount = ({tokenPresent, setTokenPresent}) => {
   const [showPassword] = useState(false);
   const [young, setYoung] = useState(false);
 
@@ -21,6 +21,7 @@ const CreateAccount = (props) => {
     if (response.success && response.token) {
       console.log(`User successfully logged in: ${response.email}`);
       localStorage.setItem("token", response.token); // store the token into localStorage
+      setTokenPresent(true);
     }
   }, [response]);
 

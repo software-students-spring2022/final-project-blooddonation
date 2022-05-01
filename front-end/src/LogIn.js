@@ -9,7 +9,7 @@ import axios from "axios";
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
-const LogIn = (props) => {
+const LogIn = ({tokenPresent, setTokenPresent}) => {
   let [urlSearchParams] = useSearchParams(); // get access to the URL query string parameters
   const [showPassword] = useState(false);
 
@@ -23,6 +23,7 @@ const LogIn = (props) => {
     if (response.success && response.token) {
       console.log(`User successfully logged in: ${response.username}`);
       localStorage.setItem("token", response.token); // store the token into localStorage
+      setTokenPresent(true);
     }
   }, [response]);
 

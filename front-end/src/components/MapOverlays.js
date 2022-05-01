@@ -441,9 +441,6 @@ export const MapOverlays = ({ showModal, setShowModal, link }) => {
       .then((res) => {
         // setResponse(res.data); // store the response data
         setUser(res.data.user);
-
-        console.log("created User", res.data.user);
-
         addType(res.data.user);
         setCreated(false);
       })
