@@ -41,7 +41,7 @@ To view the site map, wireframe, and prototype please check out the [UX-DESIGN.m
 
 ### Building
 
-Will update with that information once the project reaches that stage.
+To view how to build and launch the project go to the [BUILDING.md](./BUILDING.md)
 
 ### Testing
 
