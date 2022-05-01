@@ -42,5 +42,7 @@ In order to help you write test names properly, you can use the "unit of work - 
 
 
 
+
 ### Run Test
-npm run test
+To run test in the **frontend** directory, install by using **npm install** and launch by using **npm start**
+To run Test in the **backend** directory, install by using **npm install** and launch by using **npm start**
