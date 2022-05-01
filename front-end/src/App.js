@@ -18,12 +18,19 @@ import InformationForTeens from "./InformationForTeens";
 import CreateAccount from "./CreateAccount";
 import EligibilityQuestionnaire from "./EligibilityQuestionnaire";
 import EditProfileForm from "./EditProfileForm";
+import { useState} from "react";
+
 
 const App = (props) => {
+  const jwtToken = localStorage.getItem("token")
+  console.log( "token state "+localStorage.getItem("token")===null)
+  console.warn("loading "+Math.random())
+  const [tokenPresent, setTokenPresent] = useState(localStorage.getItem("token")!==null);
+  
   return (
     <div className="App">
       <Router>
-        <Header />
+        <Header tokenPresent={tokenPresent}/>
         <main className="App-main">
           <Routes>
             <Route path="/" element={<Home />}></Route>
@@ -34,9 +41,9 @@ const App = (props) => {
             <Route path="/FAQ" element={<Faq />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/contactus" element={<ContactUs />}></Route>
-            <Route path="/login" element={<LogIn />}></Route>
-            <Route path="/createaccount" element={<CreateAccount />}></Route>
-            <Route path="/logout" element={<Logout />}></Route>
+            <Route path="/login" element={<LogIn tokenPresent={tokenPresent} setTokenPresent={setTokenPresent}/>}></Route>
+            <Route path="/createaccount" element={<CreateAccount  tokenPresent={tokenPresent} setTokenPresent={setTokenPresent}/>}></Route>
+            <Route path="/logout" element={<Logout tokenPresent={tokenPresent} setTokenPresent={setTokenPresent}/>}></Route>
             <Route path="FAQ/eligibility" element={<Eligibility />} />
             <Route path="FAQ/otherwaystohelp" element={<OtherWaysToHelp />} />
             <Route

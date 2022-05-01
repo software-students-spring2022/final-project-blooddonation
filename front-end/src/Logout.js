@@ -2,7 +2,7 @@
 import { Button } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
 
-const Logout = (props) => {
+const Logout = ({tokenPresent, setTokenPresent}) => {
 
 
   const navigate = useNavigate();
@@ -10,6 +10,7 @@ const Logout = (props) => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    setTokenPresent(false);
     navigate('/');
   }
 
