@@ -3,6 +3,7 @@
 # Blood Donation
 
 http://142.93.246.192:4000/
+[Presentation Slides](https://docs.google.com/presentation/d/1UEARUPQDFrGnPMcGVSJ3nsk2RQWTkuOM0XINxeT-a8A/edit#slide=id.p)
 
 ### Contributors
 
@@ -15,7 +16,7 @@ http://142.93.246.192:4000/
 
 ### Product Vision Statement
 
-People use apps and websites to connect with others, find furniture, restaurants, clothes, and other things that they need. The same technology can be used to create a centralized place to find blood donation centers and drives to help stop the shortage.
+People use apps and websites to connect with others, find furniture, restaurants, clothes, and other things that they need. The same technology can be used to create a centralized place to find blood donation centers in the NYC area to help stop the shortage.
 
 ### About
 Our App will be able to help collect and donate blood easily. Users who have any mobile devices or pc with an active internet connection can contact and start searching for a donor, donation sites, information about anything related to donating blood easily through this website.
@@ -28,7 +29,6 @@ Since the pandemic started blood donations have decreased by 10% and as of Decem
 
 - People who are interested in learning more about blood donation and people who are interested in donating blood.
 - The public will be able to determine their eligibility and can find the nearest blood bank or blood drive.
-- We can treat blood banks/drives as users as well, depending on what the final form of the app looks like and aims to achieve.
 
 
 ### Contribute
