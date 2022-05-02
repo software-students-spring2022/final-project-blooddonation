@@ -2,8 +2,8 @@
 
 # Blood Donation
 
-http://142.93.246.192:4000/
-[Presentation Slides](https://docs.google.com/presentation/d/1UEARUPQDFrGnPMcGVSJ3nsk2RQWTkuOM0XINxeT-a8A/edit#slide=id.p)
+- http://142.93.246.192:4000/
+- [Presentation Slides](https://docs.google.com/presentation/d/1UEARUPQDFrGnPMcGVSJ3nsk2RQWTkuOM0XINxeT-a8A/edit#slide=id.p)
 
 ### Contributors
 
