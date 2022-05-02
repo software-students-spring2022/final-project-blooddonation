@@ -1,8 +1,8 @@
-# CircleCI
-
 [![CircleCI](https://circleci.com/gh/software-assignments-spring2022/final-project-blooddonation/tree/master.svg?style=shield)](https://circleci.com/gh/software-assignments-spring2022/final-project-blooddonation/tree/master)
 
-# Blood Donation (name is a Work in Progress)
+# Blood Donation
+
+http://142.93.246.192:4000/
 
 ### Contributors
 
