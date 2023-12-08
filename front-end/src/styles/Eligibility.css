@@ -1,0 +1,199 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.eligibilitybody {
+  margin: 0px;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  margin-left: 5px;
+  padding: 0px;
+}
+
+.sectionheader {
+  padding-top: 5em;
+}
+
+.backlink {
+  text-align: left;
+  color: rgb(0, 0, 0);
+  text-decoration: underline;
+  font-size: 20px;
+}
+
+.movelink {
+  margin-top: 70px;
+}
+
+.title {
+  display: inline-block;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  font-weight: bolder;
+  margin-left: 200px;
+  font-size: 50px;
+}
+
+.links:hover {
+  color: gray;
+}
+
+.sidenav {
+  width: 255px;
+  height: 1500px;
+  position: fixed;
+  top: 0px;
+  left: 0;
+  z-index: 1;
+  background: rgb(255, 255, 255);
+  overflow: auto;
+}
+
+.container {
+  background: rgb(255, 255, 255);
+  position: fixed;
+  top: 145px;
+  left: 0;
+  width: 245px;
+  border-radius: 5px;
+  border: 1px solid #d4d4d4;
+}
+
+.site-container {
+  background: rgb(255, 0, 0);
+  position: fixed;
+  top: 110px;
+  left: 0;
+  width: 245px;
+  border-radius: 5px;
+  border: 1px solid #d4d4d4;
+  border-left: 10px;
+}
+
+.help-container {
+  background: rgb(255, 0, 0);
+  position: fixed;
+  top: 625px;
+  left: 0;
+  width: 245px;
+  border-radius: 5px;
+  border: 1px solid #d4d4d4;
+  border-left: 10px;
+}
+
+.side-link {
+  display: block;
+  padding: 13px 30px;
+  border-top: 1px solid #d4d4d4;
+  color: black;
+  font-size: 12px;
+  position: relative;
+  text-decoration: none;
+}
+
+.findSite-link {
+  display: block;
+  padding: 13px 30px;
+  border-bottom: 1px solid #d4d4d4;
+  color: white;
+  font-size: 16px;
+  position: relative;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bolder;
+}
+
+.side-link:hover {
+  color: gray;
+}
+
+.findSite-link:hover {
+  color: gray;
+}
+
+.backlink:hover {
+  color: gray;
+}
+
+#wholeblood {
+  height: 400px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+#powerred {
+  height: 400px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-top: 150px;
+  margin-bottom: 20px;
+}
+
+#platelet {
+  height: 400px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  margin-top: 150px;
+}
+
+#plasma {
+  height: 400px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  margin-top: 150px;
+}
+
+#meds {
+  height: 980px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  margin-top: 150px;
+}
+
+#general {
+  height: 565px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+}
+
+#travel {
+  height: 565px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+}
+
+#medcond {
+  height: 2418px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+}
+
+#medtreat {
+  height: 860px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+}
+
+#life {
+  height: 910px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+
+#std {
+  height: 910px;
+  margin-left: 230px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+}

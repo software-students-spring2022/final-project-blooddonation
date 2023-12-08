@@ -1,0 +1,107 @@
+.find-body {
+  margin: 0px;
+  margin-top: 80px;
+  padding: 0px;
+}
+
+.search { 
+  margin-top: 2rem; 
+  margin-left: 200px; 
+  transform: translateX(-50%); 
+  width: 100%; 
+  max-width: 300px; 
+} 
+  
+  
+.search input { 
+  padding: 0.5rem; 
+  font-size: 1.5rem; 
+  width: 100%; 
+}
+
+.searchHeading{
+  color: white;
+  margin-top: 2rem; 
+  margin-left: 0px; 
+}
+
+.searchResults{
+  color: white;
+  margin-top: 2rem; 
+  margin-left: 0px; 
+}
+
+.currentLoc{
+  color: white;
+  margin-top: 0.5rem; 
+  margin-left: 0px; 
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.currentLoc:hover{
+  color: gray;
+  margin-top: 0.5rem; 
+  margin-left: 0px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.results{
+  color: white;
+  margin-top: 2rem; 
+  margin-left: 0px;
+  overflow-y: auto;
+  max-height: 400px;
+  padding-bottom: 10px;
+  text-align: left;
+  
+}
+
+.listingSites{
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  border-top: 1px solid red;
+}
+
+
+.noResults{
+  color: white;
+  margin-top: 2rem; 
+  margin-left: 0px;
+  
+}
+
+.centerName{
+  font-weight: bolder;
+  font-size: 20px;
+  text-decoration: underline;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.centerName:hover{
+  font-weight: bolder;
+  font-size: 20px;
+  text-decoration: underline;
+  margin-bottom: 5px;
+  cursor: pointer;
+  color: gray;
+}
+
+
+.controls {
+  position: absolute; 
+  top: 11rem; 
+  left: 1.5%; 
+  width: 400px; 
+  height: 90vh;
+  z-index: 0; 
+  background-color: black;
+}
+
+.controls input {
+  border: none;
+}
+

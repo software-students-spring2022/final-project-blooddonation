@@ -1,0 +1,26 @@
+body {
+  margin: 0px;
+  margin-top: 20px;
+  padding: 0px;
+}
+
+.inner {
+  margin: 20px;
+  padding: 15px;
+  text-align: left;
+}
+
+ul {
+  list-style-type: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.firstQ {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.secondQ {
+  padding-top: 10px;
+}

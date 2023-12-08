@@ -1,0 +1,40 @@
+.faqheaderbody {
+  margin: 0px;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  margin-left: 5px;
+  padding: 0px;
+}
+
+.faqnav {
+  display: flex;
+  top: 100px;
+  width: 100%;
+  overflow: auto;
+  height: auto;
+}
+
+.left {
+  flex: 1 1 100px;
+  text-align: left;
+}
+
+.links {
+  display: inline-block;
+  text-align: right;
+  padding: 14px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bolder;
+}
+
+.links:hover {
+  color: gray;
+}
+
+.faqh2 {
+  font-weight: bolder;
+  font-size: 35px;
+  text-decoration: underline;
+}

@@ -1,19 +1,48 @@
-# Project Repository
+[![CircleCI](https://circleci.com/gh/software-assignments-spring2022/final-project-blooddonation/tree/master.svg?style=shield)](https://circleci.com/gh/software-assignments-spring2022/final-project-blooddonation/tree/master)
 
-This repository will be used for team projects.
+# Blood Donation
 
-Several sets of instructions are included in this repository. They should each be treated as separate assignments with their own due dates and sets of requirements.
+- http://142.93.246.192:4000/
+- [Presentation Slides](https://docs.google.com/presentation/d/1UEARUPQDFrGnPMcGVSJ3nsk2RQWTkuOM0XINxeT-a8A/edit#slide=id.p)
 
-1. See the [App Map & Wireframes](instructions-0a-app-map-wireframes.md) and [Prototyping](./instructions-0b-prototyping.md) instructions for the requirements of the initial user experience design of the app.
+### Contributors
 
-1. Delete the contents of this file and replace with the contents of a proper README.md, as described in the [project setup instructions](./instructions-0c-project-setup.md)
+- [Keyanee Alexandre](https://github.com/keyaneealexandre)
+- [Rachel Kindangen](https://github.com/rkindangen)
+- [Joshua Plattner](https://github.com/jplattner73)
+- [Elena Wang](https://github.com/ELENA0206)
+- [Aaron Pahwa](https://github.com/ampahwa)
+- [Shrankhla Chand](https://github.com/shrankhla1234)
 
-1. See the [Sprint Planning instructions](instructions-0d-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
+### Product Vision Statement
 
-1. See the [Front-End Development instructions](./instructions-1-front-end.md) for the requirements of the initial Front-End Development.
+People use apps and websites to connect with others, find furniture, restaurants, clothes, and other things that they need. The same technology can be used to create a centralized place to find blood donation centers in the NYC area to help stop the shortage.
 
-1. See the [Back-End Development instructions](./instructions-2-back-end.md) for the requirements of the initial Back-End Development.
+### About
+Our App will be able to help collect and donate blood easily. Users who have any mobile devices or pc with an active internet connection can contact and start searching for a donor, donation sites, information about anything related to donating blood easily through this website.
 
-1. See the [Database Integration instructions](./instructions-3-database.md) for the requirements of integrating a database into the back-end.
+### What and why?
 
-1. See the [Deployment instructions](./instructions-4-deployment.md) for the requirements of deploying an app.
+Since the pandemic started blood donations have decreased by 10% and as of December 2021 the US blood supply is at its lowest level in a decade. The inventory of some blood types has dropped below one day’s supply in recent weeks, which is a dangerously low level. Despite the consistent demand for blood in healthcare, only about 3% of age-eligible people donate blood yearly. Additionally, many people aren't aware of whether or not they're even eligible to donate in the first place. Having a centralized app to not only fine blood donation centers, but also answer FAQs and find out about donation eligibility could increase the percentage of people who donate blood yearly.
+
+### For whom?
+
+- People who are interested in learning more about blood donation and people who are interested in donating blood.
+- The public will be able to determine their eligibility and can find the nearest blood bank or blood drive.
+
+
+### Contribute
+
+If you want to know more about how you can contribute you can head over to the [CONTRIBUTING.md](./CONTRIBUTING.md)
+
+### UX-Design
+
+To view the site map, wireframe, and prototype please check out the [UX-DESIGN.md](./UX-DESIGN.md)
+
+### Building
+
+To view how to build and launch the project go to the [BUILDING.md](./BUILDING.md)
+
+### Testing
+
+To view how to run unit test on backend please go to the [TESTING.md](./TESTING.md)

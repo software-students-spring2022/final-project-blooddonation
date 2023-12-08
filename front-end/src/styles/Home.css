@@ -1,0 +1,16 @@
+.home-body {
+  margin: 0px;
+  margin-top: 80px;
+  padding: 0px;
+}
+
+.home-card {
+  padding: 10px;
+}
+.home-card:hover {
+  background-color: rgb(240, 235, 233);
+}
+.video-card {
+  z-index: 0 !important;
+  box-shadow: none !important;
+}
